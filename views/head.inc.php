@@ -6,9 +6,7 @@
 
     <!-- Bootstrap Core CSS -->
     <!-- <link rel="icon" type="image/png" href="template/images/logo_fahsai.jpg"/> -->
-    
-    <link rel="stylesheet" type="text/css" href="template/slick/slick.css">
-    <link rel="stylesheet" type="text/css" href="template/slick/slick-theme.css">
+     
     <link href="template/css/bootstrap-4.1.1.min.css" rel="stylesheet">
 
     <!-- Simple-Sidebar CSS -->
@@ -16,19 +14,16 @@
 
     <!-- Custom Fonts -->
     <link href="template/fonts/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">  
+
+    <link href="template/css/select2.css" rel="stylesheet"/>
+    <link href="template/css/select2-bootstrap4.css" rel="stylesheet"/>
+    <link href="template/css/style_front.css" rel="stylesheet">   
     <!-- Main CSS -->
     
     <script src="template/js/jquery.min.js"></script>
-    <script src="template/js/bootstrap-4.1.1.min.js"></script>
-    <?PHP if($page =='home'){?>
-    <link href="template/css/style.css" rel="stylesheet">  
-    <?PHP }?>
-    <?PHP if($page =='about'){?>
-    <link href="template/css/style-about.css" rel="stylesheet">  
-    <?PHP }?>
-    <?PHP if($page =='promotion'){?>
-    <link href="template/css/style-promotion.css" rel="stylesheet">  
-    <?PHP }?>
+    <script src="template/js/bootstrap-4.1.1.min.js"></script> 
+    <script src="template/js/select2.js"></script>
+ 
     
 
     

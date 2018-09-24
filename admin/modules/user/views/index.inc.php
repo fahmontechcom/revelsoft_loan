@@ -19,20 +19,16 @@ $d6=date("s");
 $date="$d1$d2$d3$d4$d5$d6";
 $target_dir = "../img_upload/user/";
 $user_id = $_GET['id'];
-if(!isset($_GET['action'])){
-    $user = $user_model->getUserBy($_GET['name'],$_GET['type'],$_GET['email']); 
-    
-    require_once($path.'view.inc.php');
-}else if ($_GET['action'] == 'insert'){
+if ($_GET['action'] == 'insert'&&$menu['user']['add']==1){
     $user_type = $user_type_model->getUserTypeBy();
     $user_status = $user_status_model->getUserStatusBy();
     require_once($path.'insert.inc.php');
-}else if ($_GET['action'] == 'update'){
+}else if ($_GET['action'] == 'update'&&$menu['user']['edit']==1){
     $user_type = $user_type_model->getUserTypeBy();
     $user_status = $user_status_model->getUserStatusBy();
     $user = $user_model->getUserByID($user_id);
     require_once($path.'update.inc.php');
-}else if ($_GET['action'] == 'delete'){
+}else if ($_GET['action'] == 'delete'&&$menu['user']['delete']==1){
     $user = $user_model->getUserByID($user_id);
     $target_file = $target_dir .$user['user_image'];
     if (file_exists($target_file)) {
@@ -43,7 +39,7 @@ if(!isset($_GET['action'])){
     <script>window.location="index.php?content=user"</script>
     <?php
 
-}else if ($_GET['action'] == 'add'){
+}else if ($_GET['action'] == 'add'&&$menu['user']['add']==1){
     if(isset($_POST['user_firstname'])){
         $check = true;
         $data = [];
@@ -102,7 +98,7 @@ if(!isset($_GET['action'])){
     }else{
         ?> <script> window.history.back(); </script> <?php
     }
-}else if ($_GET['action'] == 'edit'){
+}else if ($_GET['action'] == 'edit'&&$menu['user']['edit']==1){
     if(isset($_POST['user_id'])){
         $check = true;
         $data = [];
@@ -167,7 +163,7 @@ if(!isset($_GET['action'])){
     }else{
         ?> <script> window.history.back(); </script> <?php
     }
-}else{
+}else if ($menu['user']['view']==1 ){
     $user = $user_model->getUserBy($_GET['name'],$_GET['position'],$_GET['email']);
     require_once($path.'view.inc.php');
 }

@@ -38,6 +38,24 @@ class UserTypeModel extends BaseModel{
             return $data;
         }
     } 
+    function checkUserTypeBy($name,$id=''){
+        $sql = " SELECT * 
+        FROM tb_user_type 
+        WHERE user_type_name = '$name'  
+        ";
+        if($id!=''){
+            $sql .= " AND user_type_id != '$id'";
+        }
+// echo $sql;
+        if ($result = mysqli_query(static::$db,$sql, MYSQLI_USE_RESULT)) {
+            $data=[];
+            while ($row = mysqli_fetch_array($result,MYSQLI_ASSOC)){
+                $data[] = $row;
+            }
+            $result->close();
+            return $data;
+        }
+    } 
 
     function insertUserType($data=[]){
         $sql = " INSERT INTO tb_user_type(

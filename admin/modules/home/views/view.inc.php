@@ -90,6 +90,7 @@
                         </div>
                         <!-- /.col-lg-3 (nested) -->
                     </div>   
+					<?PHP if($menu['home']['edit']==1){ ?>
 					<div align="right"> 
 						
 						<input type="hidden" id="updateby" name="updateby" class="form-control" value="<?=$_SESSION['user'][0][0]?>">
@@ -98,48 +99,129 @@
 						<button type="reset" class="btn btn-primary">ล้างข้อมูล</button>
 						<button type="submit" class="btn btn-success">บันทึกข้อมูล</button>
 					</div>
+					<?PHP }?>
 				</form>
 			</div>
 		</div>
 	</div> 
 </div>
 <hr> 
-<!-- /.row --> 
-<div class="row">
-	<div class="col-lg-12"> 
-		<h2>รูปสไลด์</h2>  
-	</div>
+<!-- /.row -->  
+<div class="row " style="padding:1% 0;">  
+	<!-- /.row --> 
 	<div class="col-lg-12">
-		<form role="form" method="post" onsubmit="return check();" action="index.php?content=home&action=add" enctype="multipart/form-data">
-			<div class="row">
-				<div class="col-lg-4">
-					<div class="form-group">
-						<label>รูปภาพ <font color="#F00"><b>1806 x 976</b></font></label>
-						<div>
-							<img id="img_slide_home" src="../img_upload/home/default.png" style="max-height: 200px;" class="img-fluid"> 
-							<input accept=".jpg , .png" type="file" id="home_slide_image" name="home_slide_image" class="form-control" style="margin: 14px 0 0 0 ;" onChange="readURL(this,'2');">
+		<div class="panel panel-default">
+			<div class="panel-body">
+				<form role="form" method="post" action="index.php?content=home&action=edit" enctype="multipart/form-data"> 
+					<div class="row">
+						<div class="col-lg-12"> 
+							<h2>content 1</h2>  
 						</div>
+						<div class="col-lg-9">
+							<div class="row">
+								<div class="col-lg-8">
+									<div class="form-group">
+										<label>หัวข้อ </label>
+										<input id="home_content_1_title" name="home_content_1_title" class="form-control"  value="<?php echo $home['home_content_1_title']?>">
+									</div>
+								</div>
+								<div class="col-lg-12">
+									<div class="form-group">
+										<label>รายละเอียด</label>
+										<textarea id="home_content_1_detail" name="home_content_1_detail" class="form-control" style="min-height: 200px;"/><?php echo $home['home_content_1_detail']?></textarea>
+									</div>
+								</div>  
+							</div>
+						</div> 
+					</div> 
+					<div class="row">
+						<div class="col-lg-12"> 
+							<h2>content 2</h2>  
+						</div>
+						<div class="col-lg-9">
+							<div class="row"> 
+								<div class="col-lg-12">
+									<div class="form-group">
+										<label>รายละเอียด</label>
+										<textarea id="home_content_2_detail" name="home_content_2_detail" class="form-control" style="min-height: 200px;"/><?php echo $home['home_content_2_detail']?></textarea>
+									</div>
+								</div> 
+							</div>
+						</div> 
+					</div>   
+					<div class="row">
+						<div class="col-lg-12"> 
+							<h2>content 3</h2>  
+						</div>
+						<div class="col-lg-9">
+							<div class="row">
+								<div class="col-lg-8">
+									<div class="form-group">
+										<label>หัวข้อ </label>
+										<input id="home_content_3_title" name="home_content_3_title" class="form-control"  value="<?php echo $home['home_content_3_title']?>">
+									</div>
+								</div> 
+							</div>
+						</div> 
+					</div> 
+					<div class="row">
+						<div class="col-lg-12"> 
+							<h2>content 4</h2>  
+						</div>
+						<div class="col-lg-9">
+							<div class="row">
+								<div class="col-lg-8">
+									<div class="form-group">
+										<label>หัวข้อ </label>
+										<input id="home_content_4_title" name="home_content_4_title" class="form-control"  value="<?php echo $home['home_content_4_title']?>">
+									</div>
+								</div>
+								<div class="col-lg-12">
+									<div class="form-group">
+										<label>รายละเอียด</label>
+										<textarea id="home_content_4_detail" name="home_content_4_detail" class="form-control" style="min-height: 200px;"/><?php echo $home['home_content_4_detail']?></textarea>
+									</div>
+								</div>  
+							</div>
+						</div> 
+					</div> 
+					<?PHP if($menu['home']['edit']==1){ ?>
+					<div align="right"> 
+						<button type="reset" class="btn btn-primary">ล้างข้อมูล</button>
+						<button type="submit" class="btn btn-success">บันทึกข้อมูล</button>
 					</div>
-				</div>
+					<?PHP }?>
+				</form>
 			</div>
-			<div> 
-				<button type="submit" class="btn btn-success">เพิ่มรูปภาพ</button>
-			</div>
-		</form>
-	</div>
-</div>
-
-<div style="border: 1px solid #ccc!important; border-radius: 5px; margin-top: 20px;">
-	<div class="row " style="margin : 10px;">
-		<? for($i = 0; $i < count($home_slide); $i++ ) {?>
-		<div class="col-lg-2" > 
-				<div style="text-align: center;">
-					<img id="img_2" src="../img_upload/home/<?php if($home_slide[$i]['home_slide_image'] != "") echo $home_slide[$i]['home_slide_image']; else echo "default.png" ?>" class="img-thumbnail"> 
-					<a href="?content=home&action=delete&id=<? echo $home_slide[$i]['home_slide_id'] ?>" onclick="return confirm('คุณต้องการลบรูปภาพนี้ใช่หรือไม่ ?');" style="color:red; font-size: 20px;">
-						<i class="fa fa-times" aria-hidden="true"></i>
-					</a>
-				</div> 
 		</div>
-		<? } ?>
-	</div>
+	</div> 
 </div>
+<script>
+	// Replace the <textarea id="editor1"> with a CKEditor
+	// instance, using default configuration. 
+	CKEDITOR.replace("home_content_1_detail",{
+		filebrowserBrowseUrl : '../template/ckfinder/ckfinder.html',
+		filebrowserImageBrowseUrl : '../template/ckfinder/ckfinder.html?Type=Images',
+		filebrowserFlashBrowseUrl : '../template/ckfinder/ckfinder.html?Type=Flash',
+		filebrowserUploadUrl : '../template/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files',
+		filebrowserImageUploadUrl : '../template/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Images',
+		filebrowserFlashUploadUrl : '../template/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Flash'
+	}); 
+	CKEDITOR.replace("home_content_2_detail",{
+		filebrowserBrowseUrl : '../template/ckfinder/ckfinder.html',
+		filebrowserImageBrowseUrl : '../template/ckfinder/ckfinder.html?Type=Images',
+		filebrowserFlashBrowseUrl : '../template/ckfinder/ckfinder.html?Type=Flash',
+		filebrowserUploadUrl : '../template/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files',
+		filebrowserImageUploadUrl : '../template/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Images',
+		filebrowserFlashUploadUrl : '../template/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Flash'
+	}); 
+	CKEDITOR.replace("home_content_4_detail",{
+		filebrowserBrowseUrl : '../template/ckfinder/ckfinder.html',
+		filebrowserImageBrowseUrl : '../template/ckfinder/ckfinder.html?Type=Images',
+		filebrowserFlashBrowseUrl : '../template/ckfinder/ckfinder.html?Type=Flash',
+		filebrowserUploadUrl : '../template/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files',
+		filebrowserImageUploadUrl : '../template/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Images',
+		filebrowserFlashUploadUrl : '../template/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Flash'
+	}); 
+	// CKEDITOR.config.fontSize_sizes = "8px/8px;8pt/8pt;9px/9px;9pt/9pt;10px/10px;10pt/10pt;11px/11px;11pt/11pt;12px/12px;12pt/12pt;14px/14px;14pt/14pt;16px/16px;16pt/16pt;18px/18px;18pt/18pt;20px/20px;20pt/20pt;22px/22px/22pt/22pt;24px/24px;24pt/24pt;26px/26px;26pt/26pt;28px/28px;28pt/28pt;36px/36px;36pt/36pt;48px/48px;48pt/48pt;72px/72px;72pt/72pt;";
+</script>

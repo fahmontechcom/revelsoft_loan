@@ -14,7 +14,7 @@
 <link href="../template/fonts/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
 <!-- Main CSS -->
-<link href="../template/css/admin-style.css" rel="stylesheet">  
+<link href="../template/css/style_back.css" rel="stylesheet">  
 
 <script src="../template/js/jquery.min.js"></script>
 <script type="text/javascript" src="../template/ckeditor/ckeditor.js"></script>

@@ -1,99 +1,88 @@
-<div class="footer" style=" ">   
-      <div class="row mg-0 ft" style="">
-            
-            <div class="ft-z1" style="">
-                  <img class="ft-z1-img" style="" src="template/images/bg_footer.jpg" alt=""> 
-            </div>   
-            <div class="ft-z2" style="">  
-                  <div class="ft-z2-div" style="">
-                        <div class="row ustify-content-lg-center ft-z2-div-row" style="">
-                              <div class="col-4 text-center ft-z2-div-row-col" style="">
-                                    <div class="ft-z2-div-row-col-div" style=" "><i style="" class="fa fa-facebook-square ft-z2-div-row-col-div-i" aria-hidden="true"></i></div>
-                              </div>  
-                              <div class="col-4 text-center ft-z2-div-row-col"  style=" ">
-                                    <div class="ft-z2-div-row-col-div" style=""><i style="" class="fa fa-instagram ft-z2-div-row-col-div-i" aria-hidden="true"></i></div>
-                              </div>  
-                              <div class="col-4 text-center ft-z2-div-row-col"  style=" ">
-                                    <div class="ft-z2-div-row-col-div" style=""><i style="" class="fa fa-twitter ft-z2-div-row-col-div-i" aria-hidden="true"></i></div>
-                              </div>  
-                        </div>
+<footer>
+      <div class="row text-center " style="background-color:#171717;color:white;padding:2.5%">
+            <div class="col-md-3" align="left" style=" ">
+                  <div class="col-12">
+                        <h5  style="padding:5% 0;"><b>เกี่ยวกับ</b></h5> 
                   </div>  
-            </div> 
-            
-            <div class="ft-z3 d-flex align-items-center " style="width:100%;"> 
-            
-                        <div class="row mg-0" style="">
-                              <div id="ft-z3-icon" class="row ustify-content-center mg-0" style=" ">
-                                    <div class="col-4 text-center ft-z2-div-row-col" style="">
-                                          <div class="ft-z2-div-row-col-div" style=" "><i style="" class="fa fa-facebook-square ft-z2-div-row-col-div-i" aria-hidden="true"></i></div>
-                                    </div>  
-                                    <div class="col-4 text-center ft-z2-div-row-col" style=" ">
-                                          <div class="ft-z2-div-row-col-div" style=""><i style="" class="fa fa-instagram ft-z2-div-row-col-div-i" aria-hidden="true"></i></div>
-                                    </div>  
-                                    <div class="col-4 text-center ft-z2-div-row-col" style=" ">
-                                          <div class="ft-z2-div-row-col-div" style=""><i style="" class="fa fa-twitter ft-z2-div-row-col-div-i" aria-hidden="true"></i></div>
-                                    </div>  
+                  <div class="col-12 gray">
+                        <h4>เกี่ยวกับเรา</h4>   
+                        <h4>ติดต่อเรา</h4>   
+                        <h4>ร่วมงานกับเรา</h4>   
+                  </div>    
+            </div>
+            <div class="col-md-3" align="left" style=" ">
+                  <div class="col-12">
+                        <h5  style="padding:5% 0;"><b>ช่วยเหลือ</b></h5> 
+                  </div>  
+                  <div class="col-12 gray">
+                        <h4>คำถามที่พบบ่อย</h4>   
+                        <h4>บทความ</h4>   
+                        <h4>ร้องเรียน</h4>   
+                  </div>    
+            </div>
+            <div class="col-md-3" align="left" style=" ">
+                  <div class="col-12">
+                        <h5  style="padding:5% 0;"><b>บริการ</b></h5> 
+                  </div>  
+                  <div class="col-12 gray">
+                        <h4>โฉนดแลกเงิน</h4>   
+                        <h4>พิโกไฟแนนซ์</h4>   
+                        <h4>รีไฟแนนซ์บ้าน</h4>   
+                  </div>    
+            </div>
+            <div class="col-md-3" align="left" style=" ">
+                  <div class="col-12">
+                        <h5  style="padding:5% 0;"><b>ติดตามเราได้ที่</b></h5> 
+                  </div>  
+                  <div class="col-12 white" style=" ">
+                        <h4>
+                              <i class="fa fa-facebook p-1" aria-hidden="true"  ></i>
+                              <i class="fa fa-google-plus p-1" aria-hidden="true"></i>
+                              <i class="fa fa-vk p-1" aria-hidden="true"></i>
+                              <i class="fa fa-youtube p-1" aria-hidden="true"></i>
+                              <i class="fa fa-instagram p-1" aria-hidden="true"></i>
+                        </h4> 
+                        <div class="row align-items-start pt-3 pb-3 gray">
+                              <div class="col-md-2" style="">
+                                    <h2><i class="fa fa-envelope-o icon-mail" aria-hidden="true"></i></h2>
                               </div>
-                              <div class="col-lg-7 pd-0" style="">
-                                    <div class="col-lg-11 offset-lg-1" style="background-color:white;padding:30px;">
-                                          <div class="row"> 
-                                                <div class="col-sm-12 text-left" > 
-                                                      <label class="topic-small" for="">CONTACT INFO</label>
-                                                </div> 
-                                                <div class="col-sm-6 form-group"> 
-                                                      <input type="email" class="form-control" id="" aria-describedby="emailHelp" placeholder="First Name"> 
-                                                </div>   
-                                                <div class="col-sm-6 form-group"> 
-                                                      <input type="email" class="form-control" id="" aria-describedby="emailHelp" placeholder="Last Name"> 
-                                                </div>   
-                                                <div class="col-sm-6 form-group"> 
-                                                      <input type="email" class="form-control" id="" aria-describedby="emailHelp" placeholder="Address"> 
-                                                </div>   
-                                                <div class="col-sm-6 form-group"> 
-                                                      <input type="email" class="form-control" id="" aria-describedby="emailHelp" placeholder="Email"> 
-                                                </div>   
-                                                <div class="col-sm-12 form-group">  
-                                                      <textarea class="form-control" rows="5" id="" placeholder="Message"></textarea>
-                                                </div>    
-                                                <div class="col-sm-12 text-right"> 
-                                                      <button type="submit" class="btn btn-dark" style="">SEND</button>
-                                                </div> 
-                                          </div>
-                                          
-                                    </div>
-                                    
-                              </div>   
-                              <div class="col-lg-5 ft-detail" > 
-                                    <div class="col-lg-12  " style=""> 
-                                          <div class="row align-items-center mg-0 pd-0">
-                                                <div class="col-lg-4 col-3 ">
-                                                      <img src="img_upload/setting/<?php if($setting['setting_logo'] != "") echo $setting['setting_logo']; else echo "default.png"; ?>" class="img-fluid" alt=""> 
-                                                </div>
-                                                <div class=" col-lg-8 col-9 text-left">
-                                                      <p>
-                                                            <span class="topic" style = "">MITTRAPAP</span><br>
-                                                            <span class="topic" style = "">PRINTING</span> 
-                                                      </p>
-                                                </div>   
-                                          </div> 
-                                    </div> 
-                                    <div class="col-lg-12  " style=""> 
-                                          <p class="ft-detail-p" style=""><?php echo $setting['setting_description']?></p> 
-                                    </div> 
-                                    <div class="col-lg-7 offset-lg-5 ">
-                                          <div class="row align-items-center text-left "> 
-                                                <div class="col-2 text-center"><i class="fa fa-map-marker topic pd-t-b" aria-hidden="true" style=" "></i></div> 
-                                                <div class="col-10"><?php echo $setting['setting_address']?></div> 
-                                                <div class="col-2 text-center"><i class="fa fa-phone topic pd-t-b" aria-hidden="true" style=" "></i></div> 
-                                                <div class="col-10"><?php echo $setting['setting_phone']?></div> 
-                                                <div class="col-2 text-center"><i class="fa fa-envelope-o topic pd-t-b" aria-hidden="true" style=""></i></div> 
-                                                <div class="col-10"><?php echo $setting['setting_email']?></div>  
-                                          </div> 
-                                    </div> 
-                              </div>   
-                              
+                  
+                              <div class="col-md-10 ">
+                                    <div class="col-md-12 ">
+                                          <h6>free@psdfreebies.comdsf<br>free@psdfreebies.comdsf<br>free@psdfreebies.comdsf</h6> 
+                                    </div>  
+                              </div> 
                         </div>
-                   
-            <div>  
-      </div>    
-</div> 
+                        <div class="row align-items-start pt-3 pb-3 gray">
+                              <div class="col-md-2" style="">
+                                    <h2><i class="fa fa-mobile" style="font-size:1.75em;" aria-hidden="true"></i></h2>
+                              </div>
+                  
+                              <div class="col-md-10 ">
+                                    <div class="col-md-12 ">
+                                          <h6>+123 456 7890<br>+123 456 7890<br>+123 456 7890</h6> 
+                                    </div>   
+                              </div> 
+                        </div>
+                        <div class="row align-items-start pt-3 pb-3 gray">
+                              <div class="col-md-2" style="">
+                                    <h2><i class="fa fa-map-marker" style="font-size:1.25em;" aria-hidden="true"></i></h2>
+                              </div>
+                  
+                              <div class="col-md-10 ">
+                                    <div class="col-md-12 ">
+                                          <h6>271/55 Newton St, Denver, CO 80221 US</h6> 
+                                    </div>  
+                              </div> 
+                        </div>
+                  </div>    
+            </div>
+      </div> 
+      <div class="row text-center" style="padding: 30px;background-color: #1a1a1a;color: #605454;">
+            <div class="col-md-12 " align="center" style="padding-left:23px;">
+            Copyleft © 2018. loanmarketo Co.,Ltd
+            </div>
+      </div>
+</footer>
+
+ 

@@ -83,24 +83,25 @@
                 </thead>
                 <tbody>
                 <?php 
-                for($i=0; $i < count($page); $i++){
+                for($i=0; $i < count($menu); $i++){    
                 ?>
-                    <tr>
+                    <tr> 
                         <td><?php echo $i+1; ?></td> 
-                        <td><?php echo $page[$i]['page_name']; ?></td>  
+                        <td><?php echo $menu[$i]['menu_name']; ?></td>  
                         <td> 
-                            <input class=""  style="align:center;" type="checkbox" value="1" name="user_type_permission_view_<?PHP echo $page[$i]['page_id'];?>">  
+                            <input class=""  style="align:center;" type="checkbox" value="1" id="user_type_permission_view_<?PHP echo $menu[$i]['menu_id'];?>" name="user_type_permission_view_<?PHP echo $menu[$i]['menu_id'];?>" onclick="oncheck('<?PHP echo $menu[$i]['menu_id'];?>','view');"> 
                         </td> 
                         <td> 
-                            <input class=""  style="align:center;" type="checkbox" value="1" name="user_type_permission_add_<?PHP echo $page[$i]['page_id'];?>">  
+                            <input class=""  style="align:center;" type="checkbox" value="1" id="user_type_permission_add_<?PHP echo $menu[$i]['menu_id'];?>" name="user_type_permission_add_<?PHP echo $menu[$i]['menu_id'];?>"  onclick="oncheck('<?PHP echo $menu[$i]['menu_id'];?>','add');">  
                         </td> 
                         <td> 
-                            <input class=""  style="align:center;" type="checkbox" value="1" name="user_type_permission_edit_<?PHP echo $page[$i]['page_id'];?>">  
+                            <input class=""  style="align:center;" type="checkbox" value="1" id="user_type_permission_edit_<?PHP echo $menu[$i]['menu_id'];?>" name="user_type_permission_edit_<?PHP echo $menu[$i]['menu_id'];?>" onclick="oncheck('<?PHP echo $menu[$i]['menu_id'];?>','edit');">  
                         </td> 
                         <td> 
-                            <input class=""  style="align:center;" type="checkbox" value="1" name="user_type_permission_delete_<?PHP echo $page[$i]['page_id'];?>">  
-                        </td>  
+                            <input class=""  style="align:center;" type="checkbox" value="1" id="user_type_permission_delete_<?PHP echo $menu[$i]['menu_id'];?>" name="user_type_permission_delete_<?PHP echo $menu[$i]['menu_id'];?>" onclick="oncheck('<?PHP echo $menu[$i]['menu_id'];?>','delete');">  
+                        </td> 
                     </tr>
+                    
                 <?php 
                 } 
                 ?>
@@ -109,8 +110,21 @@
         </div>
     </div>
     <div align="right" style="margin:3% 0;">
+        <button type="button" class="btn btn-default" onclick="window.location='?content=user_type';" >ย้อนกลับ</button>
         <button type="reset" class="btn btn-primary">ล้างข้อมูล</button>
         <button type="submit" class="btn btn-success">บันทึกข้อมูล</button>
     </div>
 <!-- /.row (nested) -->
 </form>
+<script>
+function oncheck(id,action) { 
+   if(document.getElementById('user_type_permission_'+action+'_'+id).checked==true){
+        document.getElementById('user_type_permission_view_'+id).checked = true;
+   }
+   if(document.getElementById('user_type_permission_view_'+id).checked==false){
+        document.getElementById('user_type_permission_add_'+id).checked = false;
+        document.getElementById('user_type_permission_edit_'+id).checked = false;
+        document.getElementById('user_type_permission_delete_'+id).checked = false;
+   }
+}
+</script>

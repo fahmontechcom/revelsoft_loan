@@ -41,6 +41,7 @@ body {
 
 #page-content-wrapper {
   width: 100%;
+  min-height: 1080px;
   position: absolute;
   padding: 15px;
 }

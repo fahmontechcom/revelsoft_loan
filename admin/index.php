@@ -1,12 +1,24 @@
-<?PHP
-session_start();
-$user = $_SESSION['loan_user'];
-$page = $_REQUEST['content'];
-// to change a session variable, just overwrite it
+<?PHP 
 
-if($user[0][0] == ""){
+session_start();
+$user = $_SESSION['loan_user']; 
+date_default_timezone_set('Asia/Bangkok');
+
+if($user == ""){
 	require_once("modules/login/views/index.inc.php"); 
-}else{
+}else{ 
+
+
+ if($_REQUEST['content']==''){
+	$page = 'home';
+ }else{
+
+	$page = $_REQUEST['content'];
+ }
+
+ 
+
+ 
 ?>
 <!DOCTYPE html>
 <html lang="en">
