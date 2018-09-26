@@ -11,6 +11,7 @@ class ProvinceModel extends BaseModel{
     function getProvinceBy($name = ''){
         $sql = "SELECT * FROM tb_province WHERE province_name LIKE ('%$name%') 
         ";
+        // echo $sql;
         if ($result = mysqli_query(static::$db,$sql, MYSQLI_USE_RESULT)) {
             $data = [];
             while ($row = mysqli_fetch_array($result,MYSQLI_ASSOC)){

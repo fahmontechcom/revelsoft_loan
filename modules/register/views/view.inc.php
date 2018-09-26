@@ -51,7 +51,7 @@ $(document).ready(function(){
             document.getElementById("amphur_id").focus();
             return false;
         }else if(province_id.length == 0){
-            alert("กรุณาเลือกอำเภอ");
+            alert("กรุณาเลือกจังหวัด");
             document.getElementById("province_id").focus();
             return false;
         }else if(member_tel.length == 0){
@@ -59,11 +59,11 @@ $(document).ready(function(){
             document.getElementById("member_tel").focus();
             return false;
         }else if(member_email.length == 0){
-            alert("กรุณากรอกเบอร์โทร");
+            alert("กรุณากรอกอีเมล");
             document.getElementById("member_email").focus();
             return false;
         }else if(member_password.length == 0){
-            alert("กรุณากรอกเบอร์โทร");
+            alert("กรุณากรอกรหัสผ่าน");
             document.getElementById("member_password").focus();
             return false;
         }else if(confirm == false){
@@ -88,13 +88,13 @@ $(document).ready(function(){
                     }
                 , function( data ) {
                  console.log(data);
-                 if(data!=0){
-                    alert('สมัครสมาชิกเรียบร้อยแล้ว กรุณายืนยันการสมัครในอีเมลเพื่อเข้าใช้งาน LOANMARKETO');
-                    // window.location="index.php?content=profile&member_id="+data;  
-                    window.location="index.php?content=home"; 
-                 }else{
+                 if(data=="cant_insert"){
                     alert('ไม่สามารถสมัครสมาชิกได้กรุณาสมัครใหม่');
-                    window.location="index.php?content=home"; 
+                    window.location="index.php?content=home";  
+                 }else{
+                    // alert('สมัครสมาชิกเรียบร้อยแล้ว กรุณายืนยันการสมัครในอีเมลเพื่อเข้าใช้งาน LOANMARKETO');
+                    window.location="index.php?content=profile&action=email&confirm_key="+data;  
+                    // window.location="index.php?content=home";  
                  }
             });
         } 

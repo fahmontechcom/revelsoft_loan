@@ -1,5 +1,5 @@
 <footer>
-      <div class="row text-center " style="background-color:#171717;color:white;padding:2.5%">
+      <div class="row text-center m-0" style="background-color:#171717;color:white;">
             <div class="col-md-3" align="left" style=" ">
                   <div class="col-12">
                         <h5  style="padding:5% 0;"><b>เกี่ยวกับ</b></h5> 
@@ -78,8 +78,8 @@
                   </div>    
             </div>
       </div> 
-      <div class="row text-center" style="padding: 30px;background-color: #1a1a1a;color: #605454;">
-            <div class="col-md-12 " align="center" style="padding-left:23px;">
+      <div class="row text-center m-0" style="background-color: #1a1a1a;color: #605454;">
+            <div class="col-md-12 " align="center" style="padding-left:23px;padding: 30px;">
             Copyleft © 2018. loanmarketo Co.,Ltd
             </div>
       </div>

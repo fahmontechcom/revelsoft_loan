@@ -65,8 +65,8 @@ class MemberModel extends BaseModel{
         $sql = "UPDATE tb_member SET  
         member_email_confirm_key = '".$data['member_email_confirm_key']."', 
         member_email_confirm_status = '".$data['member_email_confirm_status']."'  
-        WHERE member_id = $id ";
-        
+        WHERE member_id = '$id' ";
+        // echo $sql;
         if (mysqli_query(static::$db,$sql, MYSQLI_USE_RESULT)) {
             return 1;
         }else {
@@ -95,23 +95,41 @@ class MemberModel extends BaseModel{
         $data['member_company_certificate_img']=mysqli_real_escape_string(static::$db,$data['member_company_certificate_img']);
         $data['member_license_img']=mysqli_real_escape_string(static::$db,$data['member_license_img']);
         $data['member_verified_status_id']=mysqli_real_escape_string(static::$db,$data['member_verified_status_id']);
-        $sql = "UPDATE tb_member SET 
-        member_status_id = '".$data['member_status_id']."', 
-        member_type_id = '".$data['member_type_id']."', 
-        member_name = '".$data['member_name']."',  
-        member_image = '".$data['member_image']."', 
-        member_phone = '".$data['member_phone']."', 
+        $sql = "UPDATE tb_member SET  
+        member_name = '".$data['member_name']."', 
+        member_name_show = '".$data['member_name_show']."',  
+        member_address = '".$data['member_address']."',  
+        amphur_id = '".$data['amphur_id']."', 
+        province_id = '".$data['province_id']."', 
+        member_tel = '".$data['member_tel']."', 
         member_email = '".$data['member_email']."', 
-        member_facebook = '".$data['member_facebook']."',
-        member_line = '".$data['member_line']."',
-        member_address = '".$data['member_address']."',
-        member_province = '".$data['member_province']."',
-        member_amphur = '".$data['member_amphur']."',
-        member_district = '".$data['member_district']."',
-        member_zipcode = '".$data['member_zipcode']."', 
-        member_membername = '".$data['member_membername']."', 
-        member_password = '".$data['member_password']."' 
-        WHERE member_id = $id ";
+        member_password = '".$data['member_password']."', 
+        member_profile_img = '".$data['member_profile_img']."' 
+        WHERE member_id = '$id' ";
+        // $sql = "UPDATE tb_member SET 
+        // member_type_id = '".$data['member_type_id']."', 
+        // member_name = '".$data['member_name']."', 
+        // member_name_show = '".$data['member_name_show']."',  
+        // member_address = '".$data['member_address']."',  
+        // amphur_id = '".$data['amphur_id']."', 
+        // province_id = '".$data['province_id']."',
+        // member_tel = '".$data['member_tel']."',
+        // member_email = '".$data['member_email']."',
+        // member_password = '".$data['member_password']."',
+        // member_profile_img = '".$data['member_profile_img']."',
+        // member_email_confirm_key = '".$data['member_email_confirm_key']."',
+        // member_email_confirm_status = '".$data['member_email_confirm_status']."', 
+        // member_lender_type_id = '".$data['member_lender_type_id']."', 
+        // member_branch_name = '".$data['member_branch_name']."', 
+        // member_tax_id = '".$data['member_tax_id']."', 
+        // member_service_detail = '".$data['member_service_detail']."', 
+        // member_location = '".$data['member_location']."', 
+        // member_id_card_img = '".$data['member_id_card_img']."', 
+        // member_company_certificate_img = '".$data['member_company_certificate_img']."', 
+        // member_license_img = '".$data['member_license_img']."', 
+        // member_verified_status_id = '".$data['member_verified_status_id']."' 
+        // WHERE member_id = $id ";
+        // echo $sql;
         
         if (mysqli_query(static::$db,$sql, MYSQLI_USE_RESULT)) {
             return 1;

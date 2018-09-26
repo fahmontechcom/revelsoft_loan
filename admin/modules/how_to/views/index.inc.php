@@ -63,8 +63,7 @@ if ($_GET['action'] == 'insert'&&$menu['how_to']['add']==1){
             }else if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg" ) {
                 $error_msg = "ขอโทษด้วย. ระบบสามารถอัพโหลดไฟล์นามสกุล JPG, JPEG, PNG & GIF เท่านั้น.";
                 $check = false;
-            }else if (move_uploaded_file($_FILES[$input_image[$i]]["tmp_name"], $target_file)) {
-                chmod($target_file, 0777);
+            }else if (move_uploaded_file($_FILES[$input_image[$i]]["tmp_name"], $target_file)) { 
                 $data[$input_image[$i]] = $date.'-'.strtolower(basename($_FILES[$input_image[$i]]["name"]));
             } else {
                 $error_msg =  "ขอโทษด้วย. ระบบไม่สามารถอัพโหลดไฟล์ได้.";

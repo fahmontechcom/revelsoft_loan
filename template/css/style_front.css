@@ -111,6 +111,14 @@ body{
     border-bottom: 0.5em solid #ff9000; 
 } 
 
+.select2{
+    width:100%!important;
+}
+.select2-results{ 
+    max-height: 300px;
+    overflow: auto; 
+} 
+
  
 @media only screen and (min-width: 1921px) { 
 

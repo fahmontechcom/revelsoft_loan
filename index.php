@@ -23,7 +23,9 @@
 			
 					<!-- Page Content -->
 					<div id="page-content-wrapper" class="" style="">  
-								<?php require_once("views/body.inc.php"); ?> 
+						<?php 
+						require_once("views/body.inc.php"); 
+						?> 
 					</div>
 					
 					<!-- /#page-content-wrapper -->
@@ -32,9 +34,10 @@
 				<!-- /#wrapper -->
 			
 				<!-- Menu Toggle Script --> 
-				
-				<?php require_once("views/footer.inc.php"); ?>    
-		 
+				 
+				<?php 
+				require_once("views/footer.inc.php"); 
+				?>    
 </body>  
 </html>  
  
