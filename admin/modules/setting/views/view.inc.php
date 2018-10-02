@@ -144,7 +144,6 @@
                     </div>
                     <!-- /.row (nested) -->
                    <div align="right">
-                    <input type="hidden" id="updateby" name="updateby" class="form-control" value="<?=$_SESSION['jrp_user'][0][0]?>">
                     <input type="hidden" id="setting_id" name="setting_id" class="form-control" value="<?php echo $setting['setting_id']?>">
                     <input type="hidden" id="setting_logo_o" name="setting_logo_o" class="form-control" value="<?php echo $setting['setting_logo']?>">
                     <input type="hidden" id="setting_icon_o" name="setting_icon_o" class="form-control" value="<?php echo $setting['setting_icon']?>">

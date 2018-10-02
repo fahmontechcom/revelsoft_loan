@@ -5,6 +5,9 @@
     if($page=="profile"){ 
         require_once("modules/profile/views/index.inc.php"); 
     }   
+    if($page=="profile_detail"){ 
+        require_once("modules/profile_detail/views/index.inc.php"); 
+    }   
     if($page=="register"){ 
         require_once("modules/register/views/index.inc.php"); 
     }   

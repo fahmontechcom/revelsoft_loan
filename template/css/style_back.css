@@ -1,6 +1,6 @@
 @font-face {
     font-family: 'Kanit-Regular';
-    src: url('../fonts/kanit/Kanit-Regular.ttf') format('truetype');
+    src: url('../fonts/Kanit/Kanit-Regular.ttf') format('truetype');
     font-weight: normal;
     font-style: normal;
 }
@@ -140,15 +140,13 @@ footer {
 .menu-active{
     border-top: 1px solid #ECECEC; 
     border-left: 4px solid #0175A4;
-    color: #0175A4;
-    font-family: 'Kanit-Regular';
+    color: #0175A4; 
     text-decoration: none;
 }
 
 .menu{
     border-top: 1px solid #ECECEC; 
-    border-left: 4px solid #fff;
-    font-family: 'Kanit-Regular';
+    border-left: 4px solid #fff; 
     text-decoration: none;
 }
 
@@ -226,6 +224,9 @@ tr:nth-child(odd) {
 h2 { 
     font-weight: bold;
     color: #0175A4;
+}
+.form-check-input { 
+    margin-left: 0; 
 }
 @media only screen and (max-width: 1600px) {
     .img-detail{

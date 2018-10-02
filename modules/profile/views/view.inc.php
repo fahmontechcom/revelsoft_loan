@@ -17,45 +17,52 @@
         }
     }
 </script>
-<div class="row m-0"   style="background-color:#0193d7;">   
+<?php
+$sub_menu = 'index.php?content=profile';
+
+if($_REQUEST['profile']==''){
+	$profile = 'detail';
+ }else{
+
+	$profile = $_REQUEST['profile'];
+ }
+?>
+<div class="row m-0 <?PHP if($loan_member[0]['member_type_id']==1){echo 'borrower_bg_color';}else{echo 'lender_bg_color';}?>" >   
     <div class="col-lg-5 d-flex justify-content-center align-items-center">
       <div class="col d-flex justify-content-end">
-        <div  style="width:7em;height:7em; border-radius: 50%!important;border: 0.2em solid white; overflow: hidden;">
-          <img id="img_member" src="img_upload/member/<?php if($member['member_image'] != "" ){echo $member['member_image'];}else{ echo "default.png"; }?>" class="img-fluid" alt="" align="left" style="">     
+        <div class="img_member">
+          <img id="img_member" src="img_upload/member/<?php if($loan_member[0]['member_profile_img'] != "" ){echo $loan_member[0]['member_profile_img'];}else{ echo "default.png"; }?>" class="img-fluid" alt="" align="left" style="">     
         </div> 
       </div>
       <div class="col p-0"> 
-        <h5  class="text-white ">THANA.T</h5>   
+        <h5  class="text-white "><?PHP echo $loan_member[0]['member_name_show']?></h5>   
       </div>
     </div>
     <div class="col-lg-7">
-      <div class="row">
-        <div id="profile_detail" class="col-lg-3 profile_list" align="center" onclick="profile_menu_choose('profile_detail');" style="cursor: pointer;">  
-          <div class="col-12 p-2" >
-            <img  src="template/images/profile.png" class="fluid" alt=""  style="height:4em;">       
-          </div>    
-          <h5  class="text-white p-2">ข้อมูลส่วนตัว</h5>   
-        </div>     
-        <a href="index.php?content=profile&profile=detail">
-          <div id="profile_detail" class="col-lg-3 profile_list" align="center"  >  
+      <div class="row">  
+        <div id="profile_detail" class="col-lg-3  <?PHP 
+          if($profile=='detail'){
+            if($loan_member[0]['member_type_id']==1){
+              echo 'borrower_profile_list_active';
+            }else{
+              echo 'lender_profile_list_active'; 
+            }
+          }else{
+            if($loan_member[0]['member_type_id']==2){
+              echo 'borrower_profile_list';
+            }else{
+              echo 'lender_profile_list'; 
+            }
+          }
+        ?>" align="center"  >  
+          <a href="<?PHP echo $sub_menu;?>&profile=detail" style="text-decoration: none!important;">
             <div class="col-12 p-2" >
               <img  src="template/images/profile.png" class="fluid" alt=""  style="height:4em;">       
             </div>    
             <h5  class="text-white p-2">ข้อมูลส่วนตัว</h5>   
-          </div> 
-        </a> 
-        <div class="col-lg-3 profile_list" align="center" onclick="" style="cursor: pointer;">  
-          <div class="col-12 p-2" >
-            <img  src="template/images/profile.png" class="fluid" alt=""  style="height:4em;">       
-          </div>    
-          <h5  class="text-white p-2">ข้อมูลส่วนตัว</h5>   
-        </div>     
-        <div class="col-lg-3 profile_list" align="center" onclick="" style="cursor: pointer;">  
-          <div class="col-12 p-2" >
-            <img  src="template/images/profile.png" class="fluid" alt=""  style="height:4em;">       
-          </div>    
-          <h5  class="text-white p-2">ข้อมูลส่วนตัว</h5>   
-        </div>     
+          </a> 
+        </div>   
+            
       </div>
     </div>
    

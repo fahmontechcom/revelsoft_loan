@@ -104,11 +104,23 @@ body{
 .member_type_list:hover{
     border: 1px solid #0292d8; 
 } 
-.profile_list{
+.borrower_profile_list{
     border-bottom: 0.5em solid #0292d8; 
 } 
-.profile_list:hover{
+.borrower_profile_list_active{
     border-bottom: 0.5em solid #ff9000; 
+} 
+.borrower_profile_list:hover{
+    border-bottom: 0.5em solid #ff9100cb; 
+} 
+.lender_profile_list{
+    border-bottom: 0.5em solid #ff9000; 
+} 
+.lender_profile_list_active{
+    border-bottom: 0.5em solid #0292d8; 
+} 
+.lender_profile_list:hover{
+    border-bottom: 0.5em solid #0292d8cb; 
 } 
 
 .select2{
@@ -118,6 +130,28 @@ body{
     max-height: 300px;
     overflow: auto; 
 } 
+.img_member{
+    width:7em;
+    height:7em; 
+    border-radius: 50%!important;
+    border: 0.2em solid white; 
+    overflow: hidden;
+}
+.borrower_bg_color{
+    background-color:#0193d7;
+}
+.lender_bg_color{
+    background-color:#ff9000;
+}
+.borrower_border_color{
+    border-color: #0292d8;
+}
+.lender_border_color{
+    border-color: #ff9000;
+}
+
+
+ 
 
  
 @media only screen and (min-width: 1921px) { 

@@ -7,168 +7,26 @@ $member_model = new MemberModel;
 
 $path = "modules/profile/views/"; 
 
- if ($_GET['action'] == 'insert'){
-    require_once($path.'insert.inc.php');
+if ($_GET['action'] == 'insert'){ 
 
 }else if ($_GET['action'] == 'update'){ 
 
 }else if ($_GET['action'] == 'delete'){ 
 
 }else if ($_GET['action'] == 'add'){
-    $data = [];
-    $data['member_type_id'] = $_POST['member_type_id'];
-    $data['member_name'] = $_POST['member_name'];
-    $data['member_name_show'] = $_POST['member_name_show'];
-    $data['member_address'] = $_POST['member_address'];
-    $data['district_id'] = $_POST['district_id'];
-    $data['amphur_id'] = $_POST['amphur_id']; 
-    $data['province_id'] = $_POST['province_id']; 
-    $data['member_tel'] = $_POST['member_tel']; 
-    $data['member_email'] = $_POST['member_email']; 
-    $data['member_password'] = $_POST['member_password']; 
-    $data['member_profile_img'] = $_POST['member_profile_img']; 
-    $data['member_email_confirm_key'] = $_POST['member_email_confirm_key']; 
-    $data['member_email_confirm_status'] = $_POST['member_email_confirm_status']; 
-    $data['member_lender_type_id'] = $_POST['member_lender_type_id']; 
-    $data['member_branch_name'] = $_POST['member_branch_name']; 
-    $data['member_tax_id'] = $_POST['member_tax_id']; 
-    $data['member_service_detail'] = $_POST['member_service_detail']; 
-    $data['member_location'] = $_POST['member_location']; 
-    $data['member_id_card_img'] = $_POST['member_id_card_img']; 
-    $data['member_company_certificate_img'] = $_POST['member_company_certificate_img']; 
-    $data['member_license_img'] = $_POST['member_license_img']; 
-    $data['member_verified_status_id'] = $_POST['member_verified_status_id']; 
-    // echo '<pre>';
-    // print_r($data);
-    // echo '</pre>';
-
-    // echo 'test';
-    // echo "<script>console.log(".count($data).");</script>";
-    $member_id = $member_model->insertMember($data);  
-    // $check_result = false; 
-    if($member_id!=0){ 
-        $data['member_email_confirm_key'] = md5($member_id);
-        $data['member_email_confirm_status'] = 0; 
-
-        $check_result = $member_model->updateMemberByIDColEmailConfirm($member_id,$data);  
-         
-        require("controllers/mail/class.phpmailer.php"); 
-        $mail = new PHPMailer();
-        $body = '<div style="font-size:20px;" align="left"><strong>กรุณายืนยัน</strong></div>'.
-                '<div>
-                    <a href="http://'. $_SERVER['SERVER_NAME'] .'/support/loan/index.php?content=profile&action=confirm&confirm_key='.$data['member_email_confirm_key'] .'">http://'. $_SERVER['SERVER_NAME'] .'/support/loan/index.php?content=profile&action=confirm&confirm_key='.$data['member_email_confirm_key'] .'</a>
-                </div>';
-            
-
-        $mail->CharSet = "utf-8";
-        $mail->IsSMTP();
-        $mail->SMTPDebug = 0;
-        $mail->SMTPAuth = true;
-        $mail->Host = "mail.revelsoft.co.th"; // SMTP server
-        $mail->Port = 587; 
-        $mail->Username = "support@revelsoft.co.th"; // account SMTP
-        $mail->Password = "revelsoft1234@"; //  SMTP
-
-        $mail->SetFrom("support@revelsoft.co.th", "Revelsoft.co.th");
-        $mail->AddReplyTo("support@revelsoft.co.th","Revelsoft.co.th");
-        $mail->Subject = "LOANMARKETO ถึง ".$data['member_name'];
-
-        $mail->MsgHTML($body);
-
-        $mail->AddAddress($data['member_email'], "Member Mail"); 
-        if(!$mail->Send()) {
-            $result = "ส่งอีเมลผิดพลาด : " . $mail->ErrorInfo;
-            ?>
-            <script>alert('<? echo $result;?>');window.location="index.php?content=home";</script>
-            <?PHP 
-        }else{
-            // $output = $purchase_order_model->updatePurchaseOrderStatusByID($purchase_order_id,$data);
-            $result = "ส่งอีเมลเรียบร้อยแล้ว";
-            ?>
-            <script>alert('<? echo $result;?>');window.location="index.php?content=home";</script>
-            <?PHP
-        }      
-    } 
     
 }else if ($_GET['action'] == 'edit'){ 
 
 }else if ($_GET['action'] == 'confirm'){ 
-    $confirm_key = $_GET['confirm_key'];
-    $member = $member_model ->getMemberBy($confirm_key);   
-    echo '<pre>';
-    print_r($member);
-    echo '</pre>';
-    if(count($member)>0){ 
-        $data = [];
-        $data['member_email_confirm_key'] = $member[0]['member_email_confirm_key'];
-        $data['member_email_confirm_status'] = 1;
-        $check_result = $member_model->updateMemberByIDColEmailConfirm($member[0]['member_id'],$data);  
-        if($check_result!=0){
-            // $member_id =$member[0]['member_id']; 
-            // require_once($path.'view.inc.php');
-            ?>
-            <script>alert('ยืนยันอีเมลเรียบร้อยแล้ว');window.location="index.php?content=profile&member_id=<?PHP echo $member[0]['member_id'];?>";</script>
-            <?PHP
-        }
-    }
-}else if ($_GET['action'] == 'email'){ 
-    $confirm_key = $_GET['confirm_key'];
-    $member = $member_model ->getMemberBy($confirm_key);  
-    if(count($member)>0){
-        require("controllers/mail/class.phpmailer.php"); 
-        $mail = new PHPMailer();
-        $body = '<div style="font-size:20px;" align="left"><strong>กรุณายืนยันอีเมล</strong></div>'.
-                '<div>
-                    <a href="http://'. $_SERVER['SERVER_NAME'] .'/support/loan/index.php?content=profile&action=confirm&confirm_key='.$member[0]['member_email_confirm_key'] .'">http://'. $_SERVER['SERVER_NAME'] .'/support/loan/index.php?content=profile&action=confirm&confirm_key='.$member[0]['member_email_confirm_key'] .'</a>
-                </div>';
-            
+     
 
-        $mail->CharSet = "utf-8";
-        $mail->IsSMTP();
-        $mail->SMTPDebug = 0;
-        $mail->SMTPAuth = true;
-        $mail->Host = "mail.revelsoft.co.th"; // SMTP server
-        $mail->Port = 587; 
-        $mail->Username = "support@revelsoft.co.th"; // account SMTP
-        $mail->Password = "revelsoft1234@"; //  SMTP
-
-        $mail->SetFrom("support@revelsoft.co.th", "Revelsoft.co.th");
-        $mail->AddReplyTo("support@revelsoft.co.th","Revelsoft.co.th");
-        $mail->Subject = "LOANMARKETO ถึง ".$member[0]['member_name'];
-
-        $mail->MsgHTML($body);
-
-        $mail->AddAddress($member[0]['member_email'], "Member Mail"); 
-        if(!$mail->Send()) {
-            $result = "ส่งอีเมลผิดพลาด : " . $mail->ErrorInfo;
-            ?>
-            <script>alert('<? echo $result;?>');window.location="index.php?content=home";</script>
-            <?PHP 
-        }else{
-            // $output = $purchase_order_model->updatePurchaseOrderStatusByID($purchase_order_id,$data);
-             
-            ?>
-            <script>
-            alert('ส่งอีเมลเรียบร้อยแล้ว');
-            window.location="index.php?content=profile&member_id=<?PHP echo $member[0]['member_id'];?>";
-            </script>
-            <?PHP
-        }        
-    }else{
-        $result = "ส่งอีเมลผิดพลาด! " ;
-        echo '<script>alert('.$result.');window.location="index.php?content=home";</script>';
-    }
-}else{  
-       
-    
+}else if ($loan_member != ''){   
 
     $member_id = $_GET['member_id']; 
     // $member = $member_model ->getMemberByID($member_id);   
     // echo '<pre>';
     // print_r($member);
     // echo '</pre>';
-    require_once($path.'view.inc.php');
-    
-
+    require_once($path.'view.inc.php'); 
 }
 ?>

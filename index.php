@@ -1,4 +1,9 @@
  <?PHP 
+ session_start();
+ $loan_member = $_SESSION['loan_member']; 
+//  echo '<pre>';
+//  print_r($loan_member);
+//  echo '</pre>';
  require_once('models/SettingModel.php');
  
  $setting_model = new SettingModel;
@@ -15,6 +20,7 @@
 	<?php require_once('views/head.inc.php') ?>
 </head>
 <body>  
+ 
 				<!-- <div id="wrapper" class="toggled"> -->
 					<?php require_once('views/header.inc.php') ?>
 			

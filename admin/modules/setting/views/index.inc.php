@@ -16,10 +16,9 @@ $date="$d1$d2$d3$d4$d5$d6";
 
 $target_dir = "../img_upload/setting/";
 
-if(!isset($_GET['action'])){
-    $setting = $setting_model->getSettingByID('1');
-    require_once($path.'view.inc.php');
-} else if ($_GET['action'] == 'edit'){
+if ($_GET['action'] == 'delete'){ 
+
+}else if($_GET['action'] == 'edit'&& $menu['home']['edit']==1 ){
     if(isset($_POST['setting_tag'])){
         $check = true;
         $data = [];
@@ -106,9 +105,9 @@ if(!isset($_GET['action'])){
     }else{
         ?> <script> window.history.back(); </script> <?php
     }
-
-}else{
-    $setting = $setting_model->getSettingByID($setting_id);
+     
+}else if ($menu['home']['view']==1 ){
+    $setting = $setting_model->getSettingByID('1');
     require_once($path.'view.inc.php');
 }
 ?>

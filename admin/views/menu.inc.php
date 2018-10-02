@@ -90,6 +90,26 @@ for($i = 0 ; $i < count($menu_list); $i++){
             </a>
         </li>  
         <?PHP }?>
+        <?PHP if($menu['confirm']['view']==1){ ?>
+        <li>
+            <a href="?content=confirm">
+                <div <?php if($page=="confirm"){echo "class='menu-active'";} else {echo "class='menu'";}?> >
+                    <i class="fa fa-user" style="font-size:24px"></i>
+                    <span style="padding:5px; font-size:15px; ">การยืนยัน</span>
+                </div>
+            </a>
+        </li> 
+        <?PHP }?>
+        <?PHP if($menu['member']['view']==1){ ?>
+        <li>
+            <a href="?content=member">
+                <div <?php if($page=="member"){echo "class='menu-active'";} else {echo "class='menu'";}?> >
+                    <i class="fa fa-user" style="font-size:24px"></i>
+                    <span style="padding:5px; font-size:15px; ">สมาชิก</span>
+                </div>
+            </a>
+        </li> 
+        <?PHP }?>
         <?PHP if($menu['user']['view']==1){ ?>
         <li>
             <a href="?content=user">
@@ -100,12 +120,23 @@ for($i = 0 ; $i < count($menu_list); $i++){
             </a>
         </li> 
         <?PHP }?>
+        
         <?PHP if($menu['user_type']['view']==1){ ?>
         <li>
             <a href="?content=user_type">
                 <div <?php if($page=="user_type"){echo "class='menu-active'";} else {echo "class='menu'";}?> >
                     <i class="fa fa-user" style="font-size:24px"></i>
                     <span style="padding:5px; font-size:15px; ">ประเภทผู้ใช้งาน</span>
+                </div>
+            </a>
+        </li> 
+        <?PHP }?>
+        <?PHP if($menu['setting']['view']==1){ ?>
+        <li>
+            <a href="?content=setting">
+                <div <?php if($page=="setting"){echo "class='menu-active'";} else {echo "class='menu'";}?> >
+                    <i class="fa fa-user" style="font-size:24px"></i>
+                    <span style="padding:5px; font-size:15px; ">ตั้งค่า</span>
                 </div>
             </a>
         </li> 
