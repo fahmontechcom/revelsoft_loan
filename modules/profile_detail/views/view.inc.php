@@ -100,6 +100,7 @@
         }
         function show_form(){
             var profile_detail_member_lender_type_id = document.getElementById("profile_detail_member_lender_type_id").value;
+            var divsToHide = document.getElementsByClassName("hide_loan_type"); 
             if(profile_detail_member_lender_type_id==1){ 
                 document.getElementById("profile_detail_member_loan_type_deed").checked = false;
                 document.getElementById("profile_detail_member_loan_type_pico").checked = false;
@@ -114,10 +115,16 @@
                 document.getElementById("business").style.display = 'none';
                 document.getElementById("business_img").style.display = 'none';
                 document.getElementById("company").style.display = 'none';
+                for(var i = 0; i < divsToHide.length; i++){ 
+                    divsToHide[i].style.display = "none"; // depending on what you're doing
+                }
             }else{
                 document.getElementById("business").style.display = 'flex';
                 document.getElementById("business_img").style.display = 'flex';
                 document.getElementById("company").style.display = 'block';
+                for(var i = 0; i < divsToHide.length; i++){ 
+                    divsToHide[i].style.display = "block"; // depending on what you're doing
+                }
             }
         }
       </script>   
@@ -125,7 +132,7 @@
     <!-- ********************  กู้ ******************************* -->
   <?PHP if($loan_member[0]['member_email_confirm_status']==0){ ?>
     <div class="row m-0  pt-4 pb-4" >
-        <h6 >กรุณายืนยันอีเมลเพื่อเข้าใช้งานระบบ<br><br><a href="index.php?content=profile&action=email&confirm_key=<?PHP echo $member['member_email_confirm_key'];?>">>>ส่งรหัสไปยังอีเมลอีกครั้ง<<</a></h6>
+        <h6 >กรุณายืนยันอีเมลเพื่อเข้าใช้งานระบบ<br><br><a href="index.php?content=register&action=email&confirm_key=<?PHP echo $member['member_email_confirm_key'];?>">>>ส่งรหัสไปยังอีเมลอีกครั้ง<<</a></h6>
         
     </div>
     <?PHP }else if($loan_member[0]['member_type_id']==1){ ?>
@@ -245,21 +252,22 @@
                         <div class="form-group"> 
                             <h6><b>ภาพถ่ายบัตรประชาชน</b></h6> 
                             <img id="member_id_card_img_show" src="img_upload/member/<?php if($member['member_id_card_img'] != "" ){echo $member['member_id_card_img'];}else{ echo "default_pic.png"; }?>" class="img-fluid" alt="" align="left" style=""> 
-                                    
+                            <?PHP if($member['member_verified_status']!=2){?>
                             <input accept=".jpg , .png" type="file" id="member_id_card_img" name="member_id_card_img" class="form-control" style="margin: 14px 0 0 0 ;" onChange="readURL(this,'member_id_card_img_show');" value="">
-                                
+                            <?PHP }?>
                         </div>    
                     </div>   
                 </div> 
             </div> 
-           
+           <?PHP if($member['member_verified_status']!=2){?>
             <div class="col-lg-12"  align="center" >  
                 <div class="form-group"> 
                     <input type="hidden" id="member_id_card_img_o" name="member_id_card_img_o" value="<?php echo  $member['member_id_card_img'] ?>" />
                     <input type="hidden" name="member_id" value="<?PHP echo $member['member_id'];?>" > 
                     <button class="btn btn-login my-2 my-sm-0 m-1 pl-5 pr-5" type="submit" onclick="" >บันทึก</button>  
                 </div>  
-            </div>       
+            </div>    
+            <?PHP }?>   
         </div>    
     </form> 
     <!-- ***************************  ปล่อยกู้  **************************** -->
@@ -388,19 +396,19 @@
                         โฉนดแลกเงิน
                         </label>
                     </div>
-                    <div class="form-check">
+                    <div class="form-check hide_loan_type">
                         <input class="form-check-input" type="checkbox" value="1" id="profile_detail_member_loan_type_pico" name="member_loan_type_pico" <?PHP if($member['member_loan_type_pico']==1){echo 'checked';}?>>
                         <label class="form-check-label" for="profile_detail_member_loan_type_pico">
                         พิโกไฟแนนซ์
                         </label>
                     </div>
-                    <div class="form-check">
+                    <div class="form-check hide_loan_type">
                         <input class="form-check-input" type="checkbox" value="1" id="profile_detail_member_loan_type_nano" name="member_loan_type_nano" <?PHP if($member['member_loan_type_nano']==1){echo 'checked';}?>>
                         <label class="form-check-label" for="profile_detail_member_loan_type_nano">
                         นาโนไฟแนนซ์
                         </label>
                     </div> 
-                    <div class="form-check">
+                    <div class="form-check hide_loan_type">
                         <input class="form-check-input" type="checkbox" value="1" id="profile_detail_member_loan_type_business" name="member_loan_type_business" <?PHP if($member['member_loan_type_business']==1){echo 'checked';}?>>
                         <label class="form-check-label" for="profile_detail_member_loan_type_business">
                         หลักประกันทางธุรกิจ
@@ -466,13 +474,11 @@
                         <img id="member_business_img_show" src="img_upload/member_business_img/<?php if($business_img['member_business_img_img'] != "" ){echo $business_img['member_business_img_img'];}else{ echo "default.png"; }?>" class="img-fluid" alt="" align="left" style="">  
                         
                         <input accept=".jpg , .png" type="file" id="member_business_img_img" name="member_business_img_img" class="form-control" style="margin: 14px 0 0 0 ;" onChange="readURL(this,'member_business_img_show');" value="">
+                        <button type="submit" class="btn btn-success">เพิ่มรูปภาพ</button>
+                        <input type="hidden" name="member_id" value="<?PHP echo $member['member_id'];?>" > 
                     </div>
                 </div>
-            </div>
-            <div> 
-                <input type="hidden" name="member_id" value="<?PHP echo $member['member_id'];?>" > 
-                <button type="submit" class="btn btn-success">เพิ่มรูปภาพ</button>
-            </div>
+            </div> 
             <?PHP if(count($business_img)>0){?>
             <div style="border: 1px solid #ccc!important; border-radius: 5px; margin-top: 20px;">
                 <div class="row " style="margin : 10px;">
@@ -495,7 +501,7 @@
     <div class="row m-0 align-items-center pt-4 pb-4" >
         <h4><b>ข้อมูลยืนยันตัวตน</b></h4><h6 ><i class="fa fa-check-circle  p-2 text-success" aria-hidden="true"></i></i>100% ยืนยันแล้ว (ยังไม่ยืนยัน,รอพิจารณา)</h6>
     </div> 
-    <form role="form" method="post" onsubmit="return member_check();" action="index.php?content=profile_detail&action=verified" enctype="multipart/form-data">
+    <form role="form" method="post" action="index.php?content=profile_detail&action=verified" enctype="multipart/form-data">
         <div class="row pb-5"> 
             <div class="col-lg-9">
                 <div class="row">
@@ -503,23 +509,23 @@
                         <div class="form-group"> 
                             <h6><b>ภาพถ่ายบัตรประชาชน</b></h6> 
                             <img id="member_id_card_img_show" src="img_upload/member/<?php if($member['member_id_card_img'] != "" ){echo $member['member_id_card_img'];}else{ echo "default_pic.png"; }?>" class="img-fluid" alt="" align="left" style=""> 
-                                    
+                            <?PHP if($member['member_verified_status']!=2){?>     
                             <input accept=".jpg , .png" type="file" id="member_id_card_img" name="member_id_card_img" class="form-control" style="margin: 14px 0 0 0 ;" onChange="readURL(this,'member_id_card_img_show');" value="">
-                                
+                            <?PHP }?>  
                         </div>    
                     </div>   
                 </div> 
             </div> 
-            <div id="company" style="<?PHP if($member['member_lender_type_id']==1){echo 'display:none';}?>">
+            <div id="company" style="width:100%; <?PHP if($member['member_lender_type_id']==1){echo 'display:none';}?>">
                 <div class="col-lg-9">
                     <div class="row">
                         <div class="col-lg-7"  align="left" > 
                             <div class="form-group"> 
                                 <h6><b>หนังสือรับรองบริษัท</b></h6> 
                                 <img id="member_company_certificate_img_show" src="img_upload/member/<?php if($member['member_company_certificate_img'] != "" ){echo $member['member_company_certificate_img'];}else{ echo "default_pic.png"; }?>" class="img-fluid" alt="" align="left" style=""> 
-                                        
+                                <?PHP if($member['member_verified_status']!=2){?>     
                                 <input accept=".jpg , .png" type="file" id="member_company_certificate_img" name="member_company_certificate_img" class="form-control" style="margin: 14px 0 0 0 ;" onChange="readURL(this,'member_company_certificate_img_show');" value="">
-                                    
+                                <?PHP }?> 
                             </div>    
                         </div>   
                     </div> 
@@ -530,14 +536,15 @@
                             <div class="form-group"> 
                                 <h6><b>ใบอนุญาต</b></h6> 
                                 <img id="member_license_img_show" src="img_upload/member/<?php if($member['member_license_img'] != "" ){echo $member['member_license_img'];}else{ echo "default_pic.png"; }?>" class="img-fluid" alt="" align="left" style=""> 
-                                        
+                                <?PHP if($member['member_verified_status']!=2){?>        
                                 <input accept=".jpg , .png" type="file" id="member_license_img" name="member_license_img" class="form-control" style="margin: 14px 0 0 0 ;" onChange="readURL(this,'member_license_img_show');" value="">
-                                    
+                                <?PHP }?>   
                             </div>    
                         </div>   
                     </div> 
                 </div> 
             </div>
+            <?PHP if($member['member_verified_status']!=2){?>
             <div class="col-lg-12"  align="center" >  
                 <div class="form-group"> 
                     <input type="hidden" id="member_id_card_img_o" name="member_id_card_img_o" value="<?php echo  $member['member_id_card_img'] ?>" />
@@ -546,7 +553,8 @@
                     <input type="hidden" name="member_id" value="<?PHP echo $member['member_id'];?>" > 
                     <button class="btn btn-login my-2 my-sm-0 m-1 pl-5 pr-5" type="submit" onclick="" >บันทึก</button>  
                 </div>  
-            </div>       
+            </div>  
+            <?PHP }?>     
         </div>    
     </form> 
     <?PHP } ?>

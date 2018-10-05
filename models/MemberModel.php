@@ -106,7 +106,9 @@ class MemberModel extends BaseModel{
     }
     function getMemberByID($id){
         $sql = " SELECT * 
-        FROM tb_member 
+        FROM tb_member  
+        INNER JOIN tb_amphur ON  tb_member.amphur_id = tb_amphur.amphur_id 
+        INNER JOIN tb_province ON  tb_member.province_id = tb_province.province_id 
         WHERE member_id = '$id' 
         ";
         // echo $sql;
@@ -177,7 +179,7 @@ class MemberModel extends BaseModel{
         $sql = "UPDATE tb_member SET  
         member_id_card_img = '".$data['member_id_card_img']."',  
         member_company_certificate_img = '".$data['member_company_certificate_img']."',  
-        member_license_img = '".$data['member_license_img']."'  
+        member_license_img = '".$data['member_license_img']."',  
         member_verified_status = '".$data['member_verified_status']."'  
         WHERE member_id = '$id' ";
         // echo $sql;
@@ -204,7 +206,7 @@ class MemberModel extends BaseModel{
         $data['member_branch_name']=mysqli_real_escape_string(static::$db,$data['member_branch_name']);
         $data['member_tax_id']=mysqli_real_escape_string(static::$db,$data['member_tax_id']);
         $data['member_service_detail']=mysqli_real_escape_string(static::$db,$data['member_service_detail']);
-        $data['member_location']=mysqli_real_escape_string(static::$db,$data['member_location']);
+        
         $data['member_id_card_img']=mysqli_real_escape_string(static::$db,$data['member_id_card_img']);
         $data['member_company_certificate_img']=mysqli_real_escape_string(static::$db,$data['member_company_certificate_img']);
         $data['member_license_img']=mysqli_real_escape_string(static::$db,$data['member_license_img']);
@@ -269,8 +271,7 @@ class MemberModel extends BaseModel{
             member_lender_type_id, 
             member_branch_name, 
             member_tax_id, 
-            member_service_detail, 
-            member_location,  
+            member_service_detail,  
             member_id_card_img,
             member_company_certificate_img, 
             member_license_img, 
@@ -278,7 +279,8 @@ class MemberModel extends BaseModel{
             member_loan_type_deed,
             member_loan_type_pico,
             member_loan_type_nano,
-            member_loan_type_business
+            member_loan_type_business,
+            create_date
         ) VALUES ('".
     mysqli_real_escape_string(static::$db,$data['member_type_id'])."','".
     mysqli_real_escape_string(static::$db,$data['member_name'])."','".
@@ -295,8 +297,7 @@ class MemberModel extends BaseModel{
     mysqli_real_escape_string(static::$db,$data['member_lender_type_id'])."','".
     mysqli_real_escape_string(static::$db,$data['member_branch_name'])."','".
     mysqli_real_escape_string(static::$db,$data['member_tax_id'])."','".
-    mysqli_real_escape_string(static::$db,$data['member_service_detail'])."','".
-    mysqli_real_escape_string(static::$db,$data['member_location'])."','".
+    mysqli_real_escape_string(static::$db,$data['member_service_detail'])."','". 
     mysqli_real_escape_string(static::$db,$data['member_id_card_img'])."','".
     mysqli_real_escape_string(static::$db,$data['member_company_certificate_img'])."','".
     mysqli_real_escape_string(static::$db,$data['member_license_img'])."','".
@@ -304,7 +305,8 @@ class MemberModel extends BaseModel{
     mysqli_real_escape_string(static::$db,$data['member_loan_type_deed'])."','".
     mysqli_real_escape_string(static::$db,$data['member_loan_type_pico'])."','".
     mysqli_real_escape_string(static::$db,$data['member_loan_type_nano'])."','".
-    mysqli_real_escape_string(static::$db,$data['member_loan_type_business'])."'". 
+    mysqli_real_escape_string(static::$db,$data['member_loan_type_business'])."','".
+    mysqli_real_escape_string(static::$db,$data['create_date'])."'". 
         " )";
 // echo $sql;
         if (mysqli_query(static::$db,$sql, MYSQLI_USE_RESULT)) {

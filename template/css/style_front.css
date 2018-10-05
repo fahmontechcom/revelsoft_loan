@@ -67,6 +67,27 @@ body{
     background-color: #ca7301;
     border-color: #ca7301;
 }
+.btn-borrower {
+    color: #fff;
+    background-color: #0292d8;
+    border-color: #0292d8;
+}
+.btn-borrower:hover {
+    color: #fff;
+    background-color: #0176b1;
+    border-color: #0176b1;
+}
+ 
+.btn-lender {
+    color: #fff;
+    background-color: #fe9102;
+    border-color: #fe9102;
+}
+.btn-lender:hover {
+    color: #fff;
+    background-color: #ca7301;
+    border-color: #ca7301;
+}
 .hr-text {
     line-height: 1em;
     position: relative;
@@ -149,8 +170,20 @@ body{
 .lender_border_color{
     border-color: #ff9000;
 }
+.borrower_text_color{
+    color: #0292d8;
+}
+.lender_text_color{
+    color: #ff9000;
+}
 
-
+.bg_text_qa{
+    width:2em;
+    height:2em; 
+    border-radius: 50%!important;
+    overflow: hidden;
+    color:white;
+}
  
 
  

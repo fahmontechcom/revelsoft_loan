@@ -59,7 +59,7 @@ $amphur = $amphur_model ->getAmphurBy();
 ?>
  
 
-<nav class="navbar navbar-expand-lg navbar-light ">
+<nav class="navbar navbar-expand-lg navbar-light " style="box-shadow: 0px 1px 5px 0px rgba(0,0,0,0.1);">
     <a id=""  class="navbar-brand " style="" href="index.php?content=home" >       
         <div class="row align-items-center">
             <div class=" " align="center" style="display: inline-block;">  
@@ -84,7 +84,7 @@ $amphur = $amphur_model ->getAmphurBy();
         <a class="nav-link dropdown-toggle text-center" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">อยากกู้
         </a>
         <div class="dropdown-menu ml-auto mr-auto" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="#">Action</a>
+          <a class="dropdown-item" href="index.php?content=post">โพสอยากกู้</a>
           <a class="dropdown-item" href="#">Another action</a>
           <div class="dropdown-divider"></div>
           <a class="dropdown-item" href="#">Something else here</a>
@@ -294,7 +294,7 @@ $amphur = $amphur_model ->getAmphurBy();
                                 <div class="col-lg-12"  align="left" > 
                                     <div class="form-group">
                                         <h6>ประเภทผู้ปล่อยกู้ <font color="#F00"><b>*</b></font></h6>     
-                                        <select  class="form-control " id="lender_member_lender_type_id" name="member_lender_type_id" onchange="" style="border-color: #fe9102;"> 
+                                        <select  class="form-control " id="lender_member_lender_type_id" name="member_lender_type_id" onchange="show_header_form();" style="border-color: #fe9102;"> 
                                             <option value="">เลือกประเภท</option> 
                                             <option value="1">บุคคลธรรมดา / นายทุนทั่วไป</option> 
                                             <option value="2">ธนาคาร</option> 
@@ -311,19 +311,19 @@ $amphur = $amphur_model ->getAmphurBy();
                                             โฉนดแลกเงิน
                                             </label>
                                         </div>
-                                        <div class="form-check">
+                                        <div class="form-check  hide_header_loan_type">
                                             <input class="form-check-input" type="checkbox" value="1" id="lender_member_loan_type_pico" name="member_loan_type_pico">
                                             <label class="form-check-label" for="lender_member_loan_type_pico">
                                             พิโกไฟแนนซ์
                                             </label>
                                         </div>
-                                        <div class="form-check">
+                                        <div class="form-check hide_header_loan_type">
                                             <input class="form-check-input" type="checkbox" value="1" id="lender_member_loan_type_nano" name="member_loan_type_nano">
                                             <label class="form-check-label" for="lender_member_loan_type_nano">
                                             นาโนไฟแนนซ์
                                             </label>
                                         </div> 
-                                        <div class="form-check">
+                                        <div class="form-check hide_header_loan_type">
                                             <input class="form-check-input" type="checkbox" value="1" id="lender_member_loan_type_business" name="member_loan_type_business">
                                             <label class="form-check-label" for="lender_member_loan_type_business">
                                             หลักประกันทางธุรกิจ
@@ -479,10 +479,24 @@ $amphur = $amphur_model ->getAmphurBy();
   </div>
 </nav>
 <script> 
+    function show_header_form(){
+        var lender_member_lender_type_id = document.getElementById("lender_member_lender_type_id").value;
+        var divsToHide = document.getElementsByClassName("hide_header_loan_type"); 
+        if(lender_member_lender_type_id==1){ 
+            //divsToHide is an array
+            for(var i = 0; i < divsToHide.length; i++){ 
+                divsToHide[i].style.display = "none"; // depending on what you're doing
+            }
+        }else{
+            for(var i = 0; i < divsToHide.length; i++){ 
+                divsToHide[i].style.display = "block"; // depending on what you're doing
+            }
+        }
+    }
      
     function register(){
-        $('#loginModal').modal('hide')
-        $('#modal_register').modal('show')
+        $('#loginModal').modal('hide');
+        $('#modal_register').modal('show');
     }
 
     $(document).ready(function(){

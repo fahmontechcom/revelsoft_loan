@@ -38,7 +38,7 @@ if ($_GET['action'] == 'insert'&&$menu['member']['add']==1){
 
 }else if ($_GET['action'] == 'delete'&&$menu['member']['delete']==1){
     $member = $member_model->getMemberByID($member_id); 
-    $input_image = array("member_profile_img", "member_id_card_img", "member_company_certificate_img", "	member_license_img"); 
+    $input_image = array("member_profile_img", "member_id_card_img", "member_company_certificate_img", "member_license_img"); 
     for($i = 0;$i<count($input_image);$i++){
         if($member[$input_image[$i]] != ""){
             $target_file = $target_dir .$member[$input_image[$i]];
@@ -47,17 +47,21 @@ if ($_GET['action'] == 'insert'&&$menu['member']['add']==1){
             }
         } 
     }
+    
+    // echo '<pre>';
+    // print_r($business_img);
+    // echo '</pre>';
     $business_img = $business_img_model ->getBusinessImgBy($member_id);
-    for($i=0;$i<count($business_img);$i++){
-        $input_image = array("member_business_img_img"); 
-        for($i = 0;$i<count($input_image);$i++){
-            if($business_img[$input_image[$i]] != ""){
-                $target_file = $target_dir .$business_img[$input_image[$i]];
+    for($i=0;$i<count($business_img);$i++){ 
+         
+            if($business_img[$i]["member_business_img_img"] != ""){
+                $target_dir = "../img_upload/member_business_img/";
+                $target_file = $target_dir .$business_img[$i]["member_business_img_img"];
                 if (file_exists($target_file)) {
                     unlink($target_file);
                 }
             } 
-        } 
+         
     }
       
     $member = $member_model->deleteMemberByID($member_id);

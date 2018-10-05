@@ -11,6 +11,12 @@
     if($page=="register"){ 
         require_once("modules/register/views/index.inc.php"); 
     }   
+    if($page=="post"){ 
+        require_once("modules/post/views/index.inc.php"); 
+    }   
+    if($page=="post_detail"){ 
+        require_once("modules/post_detail/views/index.inc.php"); 
+    }   
     // if($page=="about"){ 
     //     require_once("modules/about/views/index.inc.php"); 
     // }  

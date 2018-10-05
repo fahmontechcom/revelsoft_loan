@@ -31,7 +31,7 @@ if($_REQUEST['profile']==''){
     <div class="col-lg-5 d-flex justify-content-center align-items-center">
       <div class="col d-flex justify-content-end">
         <div class="img_member">
-          <img id="img_member" src="img_upload/member/<?php if($loan_member[0]['member_profile_img'] != "" ){echo $loan_member[0]['member_profile_img'];}else{ echo "default.png"; }?>" class="img-fluid" alt="" align="left" style="">     
+          <img id="img_member" src="img_upload/member/<?php if($member['member_profile_img'] != "" ){echo $member['member_profile_img'];}else{ echo "default.png"; }?>" class="img-fluid" alt="" align="left" style="">     
         </div> 
       </div>
       <div class="col p-0"> 

@@ -70,9 +70,9 @@ if ($_GET['action'] == 'insert'){
              
             require("controllers/mail/class.phpmailer.php"); 
             $mail = new PHPMailer();
-            $body = '<div style="font-size:20px;" align="left"><strong>กรุณายืนยัน</strong></div>'.
+            $body = '<div style="font-size:20px;" align="left"><strong>กรุณายืนยันอีเมล</strong></div>'.
                     '<div>
-                        <a href="http://'. $_SERVER['SERVER_NAME'] .'/support/loan/index.php?content=register&action=confirm&confirm_key='.$data['member_email_confirm_key'] .'">http://'. $_SERVER['SERVER_NAME'] .'/support/loan/index.php?content=register&action=confirm&confirm_key='.$data['member_email_confirm_key'] .'</a>
+                        <a href="http://'. $_SERVER['SERVER_NAME'] .'/index.php?content=register&action=confirm&confirm_key='.$data['member_email_confirm_key'] .'">http://'. $_SERVER['SERVER_NAME'] .'/index.php?content=register&action=confirm&confirm_key='.$data['member_email_confirm_key'] .'</a>
                     </div>';
                 
     
@@ -123,7 +123,7 @@ if ($_GET['action'] == 'insert'){
         $mail = new PHPMailer();
         $body = '<div style="font-size:20px;" align="left"><strong>กรุณายืนยันอีเมล</strong></div>'.
                 '<div>
-                    <a href="http://'. $_SERVER['SERVER_NAME'] .'/support/loan/index.php?content=register&action=confirm&confirm_key='.$member[0]['member_email_confirm_key'] .'">http://'. $_SERVER['SERVER_NAME'] .'/support/loan/index.php?content=register&action=confirm&confirm_key='.$member[0]['member_email_confirm_key'] .'</a>
+                    <a href="http://'. $_SERVER['SERVER_NAME'] .'/index.php?content=register&action=confirm&confirm_key='.$member[0]['member_email_confirm_key'] .'">http://'. $_SERVER['SERVER_NAME'] .'/index.php?content=register&action=confirm&confirm_key='.$member[0]['member_email_confirm_key'] .'</a>
                 </div>';
             
 

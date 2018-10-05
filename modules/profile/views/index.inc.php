@@ -23,6 +23,7 @@ if ($_GET['action'] == 'insert'){
 }else if ($loan_member != ''){   
 
     $member_id = $_GET['member_id']; 
+    $member = $member_model ->getMemberByID($loan_member[0]['member_id']);    
     // $member = $member_model ->getMemberByID($member_id);   
     // echo '<pre>';
     // print_r($member);
