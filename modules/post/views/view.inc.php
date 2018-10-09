@@ -1,15 +1,27 @@
 <?php
   $sub_menu = 'index.php?content=post';
 
-  if($_GET['loan_type']==''){
-    $loan_type = 'deed';
-  }else{
 
-    $loan_type = $_GET['loan_type'];
-  }
   ?>
+  <style type="text/css">
+    .select2-selection{
+        border-color: #ff9000!important;
+    } 
+     
+</style>
   <script>
-   $(document).ready(function(){
+    // function post_building_check(id){
+    //     if(id.checked){
+    //         id.checked =false;
+    //     }else{
+    //         id.checked =true;
+    //     } 
+    // }
+    function sorting_money(id){
+        $(id).closest("form").submit();
+    }
+    
+     $(document).ready(function(){
             $("#amphur_id").select2({ 
                 placeholder: "อำเภอ",
                 theme: 'bootstrap4'
@@ -17,808 +29,410 @@
             $("#province_id").select2({ 
                 placeholder: "จังหวัด",
                 theme: 'bootstrap4'
-            });
+            }); 
             $("#occupation_id").select2({ 
                 placeholder: "เลือกอาชีพ",
                 theme: 'bootstrap4'
-            });
+            }); 
+            $("#collateral_id").select2({ 
+                placeholder: "เลือกทรัพย์หลักประกัน",
+                theme: 'bootstrap4'
+            }); 
         }); 
-    function readURL(input,id) {
-        if (input.files && input.files[0]) {
-            var reader = new FileReader();
-            reader.onload = function(e) {
-                $('#'+id).attr('src', e.target.result);
-            }
-            reader.readAsDataURL(input.files[0]);
-        }else{
-            $('#'+id).attr('src', 'img_upload/post/default_pic.png');
-        }
-    }
-    function check(){   
-    
-        var loan_type_id = document.getElementById("loan_type_id").value; 
-        if(loan_type_id==1){
-
-            var property_id = document.getElementById("property_id").value; 
-            var post_money = document.getElementById("post_money").value; 
-            var post_address = document.getElementById("post_address").value; 
-            var amphur_id = document.getElementById("amphur_id").value; 
-            var province_id = document.getElementById("province_id").value;  
-            var post_area_wa = document.getElementById("post_area_wa").value; 
-            var post_area_ngan = document.getElementById("post_area_ngan").value; 
-            var post_area_rai = document.getElementById("post_area_rai").value; 
-            
-            
-            property_id = $.trim(property_id);    
-            post_money = $.trim(post_money);    
-            post_address = $.trim(post_address);       
-            post_area_rai = $.trim(post_area_rai);    
-            post_area_ngan = $.trim(post_area_ngan);    
-            post_area_rai = $.trim(post_area_rai);    
-            
-
-            if(property_id.length == 0){
-                alert("กรุณาเลือกรายละเอียดทรัพย์");
-                document.getElementById("property_id").focus();
-                return false;
-            }else if(post_money.length == 0||post_money >50000){
-                alert("กรุณากรอกวงเงินที่ต้องการ");
-                document.getElementById("post_money").focus();
-                return false;         
-            }else if(post_address.length == 0){
-                alert("กรุณากรอกที่อยู่");
-                document.getElementById("post_address").focus();
-                return false;         
-            }else if(amphur_id.length == 0){
-                alert("กรุณาเลือกอำเภอ");
-                document.getElementById("amphur_id").focus();
-                return false;         
-            }else if(province_id.length == 0){
-                alert("กรุณาเลือกจังหวัด");
-                document.getElementById("province_id").focus();
-                return false;         
-            }else if(post_area_rai.length == 0&&post_area_ngan.length == 0&&post_area_wa.length == 0){
-                alert("กรุณากรอกเนื้อที่");
-                document.getElementById("post_area_wa").focus();
-                return false;         
-            }else{ 
-                return true;    
-            }
-        }else if(loan_type_id==2){
-            
-            var post_money = document.getElementById("post_money").value; 
-            var post_address = document.getElementById("post_address").value; 
-            var amphur_id = document.getElementById("amphur_id").value; 
-            var province_id = document.getElementById("province_id").value;  
-            var post_area_wa = document.getElementById("post_area_wa").value; 
-            var post_area_ngan = document.getElementById("post_area_ngan").value; 
-            var post_area_rai = document.getElementById("post_area_rai").value;  
-
-            post_money = $.trim(post_money);    
-            post_address = $.trim(post_address);     
-            post_area_rai = $.trim(post_area_rai);    
-            post_area_ngan = $.trim(post_area_ngan);    
-            post_area_rai = $.trim(post_area_rai);    
-
-            if(post_money.length == 0||post_money>50000){
-                alert("กรุณากรอกวงเงินที่ต้องการ (ไม่ควรเกิน 50,000 บาท)");
-                document.getElementById("post_money").focus();
-                return false;         
-            }else if(post_address.length == 0){
-                alert("กรุณากรอกที่อยู่");
-                document.getElementById("post_address").focus();
-                return false;         
-            }else if(amphur_id.length == 0){
-                alert("กรุณาเลือกอำเภอ");
-                document.getElementById("amphur_id").focus();
-                return false;         
-            }else if(province_id.length == 0){
-                alert("กรุณาเลือกจังหวัด");
-                document.getElementById("province_id").focus();
-                return false;         
-            }else if(post_area_rai.length == 0&&post_area_ngan.length == 0&&post_area_wa.length == 0){
-                alert("กรุณากรอกเนื้อที่");
-                document.getElementById("post_area_wa").focus();
-                return false;         
-            }else{ 
-                return true;    
-            }
-        }else if(loan_type_id==3){
-            
-            var post_money = document.getElementById("post_money").value; 
-            var post_address = document.getElementById("post_address").value; 
-            var amphur_id = document.getElementById("amphur_id").value; 
-            var province_id = document.getElementById("province_id").value;   
-            var occupation_id = document.getElementById("occupation_id").value;   
-
-            post_money = $.trim(post_money);    
-            post_address = $.trim(post_address);      
-
-            if(post_money.length == 0||post_money>100000){
-                alert("กรุณากรอกวงเงินที่ต้องการ (ไม่ควรเกิน 100,000 บาท)");
-                document.getElementById("post_money").focus();
-                return false;    
-            }else if(occupation_id.length == 0){
-                alert("กรุณาเลือกอาชีพ");
-                document.getElementById("occupation_id").focus();
-                return false;             
-            }else if(post_address.length == 0){
-                alert("กรุณากรอกที่อยู่");
-                document.getElementById("post_address").focus();
-                return false;         
-            }else if(amphur_id.length == 0){
-                alert("กรุณาเลือกอำเภอ");
-                document.getElementById("amphur_id").focus();
-                return false;         
-            }else if(province_id.length == 0){
-                alert("กรุณาเลือกจังหวัด");
-                document.getElementById("province_id").focus();
-                return false;   
-            }else{ 
-                return true;    
-            }
-        }
-            
-    }
   </script>
-<div class="container"> 
-    <div class="row pt-3 justify-content-center">
-    <h3 style="color: #0292d8;"><b>อยากกู้</b></h3>
-    
-    </div>
-  <div class="row  pt-3">
-    <ul class="nav nav-tabs" style="width:100%">
-      <li class="nav-item">
-        <a class="nav-link <?PHP if($loan_type=='deed'){ echo 'active';}?>" href="<?PHP echo $sub_menu;?>&loan_type=deed">โฉนดแลกเงิน</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link <?PHP if($loan_type=='pico'){ echo 'active';}?>" href="<?PHP echo $sub_menu;?>&loan_type=pico">พิโกไฟแนนซ์</a>
-      </li> 
-      <li class="nav-item">
-        <a class="nav-link <?PHP if($loan_type=='nano'){ echo 'active';}?>" href="<?PHP echo $sub_menu;?>&loan_type=nano">นาโนไฟแนนซ์</a>
-      </li> 
-      <li class="nav-item">
-        <a class="nav-link <?PHP if($loan_type=='business'){ echo 'active';}?>" href="<?PHP echo $sub_menu;?>&loan_type=business">หลักประกันทางธุรกิจ</a>
-      </li> 
-    </ul>
-  </div>
-  <?PHP 
-  if($loan_type=='deed'){
-  ?> 
-  <form role="form" method="post" onsubmit="return check();" action="index.php?content=post&action=add" enctype="multipart/form-data">
-    <div class="row pl-4 pr-4 pt-5 pb-5 align-items-center">  
-      <div class="col-lg-12"  align="left" > 
-        <div class="form-group"> 
-            <h6><b>เลือกธุรกรรมที่ต้องการ</b></h6>
-            <div class="form-check form-check-inline">
-              <input class="form-check-input" type="checkbox" id="post_transaction_mortgage" name="post_transaction_mortgage" value="1">
-              <label class="form-check-label" for="post_transaction_mortgage">จำนอง</label>
-            </div>
-            <div class="form-check form-check-inline">
-              <input class="form-check-input" type="checkbox" id="post_transaction_selling" name="post_transaction_selling" value="1">
-              <label class="form-check-label" for="post_transaction_selling">ขายฝาก</label>
-            </div>  
-            <div class="form-check form-check-inline">
-              <input class="form-check-input" type="checkbox" id="post_transaction_deposit" name="post_transaction_deposit" value="1">
-              <label class="form-check-label" for="post_transaction_deposit">ฝากโฉนด</label>
-            </div>  
-        </div>    
-      </div>    
-      <div class="col-lg-6"  align="left" > 
-          <div class="form-group">  
-              <h6><b>รายละเอียดทรัพย์</b> <font color="#F00"><b>*</b></font></h6>
-              <select  class="form-control" id="property_id"  name="property_id" onchange="" >  
-              <option value="">เลือกรายละเอียดทรัพย์</option>
-                  <?php 
-                      for($i =  0 ; $i < count($property) ; $i++){
-                      ?>
-                      <option value="<?php echo $property[$i]['property_id']; ?>"><?php echo $property[$i]['property_detail']; ?></option>
-                      <?
-                      }
-                  ?>
-              </select>    
-          </div>   
-      </div>   
-      <div class="col-lg-6"  align="left" > 
-          <div class="form-group">  
-              <h6><b>วงเงินที่ต้องการ</b> <font color="#F00"><b>*</b></font></h6>
-              <input type="number" id="post_money" name="post_money" class="form-control borrower_border_color">     
-          </div>   
-      </div>  
-      <div class="col-lg-12"  align="left" > 
-          <div class="form-group"> 
-              <h6><b>ตำแหน่ง</b> <font color="#F00"><b>*</b></font></h6>
-              <input id="post_address" name="post_address" class="form-control borrower_border_color" placeholder="ที่อยู่" >   
-          </div>    
-      </div>  
-      <div class="col-lg-6"  align="left" > 
-          <div class="form-group">  
-              <select  class="form-control select " id="amphur_id"  name="amphur_id" onchange="" >  
-              <option></option>
-                  <?php 
-                      for($i =  0 ; $i < count($amphur) ; $i++){
-                      ?>
-                      <option value="<?php echo $amphur[$i]['amphur_id']; ?>"><?php echo $amphur[$i]['amphur_name']; ?></option> 
-                      <?
-                      }
-                  ?>
-              </select>    
-          </div>   
-      </div>   
-      <div class="col-lg-6"  align="left" > 
-          <div class="form-group">  
-              <select  class="form-control select " id="province_id" name="province_id" onchange="" > 
-              <option></option> 
-                  <?php 
-                      for($i =  0 ; $i < count($province) ; $i++){
-                      ?>
-                      <option <?php if($province[$i]['province_id'] == $member['province_id']){?> selected <?php }?> value="<?php echo $province[$i]['province_id']; ?>"><?php echo $province[$i]['province_name']; ?></option>
-                      <?
-                      }
-                  ?>
-              </select>    
-          </div>   
-      </div> 
-      <div class="col-lg-12"  align="left" > 
-          <div class="form-group"> 
-              <h6><b>เนื้อที่</b> <font color="#F00"><b>*</b></font></h6>
-              <div class="form-inline">
-                <div class="pr-2"> 
-                  <input type="number" step="0.01" id="post_area_wa" name="post_area_wa" class="form-control borrower_border_color"   value="" style="width:80px;">  
-                </div>  
-                <div class="pr-2"> 
-                  ตรว. 
-                </div>  
-                <div class="pr-2"> 
-                  <input type="number" id="post_area_ngan" name="post_area_ngan" class="form-control borrower_border_color"   value="" style="width:80px;">  
-                </div>  
-                <div class="pr-2"> 
-                  งาน
-                </div>  
-                <div class="pr-2"> 
-                  <input type="number" id="post_area_rai" name="post_area_rai" class="form-control borrower_border_color"   value="" style="width:80px;">  
-                </div>  
-                <div class="pr-2"> 
-                  ไร่ 
-                </div>  
-                   
-                
-              </div>
-          </div>    
-      </div>
-      <div class="col-lg-12"  align="left" > 
-        <div class="form-group"> 
-            <h6><b>ลักษณะที่</b></h6>
-            <div class="form-inline"> 
-                <div class="form-check form-check-inline">
-                  <input class="form-check-input" type="radio" name="post_building" id="post_building1" value="0" checked >
-                  <label class="form-check-label" for="post_building1">ที่ดินเปล่า</label>
-                </div>
-                <div class="form-check form-check-inline">
-                  <input class="form-check-input" type="radio" name="post_building" id="post_building2" value="1">
-                  <label class="form-check-label" for="post_building2">มีสิ่งปลูกสร้าง</label>
-                </div>   
-                <div class="pr-2"> 
-                  <div class="form-group">  
-                      <select  class="form-control select " id="building_id"  name="building_id" onchange="" >  
-                        <option>เลือกสิ่งปลูกสร้าง</option> 
-                        <?php 
-                            for($i =  0 ; $i < count($building) ; $i++){
-                            ?>
-                            <option value="<?php echo $building[$i]['building_id']; ?>"><?php echo $building[$i]['building_name']; ?></option>
-                            <?
-                            }
-                        ?>
-                      </select>    
-                  </div>   
-                </div>      
-            </div> 
-        </div>    
-      </div>  
-      <div class="col-lg-12"  align="left" > 
-        <div class="form-group"> 
-            <h6><b>ภาระของทรัพย์</b></h6>
-            <div class="form-check form-check-inline">
-              <input class="form-check-input" type="radio" name="burden_id" id="burden_id0" value="0" checked >
-              <label class="form-check-label" for="burden_id0">ปลอดภาระ</label>
-            </div>
-            <div class="form-check form-check-inline">
-              <input class="form-check-input" type="radio" name="burden_id" id="burden_id1" value="1"  >
-              <label class="form-check-label" for="burden_id1">ติดจำนอง</label>
-            </div>
-            <div class="form-check form-check-inline">
-              <input class="form-check-input" type="radio" name="burden_id" id="burden_id2" value="2">
-              <label class="form-check-label" for="burden_id2">ติดขายฝาก</label>
-            </div>   
-            <div class="form-check form-check-inline">
-              <input class="form-check-input" type="radio" name="burden_id" id="burden_id3" value="3">
-              <label class="form-check-label" for="burden_id3">ติดฝากโฉนด</label>
-            </div>    
-        </div>    
-      </div>  
-      <div class="col-lg-12"  align="left" > 
-          <div class="form-group"> 
-              <h6><b>รูปภาพโฉนดด้านหน้า</b></h6> 
-              <div class="row">
-                <div class="col-lg-4">
-                  <img id="post_deed_front_img_1_show" src="img_upload/post/default_pic.png" class="img-fluid" alt="" align="left" style=""> 
-                        
-                  <input accept=".jpg , .png" type="file" id="post_deed_front_img_1" name="post_deed_front_img_1" class="form-control" style="margin: 14px 0 0 0 ;" onChange="readURL(this,'post_deed_front_img_1_show');" value="">
-                </div> 
-                <div class="col-lg-4">
-                  <img id="post_deed_front_img_2_show" src="img_upload/post/default_pic.png" class="img-fluid" alt="" align="left" style=""> 
-                        
-                  <input accept=".jpg , .png" type="file" id="post_deed_front_img_2" name="post_deed_front_img_2" class="form-control" style="margin: 14px 0 0 0 ;" onChange="readURL(this,'post_deed_front_img_2_show');" value="">
-                </div> 
-              </div>  
-          </div>    
-      </div>   
-      <div class="col-lg-12"  align="left" > 
-          <div class="form-group"> 
-              <h6><b>รูปภาพโฉนดด้านหลัง</b></h6> 
-              <div class="row">
-                <div class="col-lg-4">
-                  <img id="post_deed_back_img_1_show" src="img_upload/post/default_pic.png" class="img-fluid" alt="" align="left" style=""> 
-                        
-                  <input accept=".jpg , .png" type="file" id="post_deed_back_img_1" name="post_deed_back_img_1" class="form-control" style="margin: 14px 0 0 0 ;" onChange="readURL(this,'post_deed_back_img_1_show');" value="">
-                </div> 
-                <div class="col-lg-4">
-                  <img id="post_deed_back_img_2_show" src="img_upload/post/default_pic.png" class="img-fluid" alt="" align="left" style=""> 
-                        
-                  <input accept=".jpg , .png" type="file" id="post_deed_back_img_2" name="post_deed_back_img_2" class="form-control" style="margin: 14px 0 0 0 ;" onChange="readURL(this,'post_deed_back_img_2_show');" value="">
-                </div> 
-              </div> 
-          </div>    
-      </div>   
-      <div class="col-lg-12"  align="left" > 
-          <div class="form-group"> 
-              <h6><b>รูปภาพที่ดิน/บ้าน</b></h6> 
-              <div class="row">
-                <div class="col-lg-4">
-                  <img id="post_building_img_1_show" src="img_upload/post/default_pic.png" class="img-fluid" alt="" align="left" style=""> 
-                        
-                  <input accept=".jpg , .png" type="file" id="post_building_img_1" name="post_building_img_1" class="form-control" style="margin: 14px 0 0 0 ;" onChange="readURL(this,'post_building_img_1_show');" value="">
-                </div> 
-                <div class="col-lg-4">
-                  <img id="post_building_img_2_show" src="img_upload/post/default_pic.png" class="img-fluid" alt="" align="left" style=""> 
-                        
-                  <input accept=".jpg , .png" type="file" id="post_building_img_2" name="post_building_img_2" class="form-control" style="margin: 14px 0 0 0 ;" onChange="readURL(this,'post_building_img_2_show');" value="">
-                </div> 
-              </div> 
-          </div>    
-      </div> 
-      <div class="col-lg-6"  align="left" > 
-          <div class="form-group">  
-              <h6><b>ระยะเวลาของโพส</b></h6>
-              <select  class="form-control select " id="post_amount_days" name="post_amount_days" onchange="" > 
-                <option value="7">7 วัน</option> 
-                <option value="30">30 วัน</option> 
-                <option value="90">90 วัน</option> 
-                   
-              </select>    
-          </div>   
-      </div> 
-      <div class="col-lg-12"  align="center" >  
-          <div class="form-group">  
-                <input type="hidden" id="loan_type_id" name="loan_type_id" value="2" > 
-                <input type="hidden" id="member_id" name="member_id" value="<?PHP echo $loan_member[0]['member_id'];?>" > 
-              <button class="btn btn-login my-2 my-sm-0 m-1 pl-5 pr-5" type="submit" onclick="" >อยากกู้</button>  
-          </div>  
-      </div>   
-    </div>  
-  </form>
-  <?PHP
-  }
-  ?>
-  <?PHP 
-  if($loan_type=='pico'){
-  ?>
-    <form role="form" method="post" onsubmit="return check();" action="index.php?content=post&action=add" enctype="multipart/form-data">
-        <div class="row pl-4 pr-4 pt-5 pb-5 align-items-center"> 
-            
-        
-            <div class="col-lg-6"  align="left" > 
-                <div class="form-group">  
-                    <h6><b>วงเงินที่ต้องการ (ไม่ควรเกิน 50,000 บาท) <font color="#F00"><b>*</b></font></b></h6>
-                    <input type="number" id="post_money" name="post_money" class="form-control borrower_border_color"  >     
-                </div>   
-            </div>  
-            
-            <div class="col-lg-12"  align="left" > 
-            <div class="form-group"> 
-                <h6><b>หลักประกัน/โฉนด</b></h6>
-                <div class="form-inline"> 
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="post_deed" id="post_deed1" value="0" checked>
-                        <label class="form-check-label" for="post_deed1">ไม่มี</label>
-                    </div>
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="post_deed" id="post_deed2" value="1">
-                        <label class="form-check-label" for="post_deed2">มี</label>
-                    </div>   
-                    <div class="pr-2"> 
-                        <div class="form-group">  
-                            <input id="post_deed_number" name="post_deed_number" class="form-control borrower_border_color" placeholder="เลขที่โฉนด" >   
-                        </div>   
-                    </div>      
-                </div> 
-            </div>    
-            </div>  
-            <div class="col-lg-12"  align="left" > 
-                <div class="form-group"> 
-                    <h6><b>ที่อยู่ <font color="#F00"><b>*</b></font></b></h6>
-                    <input id="post_address" name="post_address" class="form-control borrower_border_color" placeholder="ที่อยู่"  value="<?PHP echo $member['post_address'];?>">   
-                </div>    
-            </div>    
-            <div class="col-lg-6"  align="left" > 
-            <div class="form-group">  
-                <select  class="form-control select " id="amphur_id"  name="amphur_id" onchange="" >  
-                <option></option>
-                    <?php 
-                        for($i =  0 ; $i < count($amphur) ; $i++){
-                        ?>
-                        <option value="<?php echo $amphur[$i]['amphur_id']; ?>"><?php echo $amphur[$i]['amphur_name']; ?></option> 
-                        <?
-                        }
-                    ?>
-                </select>    
-            </div>   
-            </div>   
-            <div class="col-lg-6"  align="left" > 
-                <div class="form-group">  
-                    <select  class="form-control select " id="province_id" name="province_id" onchange="" > 
-                    <option></option> 
-                        <?php 
-                            for($i =  0 ; $i < count($province) ; $i++){
-                            ?>
-                            <option <?php if($province[$i]['province_id'] == $member['province_id']){?> selected <?php }?> value="<?php echo $province[$i]['province_id']; ?>"><?php echo $province[$i]['province_name']; ?></option>
-                            <?
-                            }
-                        ?>
-                    </select>    
-                </div>   
-            </div>  
-            <div class="col-lg-12"  align="left" > 
-                <div class="form-group"> 
-                    <h6><b>เนื้อที่</b> <font color="#F00"><b>*</b></font></h6>
-                    <div class="form-inline">
-                    <div class="pr-2"> 
-                        <input type="number" step="0.01" id="post_area_wa" name="post_area_wa" class="form-control borrower_border_color"   value="" style="width:80px;">  
-                    </div>  
-                    <div class="pr-2"> 
-                        ตรว. 
-                    </div>  
-                    <div class="pr-2"> 
-                        <input type="number" id="post_area_ngan" name="post_area_ngan" class="form-control borrower_border_color"   value="" style="width:80px;">  
-                    </div>  
-                    <div class="pr-2"> 
-                        งาน
-                    </div>  
-                    <div class="pr-2"> 
-                        <input type="number" id="post_area_rai" name="post_area_rai" class="form-control borrower_border_color"   value="" style="width:80px;">  
-                    </div>  
-                    <div class="pr-2"> 
-                        ไร่ 
-                    </div>  
-                </div>
-            </div>      
-            </div>
-            <div class="col-lg-6">
-                <div class="form-group">
-                <h6><b>โลเคชั่น</b></h6>
-                    <fieldset class="gllpLatlonPicker">
-                        <input type="text" class="gllpSearchField form-control" placeholder="ค้นหาตำแหน่ง">
-                        <input type="button" class="gllpSearchButton btn btn-primary" value="ค้นหา">
-                        <div class="gllpMap">Google Maps</div>
-                        <input type="text" class="gllpLatitude form-control" id="post_location_lat" name="post_location_lat" value="14.999515"/>
-                        <input type="text" class="gllpLongitude form-control" id="post_location_long" name="post_location_long" value="102.13487399999997"/>
-                        <input type="hidden" class="gllpZoom" value="16"/>
-                    </fieldset>
-
-                </div>
-            </div> 
-            <div class="col-lg-12"  align="left" > 
-            <div class="form-group"> 
-                <h6><b>ลักษณะที่</b></h6>
-                <div class="form-inline"> 
-                    <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="post_building" id="post_building1" value="0" checked >
-                    <label class="form-check-label" for="post_building1">ที่ดินเปล่า</label>
-                    </div>
-                    <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="post_building" id="post_building2" value="1">
-                    <label class="form-check-label" for="post_building2">มีสิ่งปลูกสร้าง</label>
-                    </div>   
-                    <div class="pr-2"> 
-                    <div class="form-group">  
-                        <select  class="form-control select " id="building_id"  name="building_id" onchange="" >  
-                            <option>เลือกสิ่งปลูกสร้าง</option> 
-                            <?php 
-                                for($i =  0 ; $i < count($building) ; $i++){
-                                ?>
-                                <option value="<?php echo $building[$i]['building_id']; ?>"><?php echo $building[$i]['building_name']; ?></option>
-                                <?
-                                }
-                            ?>
-                        </select>    
-                    </div>   
-                    </div>      
-                </div> 
-                
-                
-            </div>    
-            </div>  
-            <div class="col-lg-12"  align="left" > 
-            <div class="form-group"> 
-                <h6><b>รูปภาพโฉนดด้านหน้า</b></h6> 
-                <div class="row">
-                    <div class="col-lg-4">
-                    <img id="post_deed_front_img_1_show" src="img_upload/post/default_pic.png" class="img-fluid" alt="" align="left" style=""> 
-                            
-                    <input accept=".jpg , .png" type="file" id="post_deed_front_img_1" name="post_deed_front_img_1" class="form-control" style="margin: 14px 0 0 0 ;" onChange="readURL(this,'post_deed_front_img_1_show');" value="">
-                    </div> 
-                    <div class="col-lg-4">
-                    <img id="post_deed_front_img_2_show" src="img_upload/post/default_pic.png" class="img-fluid" alt="" align="left" style=""> 
-                            
-                    <input accept=".jpg , .png" type="file" id="post_deed_front_img_2" name="post_deed_front_img_2" class="form-control" style="margin: 14px 0 0 0 ;" onChange="readURL(this,'post_deed_front_img_2_show');" value="">
-                    </div> 
-                </div>  
-            </div>    
-            </div>   
-            <div class="col-lg-12"  align="left" > 
-                <div class="form-group"> 
-                    <h6><b>รูปภาพโฉนดด้านหลัง</b></h6> 
-                    <div class="row">
-                        <div class="col-lg-4">
-                        <img id="post_deed_back_img_1_show" src="img_upload/post/default_pic.png" class="img-fluid" alt="" align="left" style=""> 
-                                
-                        <input accept=".jpg , .png" type="file" id="post_deed_back_img_1" name="post_deed_back_img_1" class="form-control" style="margin: 14px 0 0 0 ;" onChange="readURL(this,'post_deed_back_img_1_show');" value="">
-                        </div> 
-                        <div class="col-lg-4">
-                        <img id="post_deed_back_img_2_show" src="img_upload/post/default_pic.png" class="img-fluid" alt="" align="left" style=""> 
-                                
-                        <input accept=".jpg , .png" type="file" id="post_deed_back_img_2" name="post_deed_back_img_2" class="form-control" style="margin: 14px 0 0 0 ;" onChange="readURL(this,'post_deed_back_img_2_show');" value="">
-                        </div> 
-                    </div> 
-                </div>    
-            </div>   
-            <div class="col-lg-12"  align="left" > 
-                <div class="form-group"> 
-                    <h6><b>รูปภาพที่ดิน/บ้าน</b></h6> 
-                    <div class="row">
-                        <div class="col-lg-4">
-                        <img id="post_building_img_1_show" src="img_upload/post/default_pic.png" class="img-fluid" alt="" align="left" style=""> 
-                                
-                        <input accept=".jpg , .png" type="file" id="post_building_img_1" name="post_building_img_1" class="form-control" style="margin: 14px 0 0 0 ;" onChange="readURL(this,'post_building_img_1_show');" value="">
-                        </div> 
-                        <div class="col-lg-4">
-                        <img id="post_building_img_2_show" src="img_upload/post/default_pic.png" class="img-fluid" alt="" align="left" style=""> 
-                                
-                        <input accept=".jpg , .png" type="file" id="post_building_img_2" name="post_building_img_2" class="form-control" style="margin: 14px 0 0 0 ;" onChange="readURL(this,'post_building_img_2_show');" value="">
-                        </div> 
-                    </div> 
-                </div>    
-            </div> 
-            <div class="col-lg-6"  align="left" > 
-                <div class="form-group">  
-                    <h6><b>ระยะเวลาของโพส</b></h6>
-                    <select  class="form-control select " id="post_amount_days" name="post_amount_days" onchange="" > 
-                        <option value="7">7 วัน</option> 
-                        <option value="30">30 วัน</option> 
-                        <option value="90">90 วัน</option> 
-                        
-                    </select>    
-                </div>   
-            </div>   
-            <div class="col-lg-12"  align="center" >  
-                <div class="form-group">  
-                    <input type="hidden" id="loan_type_id" name="loan_type_id" value="2" > 
-                    <input type="hidden" id="member_id" name="member_id" value="<?PHP echo $loan_member[0]['member_id'];?>" > 
-                    <button class="btn btn-login my-2 my-sm-0 m-1 pl-5 pr-5" type="submit" onclick="" >อยากกู้</button>  
-                </div>  
-            </div>
-        </div> 
-    </form> 
-  <?PHP
-  }
-  ?>
-  <?PHP 
-  if($loan_type=='nano'){
-  ?>
-    <form role="form" method="post" onsubmit="return check();" action="index.php?content=post&action=add" enctype="multipart/form-data">
-        <div class="row pl-4 pr-4 pt-5 pb-5 align-items-center">
-            <div class="col-lg-12 p-0">
-                <div class="col-lg-6 "  align="left" > 
-                    <div class="form-group">  
-                        <h6><b>วงเงินที่ต้องการ (ไม่ควรเกิน 100,000 บาท)</b> <font color="#F00"><b>*</b></font></b></h6>
-                        <input type="number" id="post_money" name="post_money" class="form-control borrower_border_color"   >     
-                    </div>   
-                </div>  
-            </div>
-            <div class="col-lg-12 p-0">
-                <div class="col-lg-6"  align="left" > 
-                    <div class="form-group">  
-                    <h6><b>อาชีพ</b> <font color="#F00"><b>*</b></font></b></h6>
-                    <select  class="form-control select " id="occupation_id"  name="occupation_id" onchange="" >  
-                        <option value=""></option>
-                        <?php 
-                            for($i =  0 ; $i < count($occupation) ; $i++){
-                            ?>
-                            <option <?php if($occupation[$i]['occupation_id'] == $member['occupation_id']){?> selected <?php }?> value="<?php echo $occupation[$i]['occupation_id']; ?>"><?php echo $occupation[$i]['occupation_name']; ?></option>
-                                
-                            <?
-                            }
-                        ?>
-                        <option value="-1">ฯลฯ</option> 
-                    </select>    
-                    </div>   
-                </div>  
-            </div>  
-            <div class="col-lg-12"  align="left" > 
-                <div class="form-group"> 
-                    <h6><b>ที่อยู่/ที่ตั้งร้าน</b> <font color="#F00"><b>*</b></font></b></h6>
-                    <input id="post_address" name="post_address" class="form-control borrower_border_color" placeholder="ที่อยู่"  value="<?PHP echo $member['post_address'];?>">   
-                </div>    
-            </div>  
-            <div class="col-lg-6"  align="left" > 
-                <div class="form-group">  
-                    <select  class="form-control select " id="amphur_id"  name="amphur_id" onchange="" >  
-                    <option></option>
-                        <?php 
-                            for($i =  0 ; $i < count($amphur) ; $i++){
-                            ?>
-                            <option   value="<?php echo $amphur[$i]['amphur_id']; ?>"><?php echo $amphur[$i]['amphur_name']; ?></option>
-                                
-                            <?
-                            }
-                        ?>
-                    </select>    
-                </div>   
-            </div>   
-            <div class="col-lg-6"  align="left" > 
-                <div class="form-group">  
-                    <select  class="form-control select " id="province_id" name="province_id" onchange="" > 
-                    <option></option> 
-                        <?php 
-                            for($i =  0 ; $i < count($province) ; $i++){
-                            ?>
-                            <option  value="<?php echo $province[$i]['province_id']; ?>"><?php echo $province[$i]['province_name']; ?></option>
-                            <?
-                            }
-                        ?>
-                    </select>    
-                </div>   
-            </div> 
-            <div class="col-lg-12"  align="left" > 
-                <div class="form-group"> 
-                    <h6><b>รูปภาพที่เกี่ยวข้องกับอาชีพ (หน้าร้าน, ทะเบียนการค้า, รถคู่ใจ, ฯลฯ)</b></h6> 
-                    <div class="row">
-                    <?PHP 
-                    for($i=1;$i<=6;$i++){
-                    ?>
-                        <div class="col-lg-4 p-2">
-                            <img id="post_occupation_img_<?=$i?>_show" src="img_upload/member/default_pic.png" class="img-fluid" alt="" align="left" style=""> 
-                                    
-                            <input accept=".jpg , .png" type="file" id="post_occupation_img_<?=$i?>" name="post_occupation_img_<?=$i?>" class="form-control" style="margin: 14px 0 0 0 ;" onChange="readURL(this,'post_occupation_img_<?=$i?>_show');" value="">
+<form role="form" method="post" onsubmit="" action="index.php?content=post&loan_type_id=<?=$loan_type_id?>" enctype="multipart/form-data">
+    <div class="row m-0" style="background-color:#f6f6f6;" >
+        <div class="col-xl-4 p-0">
+            <div class="row">
+                <div class="col-xl-12">
+                    <div class="row ml-2 m-2 p-2"  style="box-shadow: 0px 1px 5px 0px rgba(0,0,0,0.1);background-color:white;"> 
+                        <div class="col-xl-12"> 
+                            <div class="row pt-3 justify-content-center">
+                                <h3 style="color: #0292d8;"><b>ค้นหาผู้กู้</b></h3> 
+                            </div>
+                            <div class="row  pt-3">
+                                <ul class="nav nav-tabs" style="width:100%">
+                                    <li class="nav-item">
+                                        <a style="color: #495057;!important" class="nav-link <?PHP if($loan_type_id=='1'){ echo 'active';}?>" href="<?PHP echo $sub_menu;?>&loan_type_id=1"><img src="template/images/loan_type_1.png" height="20px" alt=""> โฉนดแลกเงิน</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a style="color: #495057;!important" class="nav-link <?PHP if($loan_type_id=='2'){ echo 'active';}?>" href="<?PHP echo $sub_menu;?>&loan_type_id=2"><img src="template/images/loan_type_2.png" height="20px" alt=""> พิโกไฟแนนซ์</a>
+                                    </li> 
+                                    <li class="nav-item">
+                                        <a style="color: #495057;!important" class="nav-link <?PHP if($loan_type_id=='3'){ echo 'active';}?>" href="<?PHP echo $sub_menu;?>&loan_type_id=3"><img src="template/images/loan_type_3.png" width="20px" alt=""> นาโนไฟแนนซ์</a>
+                                    </li> 
+                                    <li class="nav-item">
+                                        <a style="color: #495057;!important" class="nav-link <?PHP if($loan_type_id=='4'){ echo 'active';}?>" href="<?PHP echo $sub_menu;?>&loan_type_id=4"><img src="template/images/loan_type_4.png" height="20px" alt=""> หลักประกันทางธุรกิจ</a>
+                                    </li> 
+                                </ul>
+                            </div> 
                         </div>
-                    <?PHP
-                    }
-                    ?> 
-                    </div>  
-                </div>    
-            </div>    
-            <div class="col-lg-12"  align="center" >  
-                <div class="form-group">  
-                    <input type="hidden" id="loan_type_id" name="loan_type_id" value="3" > 
-                    <input type="hidden" id="member_id" name="member_id" value="<?PHP echo $loan_member[0]['member_id'];?>" > 
-                    <button class="btn btn-login my-2 my-sm-0 m-1 pl-5 pr-5" type="submit" onclick="" >อยากกู้</button>  
-                </div>  
+                        
+                            <div class="col-xl-12">
+                                <div class="row pl-4 pr-4 pt-5 pb-5 align-items-center post_form">  
+
+                                
+                                    <div class="col-xl-12"  align="left" > 
+                                        <h6><b>ที่อยู่</b> </h6>  
+                                        <div class="pl-2"> 
+                                            <div class="form-group">  
+                                                <select  class="form-control select " id="amphur_id"  name="amphur_id" onchange="" > 
+                                                <option></option>  
+                                                <option value="all">ทั้งหมด</option>
+                                                    <?php 
+                                                        for($i =  0 ; $i < count($amphur) ; $i++){
+                                                        ?>
+                                                        <option <?PHP if( $amphur[$i]['amphur_id']==$_POST['amphur_id']){echo 'selected';}?> value="<?php echo $amphur[$i]['amphur_id']; ?>"><?php echo $amphur[$i]['amphur_name']; ?></option> 
+                                                        <?
+                                                        }
+                                                    ?>
+                                                </select>    
+                                            </div> 
+                                            <div class="form-group">  
+                                                <select  class="form-control select " id="province_id" name="province_id" onchange="" >  
+                                                <option></option>
+                                                <option value="all">ทั้งหมด</option>
+                                                    <?php 
+                                                        for($i =  0 ; $i < count($province) ; $i++){
+                                                        ?>
+                                                        <option <?PHP if( $province[$i]['province_id']==$_POST['province_id']){echo 'selected';}?> value="<?php echo $province[$i]['province_id']; ?>"><?php echo $province[$i]['province_name']; ?></option>
+                                                        <?
+                                                        }
+                                                    ?>
+                                                </select>    
+                                            </div>   
+                                        </div>    
+                                    </div>   
+
+                                    <?PHP if($loan_type_id==3){ ?>
+                                        <div class="col-xl-12"  align="left" > 
+                                            <h6><b>อาชีพ</b> </h6>  
+                                            <div class="pl-2"> 
+                                                <div class="form-group">  
+                                                    <select  class="form-control select " id="occupation_id"  name="occupation_id" onchange="" > 
+                                                        <option></option>  
+                                                        <option value="all">ทั้งหมด</option>
+                                                        <?php 
+                                                            for($i =  0 ; $i < count($occupation) ; $i++){
+                                                            ?>
+                                                            <option <?PHP if( $occupation[$i]['occupation_id']==$_POST['occupation_id']){echo 'selected';}?> value="<?php echo $occupation[$i]['occupation_id']; ?>"><?php echo $occupation[$i]['occupation_name']; ?></option> 
+                                                            <?
+                                                            }
+                                                        ?>
+                                                        <option value="0">ฯลฯ</option> 
+                                                    </select>    
+                                                </div>  
+                                            </div>    
+                                        </div>  
+                                    <?PHP }?> 
+                                    <?PHP if($loan_type_id==4){ ?>
+                                        <div class="col-xl-12"  align="left" > 
+                                            <h6><b>ทรัพย์หลักประกัน</b> </h6>  
+                                            <div class="pl-2"> 
+                                                <div class="form-group">  
+                                                    <select  class="form-control select " id="collateral_id"  name="collateral_id" onchange="" > 
+                                                    <option></option>  
+                                                    <option value="all">ทั้งหมด</option>
+                                                        <?php 
+                                                            for($i =  0 ; $i < count($collateral) ; $i++){
+                                                            ?>
+                                                            <option <?PHP if( $collateral[$i]['collateral_id']==$_POST['collateral_id']){echo 'selected';}?> value="<?php echo $collateral[$i]['collateral_id']; ?>"><?php echo $collateral[$i]['collateral_name']; ?></option> 
+                                                            <?
+                                                            }
+                                                        ?>
+                                                        <option value="0">อื่น ๆ </option> 
+                                                    </select>    
+                                                </div>  
+                                            </div>    
+                                        </div>  
+                                    <?PHP }?> 
+
+                                    <?PHP if($loan_type_id==1||$loan_type_id==2){ ?>
+                                        <div class="col-xl-12"  align="left" > 
+                                            <div class="form-group"> 
+                                                <h6><b>ลักษณะที่</b></h6>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="radio" name="post_building" id="post_building0" value="all" <?PHP if($_POST['post_building']=="all"||$_POST['post_building']==""){echo 'checked';}?> >
+                                                    <label class="form-check-label" for="post_building0">ทั้งหมด</label>
+                                                </div>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="radio" name="post_building" id="post_building1" value="0" <?PHP if($_POST['post_building']=='0'){echo 'checked';}?> >
+                                                    <label class="form-check-label" for="post_building1">ที่ดินเปล่า</label>
+                                                </div>
+                                                <div class="form-inline "> 
+                                                    
+                                                    <div class="form-check form-check-inline">
+                                                        <input class="form-check-input" type="radio" name="post_building" id="post_building2" value="1" <?PHP if($_POST['post_building']=='1'){echo 'checked';}?>>
+                                                        <label class="form-check-label" for="post_building2">มีสิ่งปลูกสร้าง</label>
+                                                    </div>   
+                                                    <div class="pr-2"> 
+                                                        <div class="form-group">  
+                                                            <select  class="form-control select " id="building_id"  name="building_id" onchange="" style="border-color: #ff9000!important;">  
+                                                                <option value="all">ทั้งหมด</option> 
+                                                                <?php 
+                                                                    for($i =  0 ; $i < count($building) ; $i++){
+                                                                    ?>
+                                                                    <option <?PHP if($_POST['building_id']== $building[$i]['building_id']){echo 'selected';}?> value="<?php echo $building[$i]['building_id']; ?>"><?php echo $building[$i]['building_name']; ?></option>
+                                                                    <?
+                                                                    }
+                                                                ?>
+                                                            </select>    
+                                                        </div>   
+                                                    </div>      
+                                                </div> 
+                                            </div>    
+                                        </div>  
+                                    <?PHP }?> 
+                                    <?PHP if($loan_type_id==2){ ?>
+                                        <div class="col-xl-12"  align="left" > 
+                                            <div class="form-group"> 
+                                                <h6><b>หลักประกัน/โฉนด</b></h6>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="radio" name="post_deed" id="post_deed0" value="all" <?PHP if($_POST['post_deed']=="all"||$_POST['post_deed']==""){echo 'checked';}?> >
+                                                    <label class="form-check-label" for="post_deed0">ทั้งหมด</label>
+                                                </div>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="radio" name="post_deed" id="post_deed1" value="0" <?PHP if($_POST['post_deed']=='0'){echo 'checked';}?> >
+                                                    <label class="form-check-label" for="post_deed1">ไม่มี</label>
+                                                </div>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="radio" name="post_deed" id="post_deed2" value="1" <?PHP if($_POST['post_deed']=='1'){echo 'checked';}?> >
+                                                    <label class="form-check-label" for="post_deed2">มี</label>
+                                                </div>
+                                                
+                                            </div>    
+                                        </div>  
+                                    <?PHP }?> 
+
+                                    <div class="col-xl-12"  align="left" > 
+                                        <h6><b>เลือกวงเงิน</b> </h6>
+                                        <div class="form-group pl-2">  
+                                            <input type="number" id="post_money_start" name="post_money_start" class="form-control lender_border_color" value="<?PHP echo $_POST['post_money_start'];?>" placeholder="ตั้งแต่" style="max-width:100px;display:inline-block;"> <b>-</b>      
+                                            <input type="number" id="post_money_end" name="post_money_end" class="form-control lender_border_color" value="<?PHP echo $_POST['post_money_end'];?>"  placeholder="ถึง" style="max-width:100px;display:inline-block;">      
+                                        </div>   
+                                    </div>  
+
+                                    <?PHP if($loan_type_id==1){ ?>
+                                        <div class="col-xl-12"  align="left" > 
+                                            <div class="form-group"> 
+                                                <h6><b>เลือกธุรกรรมที่ต้องการ</b></h6>
+                                                <div class="pl-2">
+                                                    <div class="form-check ">
+                                                    <input class="form-check-input" type="checkbox" id="post_transaction_mortgage" name="post_transaction_mortgage" value="1" <?PHP if($_POST['post_transaction_mortgage']=='1'){ echo ' checked ';}?>  >
+                                                    <label class="form-check-label" for="post_transaction_mortgage">จำนอง</label>
+                                                    </div>
+                                                    <div class="form-check ">
+                                                    <input class="form-check-input" type="checkbox" id="post_transaction_selling" name="post_transaction_selling" value="1"  <?PHP if($_POST['post_transaction_selling']=='1'){ echo ' checked ';}?>
+                                                    <label class="form-check-label" for="post_transaction_selling">ขายฝาก</label>
+                                                    </div>  
+                                                    <div class="form-check ">
+                                                    <input class="form-check-input" type="checkbox" id="post_transaction_deposit" name="post_transaction_deposit" value="1" <?PHP if($_POST['post_transaction_deposit']=='1'){ echo ' checked ';} ?>
+                                                    <label class="form-check-label" for="post_transaction_deposit">ฝากโฉนด</label>
+                                                    </div>  
+                                                </div>
+                                            </div>    
+                                        </div>   
+                                    <?PHP }?>  
+
+                                    <?PHP if($loan_type_id==1){ ?>
+                                        <div class="col-xl-12"  align="left" > 
+                                            <div class="form-group"> 
+                                                <h6><b>ภาระของทรัพย์</b></h6>
+                                                <div class="pl-2">
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="radio" name="burden_id" id="burden_id0" value="all" <?PHP if($_POST['burden_id']=="all"||($_POST['burden_id']=="")){echo 'checked';}?> >
+                                                        <label class="form-check-label" for="burden_id0">ทั้งหมด</label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="radio" name="burden_id" id="burden_id1" value="0" <?PHP if($_POST['burden_id']=='0'){echo 'checked';}?> >
+                                                        <label class="form-check-label" for="burden_id1">ปลอดภาระ</label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="radio" name="burden_id" id="burden_id2" value="1" <?PHP if($_POST['burden_id']=='1'){echo 'checked';}?> >
+                                                        <label class="form-check-label" for="burden_id2">ติดภาระ</label>
+                                                    </div> 
+                                                    
+                                                </div>
+                                                
+                                            </div>    
+                                        </div>    
+                                    <?PHP }?>  
+                                
+                                    <div class="col-xl-12"  align="center" >  
+                                        <div class="form-group">  
+                                            <input type="hidden" id="loan_type_id" name="loan_type_id" value="<?PHP echo $loan_type_id?>" >  
+                                            
+                                            <button class="btn btn-login my-2 my-sm-0 m-1 pl-5 pr-5" type="submit" onclick="" >ค้นหาเลย</button>  
+                                        </div>  
+                                    </div>   
+                                </div>  
+                            </div>
+                        
+    
+                    </div> 
+                </div> 
             </div>
-        </div>
-    </form> 
-  <?PHP
-  }
-  ?>
-  <?PHP 
-  if($loan_type=='business'){
-  ?>
-    <div class="row pl-4 pr-4 pt-5 pb-5 align-items-center">
-        <div class="col-lg-6"  align="left" > 
-            <div class="form-group"> 
-                <h6><b>ทรัพย์หลักประกัน</b></h6> 
-                <select  class="form-control select " id=""  name="" onchange="" >  
-                  <option>เลือกทรัพย์หลักประกัน</option>
-                    
-                </select>    
-            </div>   
         </div> 
-        <div class="col-lg-6"  align="left" > 
-            <div class="form-group">  
-                <h6><b>วงเงินที่ต้องการ</b></h6>
-                <input type="number" id="post_money" name="post_money" class="form-control borrower_border_color" >     
-            </div>   
-        </div>  
-        <div class="col-lg-12"  align="left" > 
-            <div class="form-group"> 
-                <h6><b>รูปภ่ายทรัพย์หลักประกัน</b></h6> 
-                <div class="row">
-                  <div class="col-lg-4">
-                    <img id="" src="img_upload/member/default_pic.png" class="img-fluid" alt="" align="left" style=""> 
-                          
-                    <input accept=".jpg , .png" type="file" id="member_id_card_img" name="member_id_card_img" class="form-control" style="margin: 14px 0 0 0 ;" onChange="readURL(this,'member_id_card_img_show');" value="">
-                  </div>
-                  <div class="col-lg-4">
-                    <img id="" src="img_upload/member/default_pic.png" class="img-fluid" alt="" align="left" style=""> 
-                          
-                    <input accept=".jpg , .png" type="file" id="member_id_card_img" name="member_id_card_img" class="form-control" style="margin: 14px 0 0 0 ;" onChange="readURL(this,'member_id_card_img_show');" value="">
-                  </div>
-                  <div class="col-lg-4">
-                    <img id="" src="img_upload/member/default_pic.png" class="img-fluid" alt="" align="left" style=""> 
-                          
-                    <input accept=".jpg , .png" type="file" id="member_id_card_img" name="member_id_card_img" class="form-control" style="margin: 14px 0 0 0 ;" onChange="readURL(this,'member_id_card_img_show');" value="">
-                  </div>
-                  <div class="col-lg-4">
-                    <img id="" src="img_upload/member/default_pic.png" class="img-fluid" alt="" align="left" style=""> 
-                          
-                    <input accept=".jpg , .png" type="file" id="member_id_card_img" name="member_id_card_img" class="form-control" style="margin: 14px 0 0 0 ;" onChange="readURL(this,'member_id_card_img_show');" value="">
-                  </div>
-                  <div class="col-lg-4">
-                    <img id="" src="img_upload/member/default_pic.png" class="img-fluid" alt="" align="left" style=""> 
-                          
-                    <input accept=".jpg , .png" type="file" id="member_id_card_img" name="member_id_card_img" class="form-control" style="margin: 14px 0 0 0 ;" onChange="readURL(this,'member_id_card_img_show');" value="">
-                  </div>
-                  <div class="col-lg-4">
-                    <img id="" src="img_upload/member/default_pic.png" class="img-fluid" alt="" align="left" style=""> 
-                          
-                    <input accept=".jpg , .png" type="file" id="member_id_card_img" name="member_id_card_img" class="form-control" style="margin: 14px 0 0 0 ;" onChange="readURL(this,'member_id_card_img_show');" value="">
-                  </div>
-                </div>  
-            </div>    
-        </div> 
-        <div class="col-lg-12"  align="left" > 
-            <div class="form-group"> 
-                <h6><b>ที่อยู่/ที่ตั้ง</b></h6>
-                <input id="post_address" name="post_address" class="form-control borrower_border_color" placeholder="ที่อยู่"  value="<?PHP echo $member['post_address'];?>">   
-            </div>    
-        </div>  
-        <div class="col-lg-6"  align="left" > 
-            <div class="form-group">  
-                <select  class="form-control select " id="amphur_id"  name="amphur_id" onchange="" >  
-                <option></option>
-                    <?php 
-                        for($i =  0 ; $i < count($amphur) ; $i++){
-                        ?>
-                        <option <?php if($amphur[$i]['amphur_id'] == $member['amphur_id']){?> selected <?php }?> value="<?php echo $amphur[$i]['amphur_id']; ?>"><?php echo $amphur[$i]['amphur_name']; ?></option>
-                            
-                        <?
-                        }
-                    ?>
-                </select>    
-            </div>   
+        <div class="col-xl-8 p-0">
+            <div class="row m-2"  style="box-shadow: 0px 1px 5px 0px rgba(0,0,0,0.1);background-color:white;">
+                <div class="w-100 p-5 m-2 d-flex justify-content-center"  style="background-color:#f6f6f6;">
+                    <h5 class="m-0">BANNER</h5> 
+                </div>
+            </div> 
+            <div class="row m-2 p-3"  style="box-shadow: 0px 1px 5px 0px rgba(0,0,0,0.1);background-color:white;">  
+                <div class="mr-auto form-inline">
+                    <h6 class="m-0">จำนวนการกู้ทั้งหมด <?PHP echo number_format(count($post),0, '.', ',');?> รายการ</h6> 
+                </div>
+                <div class="form-inline">
+                    <h6 class="m-0 pr-1">เรียงโดย : </h6> 
+                    <select  class="form-control select borrower_border_color" id="sort_money" onchange="sorting_money(this);" name="sort_money"   >  
+                        <option <?PHP if($_POST['sort_money']==1){echo 'selected';}?> value="1">จากวงเงินมากไปน้อย</option>  
+                        <option <?PHP if($_POST['sort_money']==2){echo 'selected';}?> value="2">จากวงเงินน้อยไปมาก</option>  
+                    </select>    
+                </div> 
+            </div>
+            <div class="row m-2 "  style="box-shadow: 0px 1px 5px 0px rgba(0,0,0,0.1);background-color:white;">  
+            <?PHP for($i=0;$i<count($post);$i++){
+                ?>
+                <div class="col-xl-12 p-0">
+                    <div class="row m-2"  style="border: 1px solid rgba(0,0,0,.125);">
+                        <?PHP if($post[$i]['loan_type_id']==1||$post[$i]['loan_type_id']==2){ ?>
+                            <div class="col-xl-4 p-2 form-inline justify-content-center">
+                                <div class="row align-items-center" style="height:250px!important;overflow:hidden;">
+                                    <div class="col-xl-12">
+                                        <img  src="img_upload/post/<?PHP 
+                                        $check_pic=false;
+                                        for($ii=5;$ii<=6&&$check_pic==false;$ii++){
+                                            if($post[$i]['post_img_'.$ii]!==''){
+                                                echo $post[$i]['post_img_'.$ii];
+                                                $check_pic=true;
+                                            } 
+                                        }
+                                        if($check_pic==false){
+                                            echo 'default_pic.png';
+                                        }
+                                        ?>" class="img-fluid" style=" " alt=""  style="">
+                                    </div> 
+                                </div>
+                            </div>
+                        <?PHP }?>  
+                        <?PHP if($post[$i]['loan_type_id']==3||$post[$i]['loan_type_id']==4){ ?>
+                            <div class="col-xl-4 p-2 form-inline justify-content-center">
+                                <div class="row align-items-center" style="height:250px!important;overflow:hidden;">
+                                    <div class="col-xl-12">
+                                        <img  src="img_upload/post/<?PHP 
+                                        $check_pic=false;
+                                        for($ii=1;$ii<=6&&$check_pic==false;$ii++){
+                                            if($post[$i]['post_img_'.$ii]!==''){
+                                                echo $post[$i]['post_img_'.$ii];
+                                                $check_pic=true;
+                                            } 
+                                        }
+                                        if($check_pic==false){
+                                            echo 'default_pic.png';
+                                        }
+                                        ?>" class="img-fluid" style=" " alt=""  style="">
+                                    </div>
+                                </div>
+                                
+                            </div>
+                        <?PHP }?>  
+                        <div class="col-xl-4 p-2 form-inline"> 
+                            <div class="row">
+                                <h6 class="col-lg-6 pb-2"><b>หมวดหมู่ :</b></h6>
+                                <h6 class="col-lg-6 pb-2"><?PHP echo $post[$i]['loan_type_name']?></h6>
+                                <?PHP if($post[$i]['loan_type_id']==1||$post[$i]['loan_type_id']==2){ ?>
+                                    <h6 class="col-lg-6 pb-2"><b>ลักษณะที่ :</b></h6>
+                                    <h6 class="col-lg-6 pb-2"><?PHP  
+                                    if($post[$i]['post_building']==0){
+                                        echo 'ที่ดินเปล่า';
+                                    }else if($post[$i]['post_building']==1){
+                                        echo 'มีสิ่งปลูกสร้าง ('.$post[$i]['building_name'].')';
+                                    }
+                                    $post[$i]['post_building']
+                                    ?></h6>
+                                <?PHP }?>
+                                <?PHP if($post[$i]['loan_type_id']==2){ ?>
+                                    <h6 class="col-lg-6 pb-2"><b>หลักประกัน/โฉนด :</b></h6>
+                                        <h6 class="col-lg-6 pb-2"><?PHP  
+                                        if($post[$i]['post_deed']==0){
+                                            echo 'ไม่มี';
+                                        }else if($post[$i]['post_deed']==1){
+                                            echo 'มี (เลขที่โฉนด: '.$post['post_deed_number'].')';
+                                        }
+                                        $post['post_building']
+                                        ?></h6>
+                                <?PHP }?>
+                                <h6 class="col-lg-6 pb-2"><b>วงเงินที่ต้องการ :</b></h6>
+                                <h6 class="col-lg-6 pb-2"><?php echo number_format($post[$i]['post_money'],0, '.', ','); ?> บาท</h6>
+
+                                <?PHP if($post[$i]['loan_type_id']==4){ ?>
+                                    <h6 class="col-lg-6 pb-2"><b>ทรัพย์หลักประกัน :</b></h6>
+                                    <h6 class="col-lg-6 pb-2"><?php if($post[$i]['collateral_id']==0){echo $post[$i]['post_collateral_name'];}else if($post[$i]['collateral_id']!=''){echo $post[$i]['collateral_name'];} ?></h6>
+                                <?PHP }?>
+
+                                <?PHP if($post[$i]['loan_type_id']==3){ ?>
+                                    <h6 class="col-lg-6 pb-2"><b>อาชีพ :</b></h6>
+                                    <h6 class="col-lg-6 pb-2"><?PHP echo $post[$i]['occupation_name']?></h6>
+                                <?PHP }?>
+
+                                <?PHP if($post[$i]['loan_type_id']==1){ ?>
+                                    <h6 class="col-lg-6 pb-2"><b>ธุรกรรมที่ต้องการ :</b></h6>
+                                    <h6 class="col-lg-6 pb-2"><?PHP
+                                    if($post[$i]['post_transaction_mortgage']==1){
+                                        echo 'จำนอง';
+                                    }
+                                    if($post[$i]['post_transaction_selling']==1){
+                                        if($post[$i]['post_transaction_mortgage']==1){
+                                            echo ',ขายฝาก';
+                                        }else{
+                                            echo 'ขายฝาก';
+                                        } 
+                                    }
+                                    if($post[$i]['post_transaction_deposit']==1){
+                                        if($post[$i]['post_transaction_mortgage']==1||$post[$i]['post_transaction_selling']==1){
+                                            echo ',ฝากโฉนด';
+                                        }else{
+                                            echo 'ฝากโฉนด';
+                                        }
+                                        
+                                    }
+                                    ?></h6>
+                                <?PHP }?>
+
+                                <?PHP if($post[$i]['loan_type_id']==1){ ?>
+                                <h6 class="col-lg-6 pb-2"><b>ภาระของทรัพย์ :</b></h6> 
+                                <h6 class="col-lg-6 pb-2"><?PHP echo $post[$i]['burden_name']?></h6> 
+                                <?PHP }?>
+
+                                <h6 class="col-lg-12"><big><i class="fa fa-map-marker borrower_text_color pr-2" aria-hidden="true"></i></big><?PHP echo $post[$i]['amphur_name']?>, <?PHP echo $post[$i]['province_name']?></h6>    
+                            </div>
+                        </div>
+                        <div class="col-xl-4 p-2 d-flex align-items-center justify-content-center">
+                            <div class="row"> 
+                                <div class="col-xl-12 form-inline justify-content-center">
+                                    <div style="width:8em;height:8em; border-radius: 50%!important;border: 0.2em solid white; overflow: hidden;"> 
+                                        <img  src="img_upload/member/<?php if($post[$i]['member_profile_img'] != "" ){echo $post[$i]['member_profile_img'];}else{ echo "default.png"; }?>" class="img-fluid" alt="" align="left" style=""> 
+                                    </div> 
+                                    <div class="pl-2"> 
+                                        <h5 ><?PHP echo $post[$i]['member_name_show']?></h5>  
+                                        <h6 ><i class="fa fa-eye" aria-hidden="true"></i>???? ครั้ง</h6> 
+                                        <?PHP if($post[$i]['member_verified_status']==2){?>
+                                        <h3 class="m-0" ><i class="fa fa-check-circle text-success" aria-hidden="true"></i></h6>  
+                                        <?PHP }?>
+                                    </div> 
+                                </div> 
+                                <div class="col-xl-12 d-flex justify-content-center m-3">
+                                    <a class="btn btn-borrower text-white" href="index.php?content=post_detail&post_id=<?PHP echo $post[$i]['post_id'];?>"><h5 class="m-0">ดูรายละเอียด</h5></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div> 
+                </div>
+                <?PHP
+            }?>
+                
+            </div>
         </div>   
-        <div class="col-lg-6"  align="left" > 
-            <div class="form-group">  
-                <select  class="form-control select " id="province_id" name="province_id" onchange="" > 
-                <option></option> 
-                    <?php 
-                        for($i =  0 ; $i < count($province) ; $i++){
-                        ?>
-                        <option <?php if($province[$i]['province_id'] == $member['province_id']){?> selected <?php }?> value="<?php echo $province[$i]['province_id']; ?>"><?php echo $province[$i]['province_name']; ?></option>
-                        <?
-                        }
-                    ?>
-                </select>    
-            </div>   
-        </div>    
     </div>
-  <?PHP
-  }
-  ?>
-
-   
-  
-</div>
-
- <script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyBPYt_mZGd-2iotzhpiZKw1_GpZ6H9w3vs&sensor=false"></script>
-<link rel="stylesheet" type="text/css" href="template/map/css/jquery-gmaps-latlon-picker.css"/>
-<script src="template/map/js/jquery-gmaps-latlon-picker.js"></script>
+</form>

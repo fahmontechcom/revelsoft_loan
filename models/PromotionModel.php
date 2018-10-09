@@ -4,7 +4,9 @@ require_once("BaseModel.php");
 class PromotionModel extends BaseModel{
 
     function __construct(){
-        $this->db = mysqli_connect($this->host, $this->username, $this->password, $this->db_name);
+        if(!static::$db){
+            static::$db = mysqli_connect($this->host, $this->username, $this->password, $this->db_name);
+        }
     }
 
     function getPromotionBy($keyword = ""){
@@ -12,7 +14,7 @@ class PromotionModel extends BaseModel{
         *
         FROM tb_promotion 
         ORDER BY promotion_id";
-        if ($result = mysqli_query($this->db,$sql, MYSQLI_USE_RESULT)) {
+        if ($result = mysqli_query(static::$db,$sql, MYSQLI_USE_RESULT)) {
             $data = [];
             while ($row = mysqli_fetch_array($result,MYSQLI_ASSOC)){
                 $data[] = $row;
@@ -29,7 +31,7 @@ class PromotionModel extends BaseModel{
         WHERE STR_TO_DATE(promotion_date_begin,'%Y-%m-%d') >= STR_TO_DATE('$date_start','%Y-%m-%d')
         ORDER BY STR_TO_DATE(promotion_date_begin,'%Y-%m-%d')  ";
 
-        if ($result = mysqli_query($this->db,$sql, MYSQLI_USE_RESULT)) {
+        if ($result = mysqli_query(static::$db,$sql, MYSQLI_USE_RESULT)) {
             $data = [];
             while ($row = mysqli_fetch_array($result,MYSQLI_ASSOC)){
                 $data[] = $row;
@@ -45,7 +47,7 @@ class PromotionModel extends BaseModel{
         WHERE promotion_id = '$id' 
         ";
 
-        if ($result = mysqli_query($this->db,$sql, MYSQLI_USE_RESULT)) {
+        if ($result = mysqli_query(static::$db,$sql, MYSQLI_USE_RESULT)) {
             $data;
             while ($row = mysqli_fetch_array($result,MYSQLI_ASSOC)){
                 $data = $row;
@@ -67,7 +69,7 @@ class PromotionModel extends BaseModel{
         lastupdate = NOW() 
         WHERE promotion_id = $id "; 
 
-        if (mysqli_query($this->db,$sql, MYSQLI_USE_RESULT)) {
+        if (mysqli_query(static::$db,$sql, MYSQLI_USE_RESULT)) {
             return mysqli_insert_id($this->db);
         }else{
             return false;
@@ -97,7 +99,7 @@ class PromotionModel extends BaseModel{
     $data['addby']."',
     NOW()) ";
 
-    if (mysqli_query($this->db,$sql, MYSQLI_USE_RESULT)) {
+    if (mysqli_query(static::$db,$sql, MYSQLI_USE_RESULT)) {
         return mysqli_insert_id($this->db);
     }else {
         return false;
@@ -106,12 +108,12 @@ class PromotionModel extends BaseModel{
 
 function deletePromotionByID($id){
     $sql = " DELETE FROM tb_promotion WHERE promotion_id = '$id' ";
-    mysqli_query($this->db,$sql, MYSQLI_USE_RESULT);
+    mysqli_query(static::$db,$sql, MYSQLI_USE_RESULT);
 }
 
 function setPromotionView($id,$val){
     $sql = "UPDATE tb_promotion SET promotion_show = '$val' WHERE promotion_id = '$id'";
-    if ($result = mysqli_query($this->db,$sql, MYSQLI_USE_RESULT)) {
+    if ($result = mysqli_query(static::$db,$sql, MYSQLI_USE_RESULT)) {
        return true;
    }
 }

@@ -184,7 +184,11 @@ body{
     overflow: hidden;
     color:white;
 }
- 
+.post_form{
+    border-left: 1px solid #dee2e6;
+    border-right: 1px solid #dee2e6;
+    border-bottom: 1px solid #dee2e6;
+}
 
  
 @media only screen and (min-width: 1921px) { 

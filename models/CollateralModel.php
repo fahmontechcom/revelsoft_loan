@@ -1,7 +1,7 @@
 <?php
 
 require_once("BaseModel.php");
-class PropertyModel extends BaseModel{
+class CollateralModel extends BaseModel{
 
     function __construct(){
         if(!static::$db){
@@ -9,9 +9,9 @@ class PropertyModel extends BaseModel{
         }
     }
 
-    function getPropertyBy(){
+    function getCollateralBy(){
         $sql = "SELECT * 
-        FROM tb_property ";
+        FROM tb_collateral ";
         if ($result = mysqli_query(static::$db,$sql, MYSQLI_USE_RESULT)) {
             $data = [];
             while ($row = mysqli_fetch_array($result,MYSQLI_ASSOC)){

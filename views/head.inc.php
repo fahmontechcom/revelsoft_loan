@@ -21,7 +21,8 @@
     <!-- Main CSS -->
     
     <script src="template/js/jquery.min.js"></script>
-    <script src="template/js/bootstrap-4.1.1.min.js"></script> 
+    <script src="template/js/bootstrap.bundle.js"></script> 
+    <!-- <script src="template/js/bootstrap-4.1.1.min.js"></script>  -->
     <script src="template/js/select2.js"></script>
  
     

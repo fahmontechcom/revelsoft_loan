@@ -12,6 +12,7 @@ require_once('models/PropertyModel.php');
 require_once('models/BuildingModel.php');  
 require_once('models/PostModel.php');  
 require_once('models/OccupationModel.php');  
+require_once('models/CollateralModel.php');  
 // require_once('models/HomeModel.php'); 
 
 $member_model = new MemberModel;
@@ -19,13 +20,14 @@ $property_model = new PropertyModel;
 $building_model = new BuildingModel;
 $post_model = new PostModel;
 $occupation_model = new OccupationModel;
+$collateral_model = new CollateralModel;
 
 $path = "modules/post/views/"; 
 $target_dir = "img_upload/post/";
 
 if($loan_member == ''){
     ?>
-    <script>alert('กรุณา login เข้าใช้งาน');window.history.back();</script>
+    <script>alert('กรุณา login เข้าใช้งาน'); window.location="index.php?content=home";</script>
     <?PHP
 }else if($loan_member[0]['member_type_id'] == 2){
     ?>
@@ -34,11 +36,42 @@ if($loan_member == ''){
 
 }else{
    
-    
     if ($_GET['action'] == 'insert'){ 
+        $member_id = $_GET['member_id']; 
+        $member = $member_model ->getMemberByID($loan_member[0]['member_id']);    
+        $property = $property_model ->getPropertyBy();    
+        $building = $building_model ->getBuildingBy();    
+        $occupation = $occupation_model->getOccupationBy();    
+        $collateral = $collateral_model->getCollateralBy();    
+        // $member = $member_model ->getMemberByID($member_id);   
+        // echo '<pre>';
+        // print_r($member);
+        // echo '</pre>';
+        require_once($path.'insert.inc.php'); 
 
     }else if ($_GET['action'] == 'update'){ 
-    
+        $post = $post_model ->getPostByID($_GET['post_id']);
+        if($post['member_id']!=$loan_member[0]['member_id']){
+            ?>
+            <script>alert('ไม่สามารถแก้ไขได้');window.history.back();</script>
+            <?PHP
+        }else{
+            $loan_type_id = $post['loan_type_id']; 
+            require_once($path.'update.inc.php'); 
+        }
+        
+
+    }else if ($_GET['action'] == 'search'){ 
+
+        $building = $building_model ->getBuildingBy();    
+        $occupation = $occupation_model->getOccupationBy(); 
+        $collateral = $collateral_model->getCollateralBy();    
+        $loan_type_id = '1';
+        if($_GET['loan_type_id']!=''){
+            $loan_type_id = $_GET['loan_type_id'];
+        } 
+        require_once($path.'search.inc.php'); 
+
     }else if ($_GET['action'] == 'delete'){ 
     
     }else if ($_GET['action'] == 'add'){
@@ -61,32 +94,29 @@ if($loan_member == ''){
         $data['post_building'] = $_POST['post_building'];
         $data['building_id'] = $_POST['building_id'];
         $data['burden_id'] = $_POST['burden_id'];
-        $data['post_deed_front_img_1'] = $_POST['post_deed_front_img_1'];
-        $data['post_deed_front_img_2'] = $_POST['post_deed_front_img_2'];
-        $data['post_deed_back_img_1'] = $_POST['post_deed_back_img_1'];
-        $data['post_deed_back_img_2'] = $_POST['post_deed_back_img_2']; 
-        $data['post_building_img_1'] = $_POST['post_building_img_1'];
-        $data['post_building_img_2'] = $_POST['post_building_img_2']; 
+        $data['post_img_1'] = $_POST['post_img_1'];
+        $data['post_img_2'] = $_POST['post_img_2'];
+        $data['post_img_3'] = $_POST['post_img_3'];
+        $data['post_img_4'] = $_POST['post_img_4']; 
+        $data['post_img_5'] = $_POST['post_img_5'];
+        $data['post_img_6'] = $_POST['post_img_6']; 
         $data['post_amount_day'] = $_POST['post_amount_day']; 
         $data['post_deed'] = $_POST['post_deed']; 
         $data['post_deed_number'] = $_POST['post_deed_number']; 
         $data['post_location_lat'] = $_POST['post_location_lat']; 
         $data['post_location_long'] = $_POST['post_location_long'];  
         $data['occupation_id'] = $_POST['occupation_id'];   
+        $data['collateral_id'] = $_POST['collateral_id'];   
+        $data['post_collateral_name'] = $_POST['post_collateral_name'];   
 
+        
         $input_image = array(
-            "post_deed_front_img_1",
-            "post_deed_front_img_2",
-            "post_deed_back_img_1",
-            "post_deed_back_img_2",
-            "post_building_img_1",
-            "post_building_img_2",
-            "post_occupation_img_1",
-            "post_occupation_img_2",
-            "post_occupation_img_3",
-            "post_occupation_img_4",
-            "post_occupation_img_5",
-            "post_occupation_img_6"
+            "post_img_1",
+            "post_img_2",
+            "post_img_3",
+            "post_img_4",
+            "post_img_5",
+            "post_img_6"
         ); 
 
         for($i = 0;$i<count($input_image);$i++){
@@ -148,15 +178,27 @@ if($loan_member == ''){
     
     }else {   
     
-        $member_id = $_GET['member_id']; 
-        $member = $member_model ->getMemberByID($loan_member[0]['member_id']);    
-        $property = $property_model ->getPropertyBy();    
-        $building = $building_model ->getBuildingBy();    
-        $occupation = $occupation_model->getOccupationBy();    
+        // $member_id = $_GET['member_id']; 
+        // $member = $member_model ->getMemberByID($loan_member[0]['member_id']);    
+        // $property = $property_model ->getPropertyBy();    
+        // $building = $building_model ->getBuildingBy();    
+        // $occupation = $occupation_model->getOccupationBy();    
+        // $collateral = $collateral_model->getCollateralBy();   
+        
+        
         // $member = $member_model ->getMemberByID($member_id);   
         // echo '<pre>';
-        // print_r($member);
+        // print_r($post);
         // echo '</pre>';
+
+        $post = $post_model ->getPostBy($_POST['loan_type_id'],$_POST['sort_money'],$_POST['amphur_id'],$_POST['province_id'],$_POST['post_building'],$_POST['building_id'],$_POST['post_money_start'],$_POST['post_money_end'],$_POST['burden_id'],$_POST['post_deed'],$_POST['occupation_id'],$_POST['collateral_id']);   
+        $building = $building_model ->getBuildingBy();    
+        $occupation = $occupation_model->getOccupationBy(); 
+        $collateral = $collateral_model->getCollateralBy();    
+        $loan_type_id = '1';
+        if($_GET['loan_type_id']!=''){
+            $loan_type_id = $_GET['loan_type_id'];
+        } 
         require_once($path.'view.inc.php'); 
     }
 }

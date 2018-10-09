@@ -14,12 +14,12 @@ $post_model = new PostModel;
 $path = "modules/post_detail/views/"; 
 $target_dir = "img_upload/post/";
 
-// if($loan_member == ''){
+if($loan_member == ''){
     ?>
-    <!-- <script>alert('กรุณา login เข้าใช้งาน');window.history.back();</script> -->
+    <script>alert('กรุณา login เข้าใช้งาน'); window.location="index.php?content=home";</script>
     <?PHP
     
-// }else{
+}else{
    
     
     if ($_GET['action'] == 'insert'){ 
@@ -46,22 +46,22 @@ $target_dir = "img_upload/post/";
         // echo '</pre>';
         $post = $post_model ->getPostByID($_GET['post_id']);   
         $member = $member_model ->getMemberByID($post['member_id']);  
-        echo '<pre>';
-        print_r($post);
-        echo '</pre>'; 
+        // echo '<pre>';
+        // print_r($post);
+        // echo '</pre>'; 
 
             $old_date=date_create($member['create_date']);//วันก่อนหน้า 
             $new_date=date_create(date("Y-m-d")); 
             $diff=date_diff($old_date,$new_date);   
-            echo '<pre>';
-            print_r($diff);
-            echo '</pre>'; 
-            echo '<pre>';
-            print_r($post);
-            echo '</pre>'; 
+            // echo '<pre>';
+            // print_r($diff);
+            // echo '</pre>'; 
+            // echo '<pre>';
+            // print_r($post);
+            // echo '</pre>'; 
     
         require_once($path.'view.inc.php'); 
     }
-// }
+}
 
 ?>

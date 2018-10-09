@@ -84,7 +84,8 @@ $amphur = $amphur_model ->getAmphurBy();
         <a class="nav-link dropdown-toggle text-center" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">อยากกู้
         </a>
         <div class="dropdown-menu ml-auto mr-auto" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="index.php?content=post">โพสอยากกู้</a>
+          <a class="dropdown-item" href="index.php?content=post&action=insert">โพสอยากกู้</a>
+          <a class="dropdown-item" href="index.php?content=post&action=view">ค้นหาโพสอยากกู้</a>
           <a class="dropdown-item" href="#">Another action</a>
           <div class="dropdown-divider"></div>
           <a class="dropdown-item" href="#">Something else here</a>
@@ -94,7 +95,7 @@ $amphur = $amphur_model ->getAmphurBy();
         <a class="nav-link dropdown-toggle text-center" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">อยากให้กู้
         </a>
         <div class="dropdown-menu ml-auto mr-auto" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="#">Action</a>
+          <a class="dropdown-item" href="index.php?content=post&action=search">อยากให้กู้</a>
           <a class="dropdown-item" href="#">Another action</a>
           <div class="dropdown-divider"></div>
           <a class="dropdown-item" href="#">Something else here</a>

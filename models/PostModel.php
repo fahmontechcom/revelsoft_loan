@@ -9,6 +9,116 @@ class PostModel extends BaseModel{
         }
     }
 
+    function getPostBy($loan_type_id="",$sort_money="",$amphur_id="",$province_id="",$post_building="",$building_id="",$post_money_start="",$post_money_end="",$burden_id="",$post_deed="",$occupation_id="",$collateral_id=""){
+        
+        $str_loan_type_id = '';
+        $str_money = '';
+        $str_amphur_id = '';
+        $str_province_id = '';
+        $str_post_building = '';
+        $str_building_id = '';
+        $str_post_money_start = '';
+        $str_post_money_end = '';
+        $str_burden_id = '';
+        $str_post_deed = '';
+        $str_occupation_id = '';
+        $str_collateral_id = '';
+
+        if($loan_type_id!=""){ 
+            $str_loan_type_id = " AND tb_post.loan_type_id = '$loan_type_id' ";
+        }
+        if($amphur_id!=""&&$amphur_id!="all"){ 
+            $str_amphur_id = " AND tb_post.amphur_id = '$amphur_id' ";
+        }
+        if($province_id!=""&&$province_id!="all"){ 
+            $str_province_id = " AND tb_post.province_id = '$province_id' ";
+        }
+        if($post_building!=""){ 
+            if($post_building=='all'){
+                $str_post_building="";
+            }else if($post_building==0){
+                $str_post_building = " AND post_building = '$post_building' ";
+            }else if($post_building==1){
+                if($building_id=='all'){ 
+                    $str_post_building = " AND post_building = '$post_building' ";
+                }else{
+                    $str_post_building = " AND post_building = '$post_building'
+                                            AND tb_post.building_id = '$building_id'";
+                }
+            }
+        }
+        if($post_money_start!=""){ 
+            $str_post_money_start = " AND tb_post.post_money >= '$post_money_start' ";
+        }
+        if($post_money_end!=""){ 
+            $str_post_money_end = " AND tb_post.post_money <= '$post_money_end' ";
+        }
+        if($burden_id!=""&&$burden_id!="all"){ 
+            if($burden_id=="0"){
+                $str_burden_id = " AND tb_post.burden_id = '$burden_id' ";
+            }else{
+                $str_burden_id = " AND tb_post.burden_id != '0' ";
+            }
+            
+        }
+        if($post_deed!=""&&$post_deed!="all"){ 
+            if($post_deed=="0"){
+                $str_post_deed = " AND tb_post.post_deed = '$post_deed' ";
+            }else{
+                $str_post_deed = " AND tb_post.post_deed != '0' ";
+            }
+            
+        }
+        if($occupation_id!=""&&$occupation_id!="all"){ 
+            $str_occupation_id = " AND tb_post.occupation_id = '$occupation_id' ";
+        }
+        if($collateral_id!=""&&$collateral_id!="all"){ 
+            $str_collateral_id = " AND tb_post.collateral_id = '$collateral_id' ";
+        }
+
+        if($sort_money=="2"){
+            $str_money = " ORDER BY post_money ASC ";
+        }else{
+            $str_money = " ORDER BY post_money DESC ";
+        }
+        
+        $sql = "SELECT * 
+        FROM tb_post 
+        INNER JOIN tb_member ON tb_post.member_id = tb_member.member_id 
+        INNER JOIN tb_loan_type ON tb_post.loan_type_id = tb_loan_type.loan_type_id 
+        LEFT JOIN tb_property ON tb_post.property_id = tb_property.property_id 
+        LEFT JOIN tb_burden ON tb_post.burden_id = tb_burden.burden_id 
+        LEFT JOIN tb_occupation ON tb_post.occupation_id = tb_occupation.occupation_id 
+        LEFT JOIN tb_collateral ON tb_post.collateral_id = tb_collateral.collateral_id 
+        LEFT JOIN tb_building ON tb_post.building_id = tb_building.building_id 
+        INNER JOIN tb_amphur ON  tb_post.amphur_id = tb_amphur.amphur_id 
+        INNER JOIN tb_province ON  tb_post.province_id = tb_province.province_id  
+        WHERE 1 
+        $str_loan_type_id
+        $str_amphur_id
+        $str_province_id
+        $str_post_building 
+        $str_post_money_start
+        $str_post_money_end
+        $str_burden_id
+        $str_post_deed
+        $str_occupation_id
+        $str_collateral_id
+        $str_money 
+        ";
+       
+    //    echo $sql;
+        if ($result = mysqli_query(static::$db,$sql, MYSQLI_USE_RESULT)) {
+            $data = [];
+            while ($row = mysqli_fetch_array($result,MYSQLI_ASSOC)){
+                $data[] = $row;
+            }
+            $result->close();
+            return $data;
+        }
+    } 
+ 
+
     function getPostByID($id){
         $sql = " SELECT * 
         FROM tb_post 
@@ -16,6 +126,8 @@ class PostModel extends BaseModel{
         LEFT JOIN tb_property ON tb_post.property_id = tb_property.property_id 
         LEFT JOIN tb_burden ON tb_post.burden_id = tb_burden.burden_id 
         LEFT JOIN tb_occupation ON tb_post.occupation_id = tb_occupation.occupation_id 
+        LEFT JOIN tb_collateral ON tb_post.collateral_id = tb_collateral.collateral_id 
+        LEFT JOIN tb_building ON tb_post.building_id = tb_building.building_id 
         INNER JOIN tb_amphur ON  tb_post.amphur_id = tb_amphur.amphur_id 
         INNER JOIN tb_province ON  tb_post.province_id = tb_province.province_id 
         WHERE post_id = '$id' 
@@ -42,12 +154,13 @@ class PostModel extends BaseModel{
         $data['post_area_ngan']=mysqli_real_escape_string(static::$db,$data['post_area_ngan']); 
         $data['post_area_rai']=mysqli_real_escape_string(static::$db,$data['post_area_rai']); 
         $data['post_building']=mysqli_real_escape_string(static::$db,$data['post_building']); 
-        $data['post_deed_front_img_1']=mysqli_real_escape_string(static::$db,$data['post_deed_front_img_1']); 
-        $data['post_deed_front_img_2']=mysqli_real_escape_string(static::$db,$data['post_deed_front_img_2']); 
-        $data['post_deed_back_img_1']=mysqli_real_escape_string(static::$db,$data['post_deed_back_img_1']); 
-        $data['post_deed_back_img_2']=mysqli_real_escape_string(static::$db,$data['post_deed_back_img_2']); 
-        $data['post_building_img_1']=mysqli_real_escape_string(static::$db,$data['post_building_img_1']); 
-        $data['post_building_img_2']=mysqli_real_escape_string(static::$db,$data['post_building_img_2']); 
+        $data['post_img_1']=mysqli_real_escape_string(static::$db,$data['post_img_1']); 
+        $data['post_img_2']=mysqli_real_escape_string(static::$db,$data['post_img_2']); 
+        $data['post_img_3']=mysqli_real_escape_string(static::$db,$data['post_img_3']); 
+        $data['post_img_4']=mysqli_real_escape_string(static::$db,$data['post_img_4']); 
+        $data['post_img_5']=mysqli_real_escape_string(static::$db,$data['post_img_5']); 
+        $data['post_img_6']=mysqli_real_escape_string(static::$db,$data['post_img_6']); 
+        
         $data['post_location_lat']=mysqli_real_escape_string(static::$db,$data['post_location_lat']); 
         $data['post_location_long']=mysqli_real_escape_string(static::$db,$data['post_location_long']); 
         
@@ -69,18 +182,15 @@ class PostModel extends BaseModel{
             post_building, 
             building_id, 
             burden_id, 
-            post_deed_front_img_1, 
-            post_deed_front_img_2,  
-            post_deed_back_img_1,
-            post_deed_back_img_2, 
-            post_building_img_1, 
-            post_building_img_2, 
-            post_occupation_img_1,
-            post_occupation_img_2,
-            post_occupation_img_3,
-            post_occupation_img_4,
-            post_occupation_img_5,
-            post_occupation_img_6,
+            occupation_id,
+            collateral_id,
+            post_collateral_name,
+            post_img_1,
+            post_img_2,
+            post_img_3,
+            post_img_4,
+            post_img_5,
+            post_img_6,
             post_amount_day, 
             post_deed, 
             post_deed_number, 
@@ -104,18 +214,15 @@ class PostModel extends BaseModel{
             $data['post_building']."','". 
             $data['building_id']."','". 
             $data['burden_id']."','". 
-            $data['post_deed_front_img_1']."','". 
-            $data['post_deed_front_img_2']."','".  
-            $data['post_deed_back_img_1']."','".
-            $data['post_deed_back_img_2']."','". 
-            $data['post_building_img_1']."','". 
-            $data['post_building_img_2']."','". 
-            $data['post_occupation_img_1']."','". 
-            $data['post_occupation_img_2']."','". 
-            $data['post_occupation_img_3']."','". 
-            $data['post_occupation_img_4']."','". 
-            $data['post_occupation_img_5']."','". 
-            $data['post_occupation_img_6']."','". 
+            $data['occupation_id']."','". 
+            $data['collateral_id']."','". 
+            $data['post_collateral_name']."','". 
+            $data['post_img_1']."','". 
+            $data['post_img_2']."','". 
+            $data['post_img_3']."','". 
+            $data['post_img_4']."','". 
+            $data['post_img_5']."','". 
+            $data['post_img_6']."','". 
             $data['post_amount_day']."','". 
             $data['post_deed']."','". 
             $data['post_deed_number']."','". 

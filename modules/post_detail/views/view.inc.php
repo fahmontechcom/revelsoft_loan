@@ -55,6 +55,16 @@
         <div class="row ml-0 mr-2 mb-2 pt-3 pb-3 pl-4 pr-4"  style="box-shadow: 0px 1px 5px 0px rgba(0,0,0,0.1);background-color:white;"> 
             
             <div class="col-lg-12">
+                <div class="row justify-content-end">
+                    <div class="dropdown show">
+                        <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></a>
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink">
+                            <a class="dropdown-item" href="index.php?content=post&action=update&post_id=<?PHP echo $post['post_id'];?>">แก้ไข</a>
+                            <a class="dropdown-item" href="#">ลบ</a> 
+                        </div>
+                    </div> 
+                    <!-- <h5><i class="fa fa-caret-square-o-down" aria-hidden="true"></i></h5>  -->
+                </div>
                 <div class="row justify-content-center">
                     <div class="col-lg-11">
                         <h5><b>รายละเอียดประกาศ</b></h5>
@@ -72,7 +82,7 @@
                                     if($post['post_building']==0){
                                         echo 'ที่ดินเปล่า';
                                     }else if($post['post_building']==1){
-                                        echo 'มีสิ่งปลูกสร้าง ('.$post['property_detail'].')';
+                                        echo 'มีสิ่งปลูกสร้าง ('.$post['building_name'].')';
                                     }
                                     $post['post_building']
                                     ?></h6>
@@ -114,6 +124,8 @@
                             
                             <div class="col-lg-5">
                                 <div class="row"> 
+                                    <h6 class="col-lg-6 pb-2"><b>หมวดหมู่ :</b></h6>
+                                    <h6 class="col-lg-6 pb-2"><?PHP echo $post['loan_type_name']?></h6>
                                     <h6 class="col-lg-6 pb-2"><b>วงเงินที่ต้องการ :</b></h6>
                                     <h6 class="col-lg-6 pb-2"><?php echo number_format($post['post_money'],0, '.', ','); ?> บาท</h6>
                                     <h6 class="col-lg-6 pb-2"><b>หลักประกัน/โฉนด :</b></h6>
@@ -131,7 +143,7 @@
                                     if($post['post_building']==0){
                                         echo 'ที่ดินเปล่า';
                                     }else if($post['post_building']==1){
-                                        echo 'มีสิ่งปลูกสร้าง ('.$post['property_detail'].')';
+                                        echo 'มีสิ่งปลูกสร้าง ('.$post['building_name'].')';
                                     }
                                     $post['post_building']
                                     ?></h6>
@@ -158,10 +170,33 @@
                             
                             <div class="col-lg-5">
                                 <div class="row"> 
+                                    <h6 class="col-lg-6 pb-2"><b>หมวดหมู่ :</b></h6>
+                                    <h6 class="col-lg-6 pb-2"><?PHP echo $post['loan_type_name']?></h6>
                                     <h6 class="col-lg-6 pb-2"><b>วงเงินที่ต้องการ :</b></h6>
                                     <h6 class="col-lg-6 pb-2"><?php echo number_format($post['post_money'],0, '.', ','); ?> บาท</h6>  
                                     <h6 class="col-lg-6 pb-2"><b>อาชีพ :</b></h6>
                                     <h6 class="col-lg-6 pb-2"><?php echo $post['occupation_name'];?></h6>  
+                                    <h6 class="col-lg-12"><big><i class="fa fa-map-marker borrower_text_color pr-2" aria-hidden="true"></i></big><?PHP echo $post['amphur_name']?>, <?PHP echo $post['province_name']?></h6>            
+                                     
+                                </div>
+                            </div>
+                            <div class="col-lg-7"> 
+                                <h6 class=" pb-2"><b>ข้อมูลเพิ่มเติม : </b><?PHP echo $post['post_description'];?></h6>  
+                            </div>
+                             
+                        </div>
+                    <?PHP }?>
+                    <?PHP if($post['loan_type_id']==4){ ?>
+                        <div class="row">
+                            
+                            <div class="col-lg-5">
+                                <div class="row"> 
+                                    <h6 class="col-lg-6 pb-2"><b>หมวดหมู่ :</b></h6>
+                                    <h6 class="col-lg-6 pb-2"><?PHP echo $post['loan_type_name']?></h6>
+                                    <h6 class="col-lg-6 pb-2"><b>ทรัพย์หลักประกัน :</b></h6>
+                                    <h6 class="col-lg-6 pb-2"><?php if($post['collateral_id']==0){echo $post['post_collateral_name'];}else if($post['collateral_id']!=''){echo $post['collateral_name'];} ?></h6>  
+                                    <h6 class="col-lg-6 pb-2"><b>วงเงินที่ต้องการ :</b></h6>
+                                    <h6 class="col-lg-6 pb-2"><?php echo number_format($post['post_money'],0, '.', ','); ?> บาท</h6>  
                                     <h6 class="col-lg-12"><big><i class="fa fa-map-marker borrower_text_color pr-2" aria-hidden="true"></i></big><?PHP echo $post['amphur_name']?>, <?PHP echo $post['province_name']?></h6>            
                                      
                                 </div>
@@ -188,14 +223,18 @@
                     
                     <div class="col-lg-12 ">
                         <div class="row">
-                            <div class="col-lg-4 p-2"  align="left" >  
-                                <img  src="img_upload/post/<?php if($post['post_building_img_1'] != "" ){echo $post['post_building_img_1'];}else{ echo "default_pic.png"; }?>" class="img-fluid" alt="" align="left" style=""> 
-                          
-                            </div>   
-                            <div class="col-lg-4 p-2"  align="left" >  
-                                <img  src="img_upload/post/<?php if($post['post_building_img_1'] != "" ){echo $post['post_building_img_1'];}else{ echo "default_pic.png"; }?>" class="img-fluid" alt="" align="left" style="">  
-                      
-                            </div>      
+                            <?PHP 
+                            for($i=5;$i<=6;$i++){
+                                if($post['post_img_'.$i]!==''){
+                            ?> 
+                                <div class="col-lg-4 p-2"  align="left" >  
+                                    <img  src="img_upload/post/<?php if($post['post_img_'.$i] != "" ){echo $post['post_img_'.$i];}else{ echo "default_pic.png"; }?>" class="img-fluid" alt="" align="left" style=""> 
+                                
+                                </div>  
+                            <?PHP
+                                }
+                            }
+                            ?>       
                         </div>  
                     </div> 
                     <?PHP   
@@ -212,10 +251,37 @@
                         <div class="row">
                         <?PHP 
                         for($i=1;$i<=6;$i++){
-                            if($post['post_occupation_img_'.$i]!==''){
+                            if($post['post_img_'.$i]!==''){
                         ?> 
                             <div class="col-lg-4 p-2"  align="left" >  
-                                <img  src="img_upload/post/<?php if($post['post_occupation_img_'.$i] != "" ){echo $post['post_occupation_img_'.$i];}else{ echo "default_pic.png"; }?>" class="img-fluid" alt="" align="left" style=""> 
+                                <img  src="img_upload/post/<?php if($post['post_img_'.$i] != "" ){echo $post['post_img_'.$i];}else{ echo "default_pic.png"; }?>" class="img-fluid" alt="" align="left" style=""> 
+                            
+                            </div>  
+                        <?PHP
+                            }
+                        }
+                        ?> 
+                                
+                        </div>  
+                    </div> 
+                    <?PHP   
+                    }
+                    ?>
+                    <?PHP
+                    if($post['loan_type_id']==4){
+                    ?>
+                    <div class="col-lg-11">
+                        <h5><b>รูปถ่ายทรัพย์หลักประกัน</b></h5>
+                    </div>
+                    
+                    <div class="col-lg-12 ">
+                        <div class="row">
+                        <?PHP 
+                        for($i=1;$i<=6;$i++){
+                            if($post['post_img_'.$i]!==''){
+                        ?> 
+                            <div class="col-lg-4 p-2"  align="left" >  
+                                <img  src="img_upload/post/<?php if($post['post_img_'.$i] != "" ){echo $post['post_img_'.$i];}else{ echo "default_pic.png"; }?>" class="img-fluid" alt="" align="left" style=""> 
                             
                             </div>  
                         <?PHP
