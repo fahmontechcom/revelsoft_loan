@@ -90,6 +90,16 @@ for($i = 0 ; $i < count($menu_list); $i++){
             </a>
         </li>  
         <?PHP }?>
+        <?PHP if($menu['post_problem']['view']==1){ ?>
+        <li>
+            <a href="?content=post_problem">
+                <div <?php if($page=="post_problem"){echo "class='menu-active'";} else {echo "class='menu'";}?> >
+                    <i class="fa fa-user" style="font-size:24px"></i>
+                    <span style="padding:5px; font-size:15px; ">แจ้งประกาศ</span>
+                </div>
+            </a>
+        </li> 
+        <?PHP }?>
         <?PHP if($menu['confirm']['view']==1){ ?>
         <li>
             <a href="?content=confirm">

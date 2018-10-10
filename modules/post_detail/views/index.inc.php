@@ -4,12 +4,14 @@ require_once('models/MemberModel.php');
 require_once('models/PropertyModel.php');  
 require_once('models/BuildingModel.php');  
 require_once('models/PostModel.php');  
+require_once('models/PostProblemModel.php');  
 // require_once('models/HomeModel.php'); 
 
 $member_model = new MemberModel;
 $property_model = new PropertyModel;
 $building_model = new BuildingModel;
 $post_model = new PostModel;
+$post_problem_model = new PostProblemModel;
 
 $path = "modules/post_detail/views/"; 
 $target_dir = "img_upload/post/";
@@ -28,7 +30,25 @@ if($loan_member == ''){
     
     }else if ($_GET['action'] == 'delete'){ 
     
-    }else if ($_GET['action'] == 'add'){
+    }else if ($_GET['action'] == 'add_problem'){ 
+        $data = [];
+        $data['post_id'] = $_POST['post_id'];  
+        $data['member_id'] = $_POST['member_id'];  
+        $data['post_problem_detail'] = $_POST['post_problem_detail'];  
+        $check_result = $post_problem_model->insertPostProblem($data);    
+        if($check_result!=0){ 
+            ?>
+            <script>
+                alert('ส่งเรียบร้อยแล้ว');
+                window.location="index.php?content=post_detail&post_id=<?=$data['post_id']?>";
+            </script>
+            <?php
+        }else{
+            $result = "ไม่สามารถส่งได้";
+            ?>
+            <script>alert('<? echo $result;?>');window.history.back();</script>
+            <?PHP
+        } 
         
     }else if ($_GET['action'] == 'edit'){ 
     

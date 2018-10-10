@@ -114,7 +114,7 @@ if ($_GET['action'] == 'insert'&&$menu['how_to']['add']==1){
                 }else if (move_uploaded_file($_FILES[$input_image[$i]]["tmp_name"], $target_file)) {
                     $data[$input_image[$i]] = $date.'-'.strtolower(basename($_FILES[$input_image[$i]]["name"]));
                     $target_file = $target_dir . $_POST[$input_image[$i].'_o'];
-                    if (file_exists($target_file)) {
+                    if (file_exists($target_file)&&$_POST[$input_image[$i].'_o']!='') {
                         unlink($target_file);
                     }
                 } else {

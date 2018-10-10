@@ -1,4 +1,20 @@
 <script>
+    function confirm(id){ 
+        document.getElementById("member_verified_status").value = id;
+    }
+</script>
+
+<div class="row">
+    <div class="col-lg-6">
+        <h1>ข้อมูลสมาชิก</h1>
+    </div>
+    <div class="col-lg-6" align="right">
+
+    </div>
+    <!-- /.col-lg-12 -->
+</div>
+<!-- /.row -->
+<script>
 function check(){
     var post_problem_detail = document.getElementById("post_problem_detail").value;  
     

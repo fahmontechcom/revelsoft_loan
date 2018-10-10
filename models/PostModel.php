@@ -82,8 +82,8 @@ class PostModel extends BaseModel{
             $str_money = " ORDER BY post_money DESC ";
         }
         
-        $sql = "SELECT * 
-        FROM tb_post 
+        $sql = "SELECT tb_post.* ,tb_member.member_name_show,tb_member.member_profile_img,tb_member.member_verified_status ,tb_loan_type.* ,tb_property.* ,tb_burden.* ,tb_occupation.* ,tb_collateral.* ,tb_building.* ,tb_amphur.* ,tb_province.*  
+        FROM tb_post  
         INNER JOIN tb_member ON tb_post.member_id = tb_member.member_id 
         INNER JOIN tb_loan_type ON tb_post.loan_type_id = tb_loan_type.loan_type_id 
         LEFT JOIN tb_property ON tb_post.property_id = tb_property.property_id 
@@ -118,6 +118,48 @@ class PostModel extends BaseModel{
         }
     } 
  
+    function updatePostID($id,$data = []){ 
+        $sql = "UPDATE tb_post SET    
+        member_id = '".mysqli_real_escape_string(static::$db,$data['member_id'])."', 
+        loan_type_id = '".mysqli_real_escape_string(static::$db,$data['loan_type_id'])."', 
+        post_transaction_mortgage = '".mysqli_real_escape_string(static::$db,$data['post_transaction_mortgage'])."', 
+        post_transaction_selling = '".mysqli_real_escape_string(static::$db,$data['post_transaction_selling'])."',  
+        post_transaction_deposit = '".mysqli_real_escape_string(static::$db,$data['post_transaction_deposit'])."',  
+        property_id = '".mysqli_real_escape_string(static::$db,$data['property_id'])."',   
+        post_money = '".mysqli_real_escape_string(static::$db,$data['post_money'])."',  
+        post_address = '".mysqli_real_escape_string(static::$db,$data['post_address'])."',  
+        amphur_id = '".mysqli_real_escape_string(static::$db,$data['amphur_id'])."',  
+        province_id = '".mysqli_real_escape_string(static::$db,$data['province_id'])."',  
+        post_area_wa = '".mysqli_real_escape_string(static::$db,$data['post_area_wa'])."',  
+        post_area_ngan = '".mysqli_real_escape_string(static::$db,$data['post_area_ngan'])."',  
+        post_area_rai = '".mysqli_real_escape_string(static::$db,$data['post_area_rai'])."',  
+        post_building = '".mysqli_real_escape_string(static::$db,$data['post_building'])."',  
+        building_id = '".mysqli_real_escape_string(static::$db,$data['building_id'])."',  
+        burden_id = '".mysqli_real_escape_string(static::$db,$data['burden_id'])."',  
+        occupation_id = '".mysqli_real_escape_string(static::$db,$data['occupation_id'])."', 
+        collateral_id = '".mysqli_real_escape_string(static::$db,$data['collateral_id'])."', 
+        post_collateral_name = '".mysqli_real_escape_string(static::$db,$data['post_collateral_name'])."', 
+        post_img_1 = '".mysqli_real_escape_string(static::$db,$data['post_img_1'])."', 
+        post_img_2 = '".mysqli_real_escape_string(static::$db,$data['post_img_2'])."', 
+        post_img_3 = '".mysqli_real_escape_string(static::$db,$data['post_img_3'])."', 
+        post_img_4 = '".mysqli_real_escape_string(static::$db,$data['post_img_4'])."', 
+        post_img_5 = '".mysqli_real_escape_string(static::$db,$data['post_img_5'])."', 
+        post_img_6 = '".mysqli_real_escape_string(static::$db,$data['post_img_6'])."', 
+        post_amount_day = '".mysqli_real_escape_string(static::$db,$data['post_amount_day'])."',  
+        post_deed = '".mysqli_real_escape_string(static::$db,$data['post_deed'])."',  
+        post_deed_number = '".mysqli_real_escape_string(static::$db,$data['post_deed_number'])."',  
+        post_location_lat = '".mysqli_real_escape_string(static::$db,$data['post_location_lat'])."',  
+        post_location_long = '".mysqli_real_escape_string(static::$db,$data['post_location_long'])."',  
+        edit_date = NOW() 
+        
+        WHERE post_id = '$id' ";
+        // echo $sql;
+        if (mysqli_query(static::$db,$sql, MYSQLI_USE_RESULT)) {
+            return 1;
+        }else {
+            return 0;
+        }
+    }
 
     function getPostByID($id){
         $sql = " SELECT * 
@@ -239,12 +281,12 @@ class PostModel extends BaseModel{
     }
 
     function deletePostByID($id){
-        $sql = " DELETE FROM tb_member WHERE member_id = '$id' ";
-        $result = mysqli_query(static::$db,$sql, MYSQLI_USE_RESULT); 
-
-        $sql = " DELETE FROM tb_member_business_img WHERE member_id = '$id' ";
-        $result = mysqli_query(static::$db,$sql, MYSQLI_USE_RESULT);
- 
+        $sql = " DELETE FROM tb_post WHERE post_id = '$id' ";  
+        if (mysqli_query(static::$db,$sql, MYSQLI_USE_RESULT)) {
+            return 1;
+        }else {
+            return 0;
+        }
     }
 }
 ?>
