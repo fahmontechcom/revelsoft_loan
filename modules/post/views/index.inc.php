@@ -29,6 +29,17 @@ if($_GET['loan_type_id']!=''){
     $loan_type_id = $_GET['loan_type_id'];
 } 
 
+function generateRandomString($length = 4) {
+    $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    $charactersLength = strlen($characters);
+    $randomString = '';
+    for ($i = 0; $i < $length; $i++) {
+        $randomString .= $characters[rand(0, $charactersLength - 1)];
+    }
+    return $randomString;
+}
+
+
 if($loan_member == ''){
     ?>
     <script>alert('กรุณา login เข้าใช้งาน'); window.location="index.php?content=home";</script>
@@ -142,6 +153,7 @@ if($loan_member == ''){
         $data['occupation_id'] = $_POST['occupation_id'];   
         $data['collateral_id'] = $_POST['collateral_id'];   
         $data['post_collateral_name'] = $_POST['post_collateral_name'];   
+        $data['post_finish_password'] = generateRandomString(4);   
 
         
         $input_image = array(
@@ -287,7 +299,7 @@ if($loan_member == ''){
             // echo "<pre>";
             // print_r($data);
             // echo "</pre>";
-            $check_result = $post_model->updatePostID($data['post_id'],$data);    
+            $check_result = $post_model->updatePostByID($data['post_id'],$data);    
             if($check_result!=0){ 
                 ?>
                 <script>

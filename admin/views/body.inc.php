@@ -21,5 +21,7 @@ if($page=="home"&&$menu['home']['view']==1){
     require_once("modules/confirm/views/index.inc.php");   
 }else if($page=="post_problem"&&$menu['post_problem']['view']==1){ 
     require_once("modules/post_problem/views/index.inc.php");  
+}else if($page=="post"&&$menu['post']['view']==1){ 
+    require_once("modules/post/views/index.inc.php");  
 }
 ?>

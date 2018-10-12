@@ -95,7 +95,17 @@ for($i = 0 ; $i < count($menu_list); $i++){
             <a href="?content=post_problem">
                 <div <?php if($page=="post_problem"){echo "class='menu-active'";} else {echo "class='menu'";}?> >
                     <i class="fa fa-user" style="font-size:24px"></i>
-                    <span style="padding:5px; font-size:15px; ">แจ้งประกาศ</span>
+                    <span style="padding:5px; font-size:15px; ">แจ้งโพสไม่เหมาะสม</span>
+                </div>
+            </a>
+        </li> 
+        <?PHP }?>
+        <?PHP if($menu['post']['view']==1){ ?>
+        <li>
+            <a href="?content=post">
+                <div <?php if($page=="post"){echo "class='menu-active'";} else {echo "class='menu'";}?> >
+                    <i class="fa fa-user" style="font-size:24px"></i>
+                    <span style="padding:5px; font-size:15px; ">โพสอยากกู้</span>
                 </div>
             </a>
         </li> 

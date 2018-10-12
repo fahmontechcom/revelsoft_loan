@@ -2,7 +2,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>ADMIN PANEL</title>
+    <title>LOANMARKETO</title>
 
     <!-- Bootstrap Core CSS -->
     <!-- <link rel="icon" type="image/png" href="template/images/logo_fahsai.jpg"/> -->
@@ -17,14 +17,16 @@
 
     <link href="template/css/select2.css" rel="stylesheet"/>
     <link href="template/css/select2-bootstrap4.css" rel="stylesheet"/>
-    <link href="template/css/style_front.css" rel="stylesheet">   
+    <link href="template/css/style_front.css" rel="stylesheet">    
+    <link rel="stylesheet" type="text/css" href="template/fancybox/css/jquery.fancybox.min.css"> 
     <!-- Main CSS -->
     
     <script src="template/js/jquery.min.js"></script>
     <script src="template/js/bootstrap.bundle.js"></script> 
     <!-- <script src="template/js/bootstrap-4.1.1.min.js"></script>  -->
-    <script src="template/js/select2.js"></script>
- 
+    <script src="template/js/select2.js"></script> 
+    <script src="template/fancybox/js/jquery.fancybox.min.js"></script> 
+   
     
 
     

@@ -34,7 +34,7 @@
             }
             reader.readAsDataURL(input.files[0]);
         }else{
-            $('#'+id).attr('src', 'img_upload/post/default_pic.png');
+            $('#'+id).attr('src', '../img_upload/post/default_pic.png');
         }
     }
     function check(){   
@@ -218,7 +218,7 @@
         ?>
         <ul class="nav nav-tabs" style="width:100%">
             <li class="nav-item">
-                <a style="color: #495057;!important" class="nav-link  active " ><img src="template/images/loan_type_<?PHP echo $loan_type_id;?>.png" <?PHP echo $height;?> alt=""> <?PHP echo $topic;?></a>
+                <a style="color: #495057;!important" class="nav-link  active " ><img src="../template/images/loan_type_<?PHP echo $loan_type_id;?>.png" <?PHP echo $height;?> alt=""> <?PHP echo $topic;?></a>
             </li>  
         </ul>
     </div> 
@@ -491,12 +491,12 @@
                             <h6><b>รูปภาพโฉนดด้านหน้า</b></h6> 
                             <div class="row">
                                 <div class="col-lg-4">
-                                    <img id="post_img_1_show" src="img_upload/post/<?php if($post['post_img_1'] != "" ){echo $post['post_img_1'];}else{ echo "default_pic.png"; }?>" class="img-fluid" alt="" align="left" style=""> 
+                                    <img id="post_img_1_show" src="../img_upload/post/<?php if($post['post_img_1'] != "" ){echo $post['post_img_1'];}else{ echo "default_pic.png"; }?>" class="img-fluid" alt="" align="left" style=""> 
                                             
                                     <input accept=".jpg , .png" type="file" id="post_img_1" name="post_img_1" class="form-control" style="margin: 14px 0 0 0 ;" onChange="readURL(this,'post_img_1_show');" value="<?php echo $post['post_img_1']?>">
                                 </div> 
                                 <div class="col-lg-4">
-                                    <img id="post_img_2_show" src="img_upload/post/<?php if($post['post_img_2'] != "" ){echo $post['post_img_2'];}else{ echo "default_pic.png"; }?>" class="img-fluid" alt="" align="left" style=""> 
+                                    <img id="post_img_2_show" src="../img_upload/post/<?php if($post['post_img_2'] != "" ){echo $post['post_img_2'];}else{ echo "default_pic.png"; }?>" class="img-fluid" alt="" align="left" style=""> 
                                             
                                     <input accept=".jpg , .png" type="file" id="post_img_2" name="post_img_2" class="form-control" style="margin: 14px 0 0 0 ;" onChange="readURL(this,'post_img_2_show');" value="<?php echo $post['post_img_2']?>">
                                     </div> 
@@ -508,12 +508,12 @@
                             <h6><b>รูปภาพโฉนดด้านหลัง</b></h6> 
                             <div class="row">
                                 <div class="col-lg-4">
-                                    <img id="post_img_3_show" src="img_upload/post/<?php if($post['post_img_3'] != "" ){echo $post['post_img_3'];}else{ echo "default_pic.png"; }?>" class="img-fluid" alt="" align="left" style=""> 
+                                    <img id="post_img_3_show" src="../img_upload/post/<?php if($post['post_img_3'] != "" ){echo $post['post_img_3'];}else{ echo "default_pic.png"; }?>" class="img-fluid" alt="" align="left" style=""> 
                                         
                                     <input accept=".jpg , .png" type="file" id="post_img_3" name="post_img_3" class="form-control" style="margin: 14px 0 0 0 ;" onChange="readURL(this,'post_img_3_show');" value="<?php echo $post['post_img_3']?>">
                                 </div> 
                                 <div class="col-lg-4">
-                                    <img id="post_img_4_show" src="img_upload/post/<?php if($post['post_img_4'] != "" ){echo $post['post_img_4'];}else{ echo "default_pic.png"; }?>" class="img-fluid" alt="" align="left" style=""> 
+                                    <img id="post_img_4_show" src="../img_upload/post/<?php if($post['post_img_4'] != "" ){echo $post['post_img_4'];}else{ echo "default_pic.png"; }?>" class="img-fluid" alt="" align="left" style=""> 
                                         
                                     <input accept=".jpg , .png" type="file" id="post_img_4" name="post_img_4" class="form-control" style="margin: 14px 0 0 0 ;" onChange="readURL(this,'post_img_4_show');" value="<?php echo $post['post_img_4']?>">
                                 </div> 
@@ -525,12 +525,12 @@
                             <h6><b>รูปภาพที่ดิน/บ้าน</b></h6> 
                             <div class="row">
                                 <div class="col-lg-4">
-                                    <img id="post_img_5_show" src="img_upload/post/<?php if($post['post_img_5'] != "" ){echo $post['post_img_5'];}else{ echo "default_pic.png"; }?>" class="img-fluid" alt="" align="left" style=""> 
+                                    <img id="post_img_5_show" src="../img_upload/post/<?php if($post['post_img_5'] != "" ){echo $post['post_img_5'];}else{ echo "default_pic.png"; }?>" class="img-fluid" alt="" align="left" style=""> 
                                         
                                     <input accept=".jpg , .png" type="file" id="post_img_5" name="post_img_5" class="form-control" style="margin: 14px 0 0 0 ;" onChange="readURL(this,'post_img_5_show');" value="<?php echo $post['post_img_5']?>">
                                 </div> 
                                 <div class="col-lg-4">
-                                    <img id="post_img_6_show" src="img_upload/post/<?php if($post['post_img_6'] != "" ){echo $post['post_img_6'];}else{ echo "default_pic.png"; }?>" class="img-fluid" alt="" align="left" style=""> 
+                                    <img id="post_img_6_show" src="../img_upload/post/<?php if($post['post_img_6'] != "" ){echo $post['post_img_6'];}else{ echo "default_pic.png"; }?>" class="img-fluid" alt="" align="left" style=""> 
                                         
                                     <input accept=".jpg , .png" type="file" id="post_img_6" name="post_img_6" class="form-control" style="margin: 14px 0 0 0 ;" onChange="readURL(this,'post_img_6_show');" value="<?php echo $post['post_img_6']?>">
                                 </div> 
@@ -554,7 +554,7 @@
                             for($i=1;$i<=6;$i++){
                             ?>
                                 <div class="col-lg-4 p-2">
-                                    <img id="post_img_<?=$i?>_show" src="img_upload/post/<?php if($post['post_img_'.$i] != "" ){echo $post['post_img_'.$i];}else{ echo "default_pic.png"; }?>" class="img-fluid" alt="" align="left" style=""> 
+                                    <img id="post_img_<?=$i?>_show" src="../img_upload/post/<?php if($post['post_img_'.$i] != "" ){echo $post['post_img_'.$i];}else{ echo "default_pic.png"; }?>" class="img-fluid" alt="" align="left" style=""> 
                                             
                                     <input accept=".jpg , .png" type="file" id="post_img_<?=$i?>" name="post_img_<?=$i?>" class="form-control" style="margin: 14px 0 0 0 ;" onChange="readURL(this,'post_img_<?=$i?>_show');" value="<?php echo $post['post_img_'.$i]?>">
                                 </div>
@@ -588,7 +588,7 @@
                         <?PHP
                         }
                         ?> 
-                        <input type="hidden" id="member_id" name="member_id" value="<?PHP echo $loan_member[0]['member_id'];?>" > 
+                        <input type="hidden" id="member_id" name="member_id" value="<?PHP echo $post['member_id'];?>" > 
                         <button class="btn btn-login my-2 my-sm-0 m-1 pl-5 pr-5" type="submit" onclick="" >แก้ไข</button>  
                     </div>  
                 </div>   
@@ -599,5 +599,5 @@
 </div>
 
  <script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyBPYt_mZGd-2iotzhpiZKw1_GpZ6H9w3vs&sensor=false"></script>
-<link rel="stylesheet" type="text/css" href="template/map/css/jquery-gmaps-latlon-picker.css"/>
-<script src="template/map/js/jquery-gmaps-latlon-picker.js"></script>
+<link rel="stylesheet" type="text/css" href="../template/map/css/jquery-gmaps-latlon-picker.css"/>
+<script src="../template/map/js/jquery-gmaps-latlon-picker.js"></script>

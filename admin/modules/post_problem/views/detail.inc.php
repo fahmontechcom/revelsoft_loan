@@ -1,103 +1,31 @@
-<script>
-    function confirm(id){ 
-        document.getElementById("member_verified_status").value = id;
-    }
-</script>
+ 
 
 <div class="row">
     <div class="col-lg-6">
-        <h1>ข้อมูลสมาชิก</h1>
+        <h1>รายละเอียดแจ้งประกาศไม่เหมาะสม</h1>
     </div>
     <div class="col-lg-6" align="right">
 
-    </div>
-    <!-- /.col-lg-12 -->
-</div>
-<!-- /.row -->
-<script>
-function check(){
-    var post_problem_detail = document.getElementById("post_problem_detail").value;  
-    
-    post_problem_detail = $.trim(post_problem_detail);     
-    
-
-    if(post_problem_detail.length == 0){
-        alert("กรุณาเลือกรายละเอียด");
-        document.getElementById("post_problem_detail").focus();
-        return false; 
-    }else{ 
-        return true;    
-    }
-}
-</script>
-<div class="row m-0" style="background-color:#f6f6f6;" >
-    <div class="col-lg-12 p-0">
-        <div class="row m-2"  style="box-shadow: 0px 1px 5px 0px rgba(0,0,0,0.1);background-color:white;">
-            <div class="w-100 p-5 m-2 d-flex justify-content-center"  style="background-color:#f6f6f6;">
-                <h5 class="m-0">BANNER</h5> 
-            </div>
-        </div>
-        
     </div> 
-    <div class="col-lg-4 p-0">
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="row ml-2 mr-2 mb-2  p-3"  style="box-shadow: 0px 1px 5px 0px rgba(0,0,0,0.1);background-color:white;"> 
-                    <div class="col-lg-12 d-flex justify-content-center pb-3">
-                        <h5 class="m-0"><b>ข้อมูลผู้ลงประกาศ</b></h5>  
-                    </div>
-                    <div class="col-lg-12 pb-4">
-                        <div class="row d-flex justify-content-center align-items-center"> 
-                            <div style="width:8em;height:8em; border-radius: 50%!important;border: 0.2em solid white; overflow: hidden;"> 
-                                <img id="member_profile_img_show" src="img_upload/member/<?php if($member['member_profile_img'] != "" ){echo $member['member_profile_img'];}else{ echo "default.png"; }?>" class="img-fluid" alt="" align="left" style=""> 
-                            </div>  
-                        </div>  
-                    </div>  
-                    <h5 class="col-lg-1 pb-2"><i class="fa fa-user" aria-hidden="true"></i></h5>   
-                    <h5 class="col-lg-11 pb-2"><b><?PHP echo $member['member_name_show']?></b></h5>     
-                    <h6 class="col-lg-1 pb-2"><i class="fa fa-history" aria-hidden="true"></i></h6>   
-                    <h6 class="col-lg-11 pb-2">เป็นสมาชิกมาแล้ว <?PHP echo $diff->y;?> ปี <?PHP echo $diff->m;?> เดือน</h6>     
-                    <h6 class="col-lg-1 pb-2"><i class="fa fa-clock-o" aria-hidden="true"></i></h6>   
-                    <h6 class="col-lg-11 pb-2"><?php echo date_format(date_create($member['create_date']),"d/m/Y H.i");?> น.</h6>     
-                    <h6 class="col-lg-1 pb-2"><i class="fa fa-eye" aria-hidden="true"></i></h6>   
-                    <h6 class="col-lg-11 pb-2">เยี่ยมชม ???? ครั้ง</h6>     
-                    <h6 class="col-lg-1 pb-2"><i class="fa fa-map-marker" aria-hidden="true"></i></h6>   
-                    <h6 class="col-lg-11 pb-2"><?PHP echo $member['amphur_name']?>, <?PHP echo $member['province_name']?></h6>     
-                    <h6 class="col-lg-1 pb-2"><i class="fa fa-phone" aria-hidden="true"></i></h6>   
-                    <h6 class="col-lg-11 pb-2"><?PHP echo $member['member_tel']?></h6>     
-                </div> 
-            </div> 
-            <div class="col-lg-12">
-                <div class="row ml-2 mr-2 mb-2  p-3"  style="box-shadow: 0px 1px 5px 0px rgba(0,0,0,0.1);background-color:white;">  
-                    <h6 class="col-lg-1 pb-2"><i class="fa fa-info-circle" aria-hidden="true"></i></h6>   
-                    <h6 class="col-lg-11 pb-2">หมายเลขประกาศ : <?PHP echo $post['post_id']?></h6>     
-                    <h6 class="col-lg-1 text-danger  m-0"><i class="fa fa-ban" aria-hidden="true" ></i></h6>   
+</div> 
+ 
+<div class="row " style=" " >
+    
+    <div class="col-lg-12  ">
+        
+        <div class="row " > 
+            <div class="col-lg-12"> 
+                <div class="row justify-content-center"> 
+                    <div class="col-lg-11 p-2  ">
+                    <p><h6 ><b>รายละเอียดการแจ้ง : </b><?PHP echo $post_problem['post_problem_detail']?></h6> </p>
                     
-                    <h6 class="col-lg-11 m-0 "><a href="javascript:;"  data-toggle="modal" data-target="#post_problem" style="color: rgba(0,0,0,.9)!important;">แจ้งประกาศไม่เหมาะสม</a></h6>     
-                </div> 
-            </div> 
-            <div class="col-lg-12">
-                <div class="row ml-2 mr-2 mb-2 justify-content-center p-3"  style="box-shadow: 0px 1px 5px 0px rgba(0,0,0,0.1);background-color:white;">  
-                    <button class="btn btn-success">แจ้งเรื่องปล่อยกู้สำเร็จ</button> 
-                </div> 
-            </div> 
-        </div>
-    </div> 
-    <div class="col-lg-8 p-0">
-        
-        <div class="row ml-0 mr-2 mb-2 pt-3 pb-3 pl-4 pr-4"  style="box-shadow: 0px 1px 5px 0px rgba(0,0,0,0.1);background-color:white;"> 
-            
-            <div class="col-lg-12">
-                <div class="row justify-content-end">
-                    <div class="dropdown show">
-                        <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></a>
-                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink">
-                            <a class="dropdown-item" href="index.php?content=post&action=update&post_id=<?PHP echo $post['post_id'];?>">แก้ไข</a>
-                            <a class="dropdown-item" href="index.php?content=post&action=delete&post_id=<?PHP echo $post['post_id'];?>">ลบ</a> 
-                        </div>
-                    </div> 
-                    <!-- <h5><i class="fa fa-caret-square-o-down" aria-hidden="true"></i></h5>  -->
+                    </div>
                 </div>
+            </div> 
+            <div class="col-lg-12">  
+                <hr> 
+            </div>  
+            <div class="col-lg-12"> 
                 <div class="row justify-content-center">
                     <div class="col-lg-11">
                         <h5><b>รายละเอียดประกาศ</b></h5>
@@ -261,7 +189,7 @@ function check(){
                                 if($post['post_img_'.$i]!==''){
                             ?> 
                                 <div class="col-lg-4 p-2"  align="left" >  
-                                    <img  src="img_upload/post/<?php if($post['post_img_'.$i] != "" ){echo $post['post_img_'.$i];}else{ echo "default_pic.png"; }?>" class="img-fluid" alt="" align="left" style=""> 
+                                    <img  src="../img_upload/post/<?php if($post['post_img_'.$i] != "" ){echo $post['post_img_'.$i];}else{ echo "default_pic.png"; }?>" class="img-fluid" alt="" align="left" style=""> 
                                 
                                 </div>  
                             <?PHP
@@ -287,7 +215,7 @@ function check(){
                             if($post['post_img_'.$i]!==''){
                         ?> 
                             <div class="col-lg-4 p-2"  align="left" >  
-                                <img  src="img_upload/post/<?php if($post['post_img_'.$i] != "" ){echo $post['post_img_'.$i];}else{ echo "default_pic.png"; }?>" class="img-fluid" alt="" align="left" style=""> 
+                                <img  src="../img_upload/post/<?php if($post['post_img_'.$i] != "" ){echo $post['post_img_'.$i];}else{ echo "default_pic.png"; }?>" class="img-fluid" alt="" align="left" style=""> 
                             
                             </div>  
                         <?PHP
@@ -314,7 +242,7 @@ function check(){
                             if($post['post_img_'.$i]!==''){
                         ?> 
                             <div class="col-lg-4 p-2"  align="left" >  
-                                <img  src="img_upload/post/<?php if($post['post_img_'.$i] != "" ){echo $post['post_img_'.$i];}else{ echo "default_pic.png"; }?>" class="img-fluid" alt="" align="left" style=""> 
+                                <img  src="../img_upload/post/<?php if($post['post_img_'.$i] != "" ){echo $post['post_img_'.$i];}else{ echo "default_pic.png"; }?>" class="img-fluid" alt="" align="left" style=""> 
                             
                             </div>  
                         <?PHP
@@ -333,103 +261,8 @@ function check(){
             
         </div> 
         
-
-        <div class="row ml-0 mr-2 mb-2 pt-3 pb-3 pl-4 pr-4"  style="box-shadow: 0px 1px 5px 0px rgba(0,0,0,0.1);background-color:white;"> 
-            
-            <div class="col-lg-12">
-                <div class="row justify-content-center">
-                    <div class="col-lg-11">
-                        <h5><b>คำถามเกี่ยวกับประกาศนี้(12)</b></h5>
-                    </div>  
-                    <div class="col-lg-12 pt-2">
-                        <div class="row">
-                             <div class="col-lg-10">  
-                                <input id="" name="" class="form-control" style="" value="">    
-                             </div>
-                             <div class="col-lg-2">
-                                 <button class="btn btn-borrower">ถามคำถาม</button>
-                             </div> 
-                        </div>  
-                    </div> 
-                    <div class="col-lg-12 pt-3">
-                        <div class="col-lg-12 border-bottom pb-3">
-                            <div class="row pt-2"> 
-                                <div class="col-lg-12 form-inline"> 
-                                    <h5 class="m-0 p-0 borrower_bg_color d-flex justify-content-center align-items-center bg_text_qa" ><b>Q</b></h5> 
-                                    <div class="pl-3">
-                                        <h6 class="m-0">ที่ดินใกล้บ่อน้ำไหมครับ</h6>
-                                        <h6 class="m-0 text-secondary"><small>Thana.t - 2 ชั่วโมงที่แล้ว</small></h6>
-                                    </div> 
-                                </div> 
-                            </div>  
-                            <div class="row pt-3"> 
-                                <div class="col-lg-12 form-inline">
-                                    <h5 class="m-0 p-0 lender_bg_color d-flex justify-content-center align-items-center bg_text_qa" ><b>A</b></h5> 
-                                    <div class="pl-3">
-                                        <h6 class="m-0">ที่ดินใกล้บ่อน้ำไหมครับ</h6>
-                                        <h6 class="m-0 text-secondary"><small>Fahmon - 1 ชั่วโมงที่แล้ว</small></h6>
-                                    </div>
-                                </div> 
-                            </div>  
-                        </div> 
-                    </div>     
-                    <div class="col-lg-12 pt-3">
-                        <div class="col-lg-12 border-bottom pb-3">
-                            <div class="row pt-2"> 
-                                <div class="col-lg-10 form-inline"> 
-                                    <h5 class="m-0 p-0 borrower_bg_color d-flex justify-content-center align-items-center bg_text_qa" ><b>Q</b></h5> 
-                                    <div class="pl-3">
-                                        <h6 class="m-0">ที่ดินใกล้บ่อน้ำไหมครับ</h6>
-                                        <h6 class="m-0 text-secondary"><small>Thana.t - 2 ชั่วโมงที่แล้ว</small></h6>
-                                    </div> 
-                                </div> 
-                                <div class="col-lg-2">
-                                    <button class="btn btn-lender">ตอบคำถาม</button>
-                                </div>
-                            </div>    
-                        </div> 
-                    </div>     
-                </div>
-            </div>
-            
-            
-        </div>
+ 
     </div>
-</div>
-<div class="modal fade" id="post_problem" tabindex="-1" role="dialog" aria-labelledby="post_problemLabel" aria-hidden="true">
-        <div class="modal-dialog  modal-lg" role="document">
-            <div class="modal-content">  
-                <div class="modal-header" style="border-bottom:none;"> 
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <div class="container pl-4 pr-4 pb-4">
-                             
-                        <div class="row justify-content-center">
-                            <h4>แจ้งประกาศไม่เหมาะสม</h4>   
-                        </div>     
-                        <form role="form" method="post" onsubmit="return check();" action="index.php?content=post_detail&action=add_problem" enctype="multipart/form-data">
-                            <div class="row justify-content-center"> 
-                                <div class="col-lg-12"  align="center" >
-                                    <div class="form-group"> 
-                                        <textarea rows="5" id="post_problem_detail" name="post_problem_detail" class="form-control" placeholder="รายละเอียด..." style=""></textarea>
-                                    </div> 
-                                    <input type="hidden" id="post_id" name="post_id"  value="<?PHP echo $post['post_id'];?>"> 
-                                    <input type="hidden" id="member_id" name="member_id" value="<?PHP echo $loan_member[0]['member_id'];?>" > 
-                                    <button class="btn btn-lender my-2 my-sm-0 m-1" type="submit" >ส่ง</button>   
-                                </div>  
-                            </div>     
-                        </form>   
-                    </div>
-                </div>
-                <!-- <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
-                </div> -->
-            </div>
-        </div>
-    </div>
+</div> 
 <script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyBPYt_mZGd-2iotzhpiZKw1_GpZ6H9w3vs&sensor=false"></script>
-<script src="template/map/js/jquery-gmaps-latlon-picker.js"></script> 
+<script src="../template/map/js/jquery-gmaps-latlon-picker.js"></script> 

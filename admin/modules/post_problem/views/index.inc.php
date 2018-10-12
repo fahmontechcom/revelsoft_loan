@@ -32,47 +32,28 @@ if ($_GET['action'] == 'insert'&&$menu['post_problem']['add']==1){
     require_once($path.'insert.inc.php');
 }else if ($_GET['action'] == 'detail'&&$menu['post_problem']['view']==1){ 
 
-    $post = $post_model ->getPostByID($post_problem_id);   
+    $post_problem = $post_problem_model ->getPostProblemByID($post_problem_id);    
+
+    $post = $post_model ->getPostByID($post_problem['post_id']);   
     $member = $member_model ->getMemberByID($post['member_id']);    
     $old_date=date_create($member['create_date']);  
     $new_date=date_create(date("Y-m-d")); 
-    $diff=date_diff($old_date,$new_date);    
+    $diff=date_diff($old_date,$new_date);        
+    // echo '<pre>';
+    // print_r($post);
+    // echo '</pre>';
 
-    $post_problem = $post_problem_model ->getPostProblemByID($post_problem_id);     
     require_once($path.'detail.inc.php');
 
-}else if ($_GET['action'] == 'delete'&&$menu['post_problem']['delete']==1){
-    $post_problem = $post_problem_model->getPostProblemByID($post_problem_id); 
-    $input_image = array("post_problem_profile_img", "post_problem_id_card_img", "post_problem_company_certificate_img", "post_problem_license_img"); 
-    for($i = 0;$i<count($input_image);$i++){
-        if($post_problem[$input_image[$i]] != ""){
-            $target_file = $target_dir .$post_problem[$input_image[$i]];
-            if (file_exists($target_file)) {
-                unlink($target_file);
-            }
-        } 
-    }
+}else if ($_GET['action'] == 'delete'&&$menu['post_problem']['delete']==1){ 
     
     // echo '<pre>';
     // print_r($business_img);
-    // echo '</pre>';
-    $business_img = $business_img_model ->getBusinessImgBy($post_problem_id);
-    for($i=0;$i<count($business_img);$i++){ 
-         
-            if($business_img[$i]["post_problem_business_img_img"] != ""){
-                $target_dir = "../img_upload/post_problem_business_img/";
-                $target_file = $target_dir .$business_img[$i]["post_problem_business_img_img"];
-                if (file_exists($target_file)) {
-                    unlink($target_file);
-                }
-            } 
-         
-    }
+    // echo '</pre>'; 
       
     $post_problem = $post_problem_model->deletePostProblemByID($post_problem_id);
 
-    $post_problem_type_id = $post_problem['post_problem_type_id']; 
-    $post_problem = $post_problem_model->getPostProblemByAllPostProblemTypeID($post_problem_type_id);
+    $post_problem = $post_problem_model->getPostProblemBy(); 
     require_once($path.'view.inc.php');
 
     
@@ -83,9 +64,9 @@ if ($_GET['action'] == 'insert'&&$menu['post_problem']['add']==1){
    
 }else if ($menu['post_problem']['view']==1 ){ 
     $post_problem = $post_problem_model->getPostProblemBy();
-    echo '<pre>';
-    print_r($post_problem);
-    echo '</pre>';
+    // echo '<pre>';
+    // print_r($post_problem);
+    // echo '</pre>';
     require_once($path.'view.inc.php');
 }
 ?>

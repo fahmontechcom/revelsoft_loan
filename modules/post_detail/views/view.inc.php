@@ -6,22 +6,40 @@ function check(){
     
 
     if(post_problem_detail.length == 0){
-        alert("กรุณาเลือกรายละเอียด");
+        alert("กรุณากรอกรายละเอียด");
         document.getElementById("post_problem_detail").focus();
         return false; 
     }else{ 
         return true;    
     }
 }
-</script>
+function post_que_ans_check(){
+    var post_que_ans_question = document.getElementById("post_que_ans_question").value;  
+    
+    post_que_ans_question = $.trim(post_que_ans_question);     
+    
+
+    if(post_que_ans_question.length == 0){
+        alert("กรุณากรอกรายละเอียด");
+        document.getElementById("post_que_ans_question").focus();
+        return false; 
+    }else{ 
+        return true;    
+    }
+}
+$(document).on('ready', function() {
+   
+        $('[data-fancybox="gallery"]').fancybox({
+        });
+    });
+</script> 
 <div class="row m-0" style="background-color:#f6f6f6;" >
     <div class="col-lg-12 p-0">
         <div class="row m-2"  style="box-shadow: 0px 1px 5px 0px rgba(0,0,0,0.1);background-color:white;">
             <div class="w-100 p-5 m-2 d-flex justify-content-center"  style="background-color:#f6f6f6;">
                 <h5 class="m-0">BANNER</h5> 
             </div>
-        </div>
-        
+        </div> 
     </div> 
     <div class="col-lg-4 p-0">
         <div class="row">
@@ -42,9 +60,9 @@ function check(){
                     <h6 class="col-lg-1 pb-2"><i class="fa fa-history" aria-hidden="true"></i></h6>   
                     <h6 class="col-lg-11 pb-2">เป็นสมาชิกมาแล้ว <?PHP echo $diff->y;?> ปี <?PHP echo $diff->m;?> เดือน</h6>     
                     <h6 class="col-lg-1 pb-2"><i class="fa fa-clock-o" aria-hidden="true"></i></h6>   
-                    <h6 class="col-lg-11 pb-2"><?php echo date_format(date_create($member['create_date']),"d/m/Y H.i");?> น.</h6>     
+                    <h6 class="col-lg-11 pb-2"><?php echo date_format(date_create($post['create_date']),"d/m/Y H.i");?> น.</h6>     
                     <h6 class="col-lg-1 pb-2"><i class="fa fa-eye" aria-hidden="true"></i></h6>   
-                    <h6 class="col-lg-11 pb-2">เยี่ยมชม ???? ครั้ง</h6>     
+                    <h6 class="col-lg-11 pb-2">เยี่ยมชม <?php echo number_format($post['post_view'],0, '.', ','); ?> ครั้ง</h6>     
                     <h6 class="col-lg-1 pb-2"><i class="fa fa-map-marker" aria-hidden="true"></i></h6>   
                     <h6 class="col-lg-11 pb-2"><?PHP echo $member['amphur_name']?>, <?PHP echo $member['province_name']?></h6>     
                     <h6 class="col-lg-1 pb-2"><i class="fa fa-phone" aria-hidden="true"></i></h6>   
@@ -54,7 +72,11 @@ function check(){
             <div class="col-lg-12">
                 <div class="row ml-2 mr-2 mb-2  p-3"  style="box-shadow: 0px 1px 5px 0px rgba(0,0,0,0.1);background-color:white;">  
                     <h6 class="col-lg-1 pb-2"><i class="fa fa-info-circle" aria-hidden="true"></i></h6>   
-                    <h6 class="col-lg-11 pb-2">หมายเลขประกาศ : <?PHP echo $post['post_id']?></h6>     
+                    <h6 class="col-lg-11 pb-2">หมายเลขประกาศ : <?PHP echo $post['post_id']?></h6>   
+                    <?PHP if($post['member_id']==$loan_member[0]['member_id']){?>  
+                    <h6 class="col-lg-1 pb-2"><i class="fa fa-unlock" aria-hidden="true"></i></h6>   
+                    <h6 class="col-lg-11 pb-2">รหัสปล่อยกู้ : <?PHP echo $post['post_finish_password']?></h6>  
+                    <?PHP }?>     
                     <h6 class="col-lg-1 text-danger  m-0"><i class="fa fa-ban" aria-hidden="true" ></i></h6>   
                     
                     <h6 class="col-lg-11 m-0 "><a href="javascript:;"  data-toggle="modal" data-target="#post_problem" style="color: rgba(0,0,0,.9)!important;">แจ้งประกาศไม่เหมาะสม</a></h6>     
@@ -62,7 +84,7 @@ function check(){
             </div> 
             <div class="col-lg-12">
                 <div class="row ml-2 mr-2 mb-2 justify-content-center p-3"  style="box-shadow: 0px 1px 5px 0px rgba(0,0,0,0.1);background-color:white;">  
-                    <button class="btn btn-success">แจ้งเรื่องปล่อยกู้สำเร็จ</button> 
+                    <button class="btn btn-success"  data-toggle="modal" data-target="#post_finish">แจ้งเรื่องปล่อยกู้สำเร็จ</button> 
                 </div> 
             </div> 
         </div>
@@ -238,16 +260,19 @@ function check(){
                         <h5><b>รูปภาพที่ดิน/บ้าน</b></h5>
                     </div>
                     
+        
                     <div class="col-lg-12 ">
                         <div class="row">
                             <?PHP 
                             for($i=5;$i<=6;$i++){
                                 if($post['post_img_'.$i]!==''){
                             ?> 
-                                <div class="col-lg-4 p-2"  align="left" >  
+                            <div class="col-lg-4 p-2"  align="left" >  
+                                <a  data-fancybox="gallery" href="img_upload/post/<?php if($post['post_img_'.$i] != "" ){echo $post['post_img_'.$i];}else{ echo "default_pic.png"; }?>"> 
                                     <img  src="img_upload/post/<?php if($post['post_img_'.$i] != "" ){echo $post['post_img_'.$i];}else{ echo "default_pic.png"; }?>" class="img-fluid" alt="" align="left" style=""> 
                                 
-                                </div>  
+                                </a>
+                            </div>  
                             <?PHP
                                 }
                             }
@@ -258,37 +283,23 @@ function check(){
                     }
                     ?>
                     <?PHP
-                    if($post['loan_type_id']==3){
+                    if($post['loan_type_id']==3||$post['loan_type_id']==4){
                     ?>
                     <div class="col-lg-11">
+                        <?PHP
+                        if($post['loan_type_id']==3){
+                        ?>
                         <h5><b>รูปภาพที่เกี่ยวข้องกับอาชีพ (หน้าร้าน, ทะเบียนการค้า, รถคู่ใจ, ฯลฯ)</b></h5>
-                    </div>
-                    
-                    <div class="col-lg-12 ">
-                        <div class="row">
-                        <?PHP 
-                        for($i=1;$i<=6;$i++){
-                            if($post['post_img_'.$i]!==''){
-                        ?> 
-                            <div class="col-lg-4 p-2"  align="left" >  
-                                <img  src="img_upload/post/<?php if($post['post_img_'.$i] != "" ){echo $post['post_img_'.$i];}else{ echo "default_pic.png"; }?>" class="img-fluid" alt="" align="left" style=""> 
-                            
-                            </div>  
-                        <?PHP
-                            }
+                        <?PHP   
                         }
-                        ?> 
-                                
-                        </div>  
-                    </div> 
-                    <?PHP   
-                    }
-                    ?>
-                    <?PHP
-                    if($post['loan_type_id']==4){
-                    ?>
-                    <div class="col-lg-11">
+                        ?>
+                        <?PHP
+                        if($post['loan_type_id']==4){
+                        ?>
                         <h5><b>รูปถ่ายทรัพย์หลักประกัน</b></h5>
+                        <?PHP   
+                        }
+                        ?>
                     </div>
                     
                     <div class="col-lg-12 ">
@@ -297,10 +308,12 @@ function check(){
                         for($i=1;$i<=6;$i++){
                             if($post['post_img_'.$i]!==''){
                         ?> 
-                            <div class="col-lg-4 p-2"  align="left" >  
-                                <img  src="img_upload/post/<?php if($post['post_img_'.$i] != "" ){echo $post['post_img_'.$i];}else{ echo "default_pic.png"; }?>" class="img-fluid" alt="" align="left" style=""> 
-                            
-                            </div>  
+                        <div class="col-lg-4 p-2"  align="left" >  
+                            <a  data-fancybox="gallery" href="img_upload/post/<?php if($post['post_img_'.$i] != "" ){echo $post['post_img_'.$i];}else{ echo "default_pic.png"; }?>"> 
+                                <img   src="img_upload/post/<?php if($post['post_img_'.$i] != "" ){echo $post['post_img_'.$i];}else{ echo "default_pic.png"; }?>" class="img-fluid" alt="" align="left" style=""> 
+                                
+                            </a>
+                        </div>  
                         <?PHP
                             }
                         }
@@ -310,110 +323,114 @@ function check(){
                     </div> 
                     <?PHP   
                     }
-                    ?>
+                    ?> 
                     
                 </div>
             </div>
             
         </div> 
-        
-
-        <div class="row ml-0 mr-2 mb-2 pt-3 pb-3 pl-4 pr-4"  style="box-shadow: 0px 1px 5px 0px rgba(0,0,0,0.1);background-color:white;"> 
-            
-            <div class="col-lg-12">
-                <div class="row justify-content-center">
-                    <div class="col-lg-11">
-                        <h5><b>คำถามเกี่ยวกับประกาศนี้(12)</b></h5>
-                    </div>  
-                    <div class="col-lg-12 pt-2">
-                        <div class="row">
-                             <div class="col-lg-10">  
-                                <input id="" name="" class="form-control" style="" value="">    
-                             </div>
-                             <div class="col-lg-2">
-                                 <button class="btn btn-borrower">ถามคำถาม</button>
-                             </div> 
-                        </div>  
-                    </div> 
-                    <div class="col-lg-12 pt-3">
-                        <div class="col-lg-12 border-bottom pb-3">
-                            <div class="row pt-2"> 
-                                <div class="col-lg-12 form-inline"> 
-                                    <h5 class="m-0 p-0 borrower_bg_color d-flex justify-content-center align-items-center bg_text_qa" ><b>Q</b></h5> 
-                                    <div class="pl-3">
-                                        <h6 class="m-0">ที่ดินใกล้บ่อน้ำไหมครับ</h6>
-                                        <h6 class="m-0 text-secondary"><small>Thana.t - 2 ชั่วโมงที่แล้ว</small></h6>
-                                    </div> 
-                                </div> 
-                            </div>  
-                            <div class="row pt-3"> 
-                                <div class="col-lg-12 form-inline">
-                                    <h5 class="m-0 p-0 lender_bg_color d-flex justify-content-center align-items-center bg_text_qa" ><b>A</b></h5> 
-                                    <div class="pl-3">
-                                        <h6 class="m-0">ที่ดินใกล้บ่อน้ำไหมครับ</h6>
-                                        <h6 class="m-0 text-secondary"><small>Fahmon - 1 ชั่วโมงที่แล้ว</small></h6>
-                                    </div>
-                                </div> 
-                            </div>  
-                        </div> 
-                    </div>     
-                    <div class="col-lg-12 pt-3">
-                        <div class="col-lg-12 border-bottom pb-3">
-                            <div class="row pt-2"> 
-                                <div class="col-lg-10 form-inline"> 
-                                    <h5 class="m-0 p-0 borrower_bg_color d-flex justify-content-center align-items-center bg_text_qa" ><b>Q</b></h5> 
-                                    <div class="pl-3">
-                                        <h6 class="m-0">ที่ดินใกล้บ่อน้ำไหมครับ</h6>
-                                        <h6 class="m-0 text-secondary"><small>Thana.t - 2 ชั่วโมงที่แล้ว</small></h6>
-                                    </div> 
-                                </div> 
-                                <div class="col-lg-2">
-                                    <button class="btn btn-lender">ตอบคำถาม</button>
-                                </div>
-                            </div>    
-                        </div> 
-                    </div>     
-                </div>
-            </div>
-            
-            
-        </div>
+        <?PHP require_once("modules/post_que_ans/views/view.inc.php");?>
     </div>
 </div>
 <div class="modal fade" id="post_problem" tabindex="-1" role="dialog" aria-labelledby="post_problemLabel" aria-hidden="true">
-        <div class="modal-dialog  modal-lg" role="document">
-            <div class="modal-content">  
-                <div class="modal-header" style="border-bottom:none;"> 
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <div class="container pl-4 pr-4 pb-4">
-                             
-                        <div class="row justify-content-center">
-                            <h4>แจ้งประกาศไม่เหมาะสม</h4>   
-                        </div>     
-                        <form role="form" method="post" onsubmit="return check();" action="index.php?content=post_detail&action=add_problem" enctype="multipart/form-data">
-                            <div class="row justify-content-center"> 
-                                <div class="col-lg-12"  align="center" >
-                                    <div class="form-group"> 
-                                        <textarea rows="5" id="post_problem_detail" name="post_problem_detail" class="form-control" placeholder="รายละเอียด..." style=""></textarea>
-                                    </div> 
-                                    <input type="hidden" id="post_id" name="post_id"  value="<?PHP echo $post['post_id'];?>"> 
-                                    <input type="hidden" id="member_id" name="member_id" value="<?PHP echo $loan_member[0]['member_id'];?>" > 
-                                    <button class="btn btn-lender my-2 my-sm-0 m-1" type="submit" >ส่ง</button>   
-                                </div>  
-                            </div>     
-                        </form>   
-                    </div>
-                </div>
-                <!-- <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
-                </div> -->
+    <div class="modal-dialog  modal-lg" role="document">
+        <div class="modal-content">  
+            <div class="modal-header" style="border-bottom:none;"> 
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
             </div>
+            <div class="modal-body">
+                <div class="container pl-4 pr-4 pb-4">
+                            
+                    <div class="row justify-content-center">
+                        <h4>แจ้งประกาศไม่เหมาะสม</h4>   
+                    </div>     
+                    <form role="form" method="post" onsubmit="return check();" action="index.php?content=post_detail&action=add_problem" enctype="multipart/form-data">
+                        <div class="row justify-content-center"> 
+                            <div class="col-lg-12"  align="center" >
+                                <div class="form-group"> 
+                                    <textarea rows="5" id="post_problem_detail" name="post_problem_detail" class="form-control" placeholder="รายละเอียด..." style=""></textarea>
+                                </div> 
+                                <input type="hidden" name="post_id"  value="<?PHP echo $post['post_id'];?>"> 
+                                <input type="hidden" name="member_id" value="<?PHP echo $loan_member[0]['member_id'];?>" > 
+                                <button class="btn btn-lender my-2 my-sm-0 m-1" type="submit" >ส่ง</button>   
+                            </div>  
+                        </div>     
+                    </form>   
+                </div>
+            </div>
+            <!-- <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div> -->
         </div>
     </div>
+</div>
+<div class="modal fade" id="post_finish" tabindex="-1" role="dialog" aria-labelledby="post_finishLabel" aria-hidden="true">
+    <div class="modal-dialog " role="document">
+        <div class="modal-content">  
+            <div class="modal-header" style="border-bottom:none;"> 
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="container pl-4 pr-4 pb-4">
+                            
+                    <div class="row justify-content-center">
+                        <h4>แจ้งเรื่องปล่อยกู้สำเร็จ</h4>   
+                    </div>  
+                    <div class="row justify-content-center form-inline">  
+                        <h6 class=" p-2"><i class="fa fa-user" aria-hidden="true"></i></h6>   
+                        <h6 class=" p-2"><b><?PHP echo $member['member_name_show']?></b></h6>  
+                
+                        <h6 class=" p-2"><i class="fa fa-info-circle" aria-hidden="true"></i></h6>   
+                        <h6 class=" p-2">หมายเลขประกาศ : <?PHP echo $post['post_id']?></h6>    
+                    </div>      
+                      
+                    <form role="form" method="post" onsubmit="return check();" action="index.php?content=post_detail&action=add_problem" enctype="multipart/form-data">
+                        <div class="row"> 
+                            <div class="col-lg-12 p-2"   >
+                                <h6 class="p-1">รหัสผ่านแจ้งเรื่องปล่อยกู้สำเร็จ 4 หลัก</h6> 
+                                <div class="form-inline pl-2 pr-2"> 
+                                    <input type="text" class="form-control m-1" id="" name="" style="width:40px;">
+                                    <input type="text" class="form-control m-1" id="" name="" style="width:40px;">
+                                    <input type="text" class="form-control m-1" id="" name="" style="width:40px;">
+                                    <input type="text" class="form-control m-1" id="" name="" style="width:40px;">
+                                </div> 
+                                 
+                            </div>  
+                            <div class="col-lg-12 p-2"   >
+                                <h6 class="p-1">จำนวนเงินให้กู้</h6> 
+                                <div class="form-inline pl-2 pr-2"> 
+                                    <input type="text" class="form-control " id="" name=""  > 
+                                </div>  
+                            </div>  
+                            <div class="col-lg-12 p-2"   >
+                                <h6 class="p-1">รายละเอียด</h6> 
+                                <div class="form-group pl-2 pr-2"> 
+                                    <input type="text" class="form-control " id="" name=""  > 
+                                </div>  
+                            </div>  
+                            <div class="col-lg-12"   >
+                                <div class="row  justify-content-center">
+                                    <input type="hidden" name="post_id"  value="<?PHP echo $post['post_id'];?>"> 
+                                    <input type="hidden" name="member_id" value="<?PHP echo $loan_member[0]['member_id'];?>" > 
+                                    <button class="btn btn-success my-2 my-sm-0 m-1 " type="submit" >แจ้งเรื่องปล่อยกู้สำเร็จ</button> 
+                                </div>
+                            </div> 
+                             
+                        </div>     
+                    </form>   
+                </div>
+            </div>
+            <!-- <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div> -->
+        </div>
+    </div>
+</div>
 <script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyBPYt_mZGd-2iotzhpiZKw1_GpZ6H9w3vs&sensor=false"></script>
 <script src="template/map/js/jquery-gmaps-latlon-picker.js"></script> 

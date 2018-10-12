@@ -82,7 +82,7 @@ class PostModel extends BaseModel{
             $str_money = " ORDER BY post_money DESC ";
         }
         
-        $sql = "SELECT tb_post.* ,tb_member.member_name_show,tb_member.member_profile_img,tb_member.member_verified_status ,tb_loan_type.* ,tb_property.* ,tb_burden.* ,tb_occupation.* ,tb_collateral.* ,tb_building.* ,tb_amphur.* ,tb_province.*  
+        $sql = "SELECT tb_post.* ,tb_member.member_name,tb_member.member_name_show,tb_member.member_profile_img,tb_member.member_verified_status ,tb_loan_type.* ,tb_property.* ,tb_burden.* ,tb_occupation.* ,tb_collateral.* ,tb_building.* ,tb_amphur.* ,tb_province.*  
         FROM tb_post  
         INNER JOIN tb_member ON tb_post.member_id = tb_member.member_id 
         INNER JOIN tb_loan_type ON tb_post.loan_type_id = tb_loan_type.loan_type_id 
@@ -118,7 +118,7 @@ class PostModel extends BaseModel{
         }
     } 
  
-    function updatePostID($id,$data = []){ 
+    function updatePostByID($id,$data = []){ 
         $sql = "UPDATE tb_post SET    
         member_id = '".mysqli_real_escape_string(static::$db,$data['member_id'])."', 
         loan_type_id = '".mysqli_real_escape_string(static::$db,$data['loan_type_id'])."', 
@@ -152,6 +152,17 @@ class PostModel extends BaseModel{
         post_location_long = '".mysqli_real_escape_string(static::$db,$data['post_location_long'])."',  
         edit_date = NOW() 
         
+        WHERE post_id = '$id' ";
+        // echo $sql;
+        if (mysqli_query(static::$db,$sql, MYSQLI_USE_RESULT)) {
+            return 1;
+        }else {
+            return 0;
+        }
+    }
+    function updatePostByIDPostView($id,$data = []){ 
+        $sql = "UPDATE tb_post SET    
+        post_view = '".mysqli_real_escape_string(static::$db,$data['post_view'])."'   
         WHERE post_id = '$id' ";
         // echo $sql;
         if (mysqli_query(static::$db,$sql, MYSQLI_USE_RESULT)) {
@@ -238,6 +249,7 @@ class PostModel extends BaseModel{
             post_deed_number, 
             post_location_lat, 
             post_location_long, 
+            post_finish_password, 
             create_date 
         ) VALUES ('". 
             $data['member_id']."','".
@@ -270,6 +282,7 @@ class PostModel extends BaseModel{
             $data['post_deed_number']."','". 
             $data['post_location_lat']."','". 
             $data['post_location_long']."',". 
+            $data['post_finish_password']."',". 
             "NOW()". 
         " )";
 // echo $sql;
